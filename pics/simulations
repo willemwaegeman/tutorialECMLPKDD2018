@@ -1,0 +1,100 @@
+library(foreign)
+
+x1 = runif(5000,-1,1)
+x2 = runif(5000,-1,1)
+
+x1test = runif(100000,-1,1)
+x2test = runif(100000,-1,1)
+
+ispdf = T
+
+###############################
+
+f1 = function(x1,x2) {
+	f = 0.5*x1 + 0.5*x2
+	label = rbinom(length(f), 1, 1/(1+exp(-2*f)))
+	label
+}
+
+f2 = function(x1,x2) {
+	f =  0.5*x1 - 0.5*x2
+	label = rbinom(length(f), 1, 1/(1+exp(-2*f)))
+	label
+}
+
+label1 = f1(x1,x2)
+label2 = f2(x1,x2)
+
+if(ispdf == T) pdf(file = paste("e:/presentations/multi-target_predictions/joint-target_view/pics/ind-1.pdf", sep = ""), width = 5, height = 5, pointsize = 22, bg = "transparent")
+par(mai = c(0.5,0.5,0.05,0.05),mgp = c(1.5, 0.5, 0))
+
+plot(x1,x2, col = label1 + 1, pch = 16, ylab = "", xlab = "")
+
+if(ispdf == T) dev.off()
+
+if(ispdf == T) pdf(file = paste("e:/presentations/multi-target_predictions/joint-target_view/pics/ind-2.pdf", sep = ""), width = 5, height = 5, pointsize = 22, bg = "transparent")
+par(mai = c(0.5,0.5,0.05,0.05),mgp = c(1.5, 0.5, 0))
+
+plot(x1,x2, col = label2 + 1, pch = 16, ylab = "", xlab = "")
+
+if(ispdf == T) dev.off()
+
+data = data.frame(x1,x2, label1 = as.factor(label1), label2 = as.factor(label2))
+
+write.arff(data, file = "e:/projects/calypso/mlc/mlc_tests/data/tutorial-train-1.arff")
+
+label1test = f1(x1test,x2test)
+label2test = f1(x1test,x2test)
+
+data = data.frame(x1test,x2test, label1 = as.factor(label1test), label2 = as.factor(label2test))
+
+write.arff(data, file = "e:/projects/calypso/mlc/mlc_tests/data/tutorial-test-1.arff")
+
+###############################
+
+f1 = function(x1,x2) {
+	f = 0.5*x1 + 0.5*x2
+	label = rbinom(length(f), 1, 1/(1+exp(-2*f)))
+	label
+}
+
+f2 = function(label1,x1,x2) {
+	f = 1*label1 + 0.5*x1 - 0.5*x2 - 0.66
+	label = rbinom(length(f), 1, 1/(1+exp(-2*f)))
+	label
+}
+
+label1 = f1(x1,x2)
+label2 = f2(label1,x1,x2)
+
+if(ispdf == T) pdf(file = paste("e:/presentations/multi-target_predictions/joint-target_view/pics/dep-1.pdf", sep = ""), width = 5, height = 5, pointsize = 22, bg = "transparent")
+par(mai = c(0.5,0.5,0.05,0.05),mgp = c(1.5, 0.5, 0))
+
+plot(x1,x2, col = label1 + 1, pch = 16, ylab = "", xlab = "")
+
+if(ispdf == T) dev.off()
+
+if(ispdf == T) pdf(file = paste("e:/presentations/multi-target_predictions/joint-target_view/pics/dep-2.pdf", sep = ""), width = 5, height = 5, pointsize = 22, bg = "transparent")
+par(mai = c(0.5,0.5,0.05,0.05),mgp = c(1.5, 0.5, 0))
+
+plot(x1,x2, col = label2 + 1, pch = 16, ylab = "", xlab = "")
+
+if(ispdf == T) dev.off()
+
+
+plot(x1,x2, col = label1 + 1, pch = label2 + 16)
+
+data = data.frame(x1,x2, label1 = as.factor(label1), label2 = as.factor(label2))
+
+write.arff(data, file = "e:/projects/calypso/mlc/mlc_tests/data/tutorial-train-2.arff")
+
+label1test = f1(x1test,x2test)
+label2test = f2(la	bel1test,x1test,x2test)
+
+data = data.frame(x1test,x2test, label1 = as.factor(label1test), label2 = as.factor(label2test))
+
+write.arff(data, file = "e:/projects/calypso/mlc/mlc_tests/data/tutorial-test-2.arff")
+
+
+
+	
