@@ -400,6 +400,28 @@ A multi-target prediction setting is characterized by instances $\vec{x} \in \ma
 
 \end{frame}
 
+\begin{frame}{A unifying view on MTP methods}
+
+\begin{center}
+\includegraphics[scale=0.3]{pics/tools}
+
+\begin{tabular}{ll}
+\hline
+Group of methods & Applicable setting \\
+\hline
+\hline
+\alert{A baseline method} & B and C \\
+Methods that do not use domain knowledge & B and C   \\ 
+Methods that use target relations & B, C and D  \\
+Methods that learn target relations & B and C \\
+Methods that use target representations & B, C and D \\
+Methods that learn target representations & B and C \\
+Matrix completion and hybrid methods & A \\
+\hline  
+\end{tabular}
+\end{center}
+\end{frame}
+
 \begin{frame}{A baseline method:\\
 learning a model for each target independently}
 % voorbeeldje met boeken
@@ -440,6 +462,16 @@ X = \begin{bmatrix} \phi(\vec{x}_1)^T \\ \vdots \\ \phi(\vec{x}_n)^T \end{bmatri
 
 \end{frame}
 
+\begin{frame}
+
+\begin{center}
+Learning a model for each target independently is still state-of-the-art in extreme multi-label classification\footnote{Babbar and Sch\"olkopf, DISMEC: Distributed Sparse Machines for Extreme Multi-label classification, WSDM 2017}:
+
+\includegraphics[scale=0.3]{Figures/dismec} 
+\end{center}
+
+\end{frame}
+
 \begin{frame}{A unifying view on MTP methods}
 
 \begin{center}
@@ -450,16 +482,13 @@ X = \begin{bmatrix} \phi(\vec{x}_1)^T \\ \vdots \\ \phi(\vec{x}_n)^T \end{bmatri
 Group of methods & Applicable setting \\
 \hline
 \hline
-Methods that do not use domain knowledge & B and C   \\ 
+A baseline method & B and C \\
+\alert{Methods that do not use domain knowledge} & B and C   \\ 
 Methods that use target relations & B, C and D  \\
 Methods that learn target relations & B and C \\
 Methods that use target representations & B, C and D \\
 Methods that learn target representations & B and C \\
 Matrix completion and hybrid methods & A \\
-%Hybrid filtering methods & 1-5, 9 \\
-%Structured output prediction methods ? & 1-4, 5*, 7-8, 11 \\
-%Methods that assume deterministic dependencies ? & 1-4 \\ 
-%Methods that optimize complex loss functions? &1-4, 8* \\
 \hline  
 \end{tabular}
 \end{center}
@@ -551,27 +580,123 @@ Example: Mean-regularized multi-task learning\footnote{Evgeniou and Pontil, Regu
 \label{eq:meanreg}
 \min_A ||Y - XA ||^2_F + \lambda \sum_{i=1}^m ||\vec{a}_i - \frac{1}{m} \sum_{j=1}^m \vec{a}_j||^2 \, ,
 \end{equation*}
-
-
 \end{frame}
 
-\begin{frame}{Methods that use target relations (B, C and D) \\
-Example: Graph-based regularization\footnote{Gopal and Yang, Recursive regularization for large-scale classification with hierarchical
-and graphical dependencies, KDD 2013.}}
+
+\begin{frame}
+\frametitle{Stacking (Stacked generalization)}
+
+\begin{itemize}
+\item Originally introduced as a general ensemble learning or blending technique.\footnote{Wolpert, Stacked generalization. Neural Networks 1992}
+\item Level 1 classifiers: apply a series of ML methods on the same dataset (or, one ML method on bootstrap samples of the dataset)
+\item Level 2 classifier: apply an ML method to a new dataset consisting of the predictions obtaining at Level 1 
+\end{itemize}
 
 \begin{center}
-\includegraphics[width=\textwidth]{pics/targetrelations}
+\def\layersep{1.25cm}
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+    \tikzstyle{input neuron}=[neuron, fill=green!50];
+    \tikzstyle{output neuron}=[neuron, fill=red!50];
+    \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+    \tikzstyle{annot} = [text width=4em, text centered]
+
+   % Draw the input layer nodes
+   \foreach \name / \y in {1,...,4}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+        \node[input neuron] (I-\name) at (\y, 0) {$f_\y$};
+
+    % Draw the hidden layer nodes
+   \foreach \name / \y in {1}
+      % \path%[yshift=0.5cm]
+           \node[hidden neuron] (H-\name) at (2.5, \layersep) {$h_\y$};
+
+
+% % Draw the output layer node
+    \node[output neuron] (I) at (2.5, -\layersep) {$\bx$};
+%%
+%%    % Connect every node in the input layer with every node in the
+%%    % hidden layer.
+     \foreach \source in {1,...,4}
+        \foreach \dest in {1}
+            \path (I-\source) edge (H-\dest);
+%%
+%    % Connect every node in the hidden layer with the output layer
+  \foreach \source in {1,...,4}
+     \path (I) edge (I-\source);
+%
+   % Annotate the layers
+  \node[annot,left of=H-1, node distance=3cm] (hl) {Level 2}; 
+   \node[annot,below of=hl, node distance=\layersep] {Level 1};
+%%    \node[annot,right of=hl] {Output layer};
+\end{tikzpicture}
 \end{center}
 
-\begin{equation*}
-\min_A ||Y - XA ||^2_F + \lambda \sum_{i=1}^m \sum_{j \in \mathcal{N}(i)} ||\vec{a}_i - \ \vec{a}_j||^2 
-\end{equation*}
+%D. Wolpert, Stacked Generalization, Machine Learning, 1992
+\end{frame}
+
+\begin{frame}
+\frametitle{Stacking applied to multi-target prediction\footnote{Cheng and H\"ullermeier, Combining Instance-based learning and Logistic Regreession for Multi-Label classification, Machine Learning, 2009} }
+
+\begin{columns}
+\begin{column}{5cm}
+\begin{itemize}
+\item Level 1 classifiers: learn a model for every target independently 
+\item Level 2 classifier: learn again a model for every target independently, using the predictions of the first step as features
+\end{itemize}
+\end{column}
+
+\begin{column}{6cm}
+\def\layersep{2.5cm}
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+    \tikzstyle{input neuron}=[neuron, fill=green!50];
+    \tikzstyle{output neuron}=[neuron, fill=red!50];
+    \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+    \tikzstyle{annot} = [text width=4em, text centered]
+
+   % Draw the input layer nodes
+   \foreach \name / \y in {1,...,4}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+        \node[input neuron] (I-\name) at (\y, 0) {$f_\y$};
+
+    % Draw the hidden layer nodes
+   \foreach \name / \y in {1,...,4}
+      % \path%[yshift=0.5cm]
+           \node[hidden neuron] (H-\name) at (\y, \layersep) {$h_\y$};
+
+
+% % Draw the output layer node
+    \node[output neuron] (I) at (2.5, -\layersep) {$\bx$};
+%%
+%%    % Connect every node in the input layer with every node in the
+%%    % hidden layer.
+     \foreach \source in {1,...,4}
+        \foreach \dest in {1,...,4}
+            \path (I-\source) edge (H-\dest);
+%%
+%    % Connect every node in the hidden layer with the output layer
+  \foreach \source in {1,...,4}
+     \path (I) edge (I-\source);
+%
+   % Annotate the layers
+  \node[annot,left of=H-1, node distance=1cm] (hl) {Level 2}; 
+   \node[annot,left of=I-1, node distance=1cm] {Level 1};
+%%    \node[annot,right of=hl] {Output layer};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+% 
+
 
 \end{frame}
 
-
+%
 %\begin{frame}
-%\frametitle{Stacking applied to multi-target prediction: general principle\footnote{\bibentry{Cheng_Hullermeier_2009}}}
+%\frametitle{Stacking applied to multi-target prediction: general principle\footnote{Cheng and Huellermeier, Combining Instance-based learning and Logistic Regreession for Multi-Label classification, Machine Learning, 2009}}
 %
 %\begin{center}
 %\def\layersep{2.5cm}
@@ -614,10 +739,87 @@ and graphical dependencies, KDD 2013.}}
 %\end{tikzpicture}
 %\end{center}
 %
-%% Cheng and Huellermeier, Combining Instance-based learning and Logistic Regreession for Multi-Label classification, Machine Learning, 2009
+%% 
 %
 %
 %\end{frame}
+
+\begin{frame}{MTP in (Deep) Neural Networks}
+\begin{center}
+Commonly-used architecture: weight sharing among targets\footnote{Caruana, Multitask learning: A knowledge-based source of inductive bias. Machine
+Learning 1997} \\
+\vspace{0.2cm}
+\includegraphics[scale=0.6]{Figures/weightsharing}
+\end{center}
+\end{frame}
+
+\begin{frame}{Re-using Pretrained Models in (Deep) Neural Networks}
+\begin{center}
+Commonly-used training method: first train on targets that have a lot of observations, only train some parameters for targets that have few observations \footnote{Keras Tutorial: Transfer Learning using pre-trained models } \\
+%\vspace{0.2cm}
+\includegraphics[scale=0.4]{Figures/pretrain2}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{An intuitive explanation: James-Stein estimation}
+
+\begin{itemize}
+\item Consider a multivariate normal distribution $\by \sim N(\vec{\theta}, \sigma^2\mathbf{I})$.
+\begin{center}
+\includegraphics[width = 4.5cm]{Figures/biva}
+\end{center}
+\item What is the best estimator of the mean vector $\vec{\theta}$?
+\item Evaluation w.r.t. MSE: $\mathbb{E}[(\vec\theta - \hat{\vec\theta})^2]$
+\item Single-observation maximum likelihood estimator: $\hat{\vec\theta}^{\mathrm{ML}} = \by$
+\item James-Stein estimator\footnote{W. James and C. Stein. Estimation with quadratic loss. In Proc. Fourth Berkeley Symp. Math.
+Statist. Prob. 1, pages 361-379, 1961}: 
+$$
+\hat{\theta}^{\mathrm{JS}} = \left (1 - \frac{(m-2)\sigma^2}{\|\by\|^2} \right )\by
+$$
+\end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}
+
+
+\begin{itemize}
+%\item Similar principle as many target regularization methods.
+
+\item Works best when the norm of the mean vector is close to zero:\\
+\begin{center}
+\includegraphics[width=7cm]{Figures/JS}
+\end{center} \pause 
+\item Regularization towards other directions is also possible:
+$$
+\hat{\theta}^{\mathrm{JS+}} = \left (1 - \frac{(m-2)\sigma^2}{\|\by - \vec{v}\|^2} \right )(\by - \vec{v}) + \vec{v}
+$$
+\item Only outperforms the maximum likelihood estimator w.r.t. the sum of squared errors over all components.
+%\item Does not outperform the squared error when evaluating an individual component (i.e. one target).
+
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Methods that use target relations (B, C and D) \\
+Example: Graph-based regularization\footnote{Gopal and Yang, Recursive regularization for large-scale classification with hierarchical
+and graphical dependencies, KDD 2013.}}
+
+\begin{center}
+\includegraphics[width=\textwidth]{pics/targetrelations}
+\end{center}
+
+\begin{equation*}
+\min_A ||Y - XA ||^2_F + \lambda \sum_{i=1}^m \sum_{j \in \mathcal{N}(i)} ||\vec{a}_i - \ \vec{a}_j||^2 
+\end{equation*}
+
+\end{frame}
+
 
 \begin{frame}{Methods that learn target relations (B and C) \\
 Example: learning target hierarchies\footnote{Rangwala and Naik, Tutorial on Large-Scale Hierarchical Classification, KDD 2017.}}
