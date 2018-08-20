@@ -410,12 +410,12 @@ A multi-target prediction setting is characterized by instances $\vec{x} \in \ma
 Group of methods & Applicable setting \\
 \hline
 \hline
-\alert{A baseline method} & B and C \\
-Methods that do not use domain knowledge & B and C   \\ 
-Methods that use target relations & B, C and D  \\
-Methods that learn target relations & B and C \\
-Methods that use target representations & B, C and D \\
-Methods that learn target representations & B and C \\
+\alert{Independent models} & B and C \\
+Similarity-enforcing methods & B and C   \\ 
+Relation-exploiting methods & B, C and D  \\
+Relation-constructing methods & B and C \\
+Representation-exploiting methods & B, C and D \\
+Representation-constructing methods & B and C \\
 Matrix completion and hybrid methods & A \\
 \hline  
 \end{tabular}
@@ -434,14 +434,12 @@ learning a model for each target independently}
 \includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide14}
 \end{frame}
 
-\begin{frame}{A baseline method:\\
-learning a model for each target independently}
+\begin{frame}{A baseline: Independent Models}
 % voorbeeldje met boeken
 \includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide15}
 \end{frame}
 
-\begin{frame}{A baseline method:\\
-learning a model for each target independently}
+\begin{frame}{A baseline: Independent Models}
 % voorbeeldje met boeken
 \vspace{0.5cm}
 Linear basis function model for $i$-th target: 
@@ -459,6 +457,9 @@ With the following notations:
 \label{eq:notation}
 X = \begin{bmatrix} \phi(\vec{x}_1)^T \\ \vdots \\ \phi(\vec{x}_n)^T \end{bmatrix} \qquad A = [\vec{a}_1 \quad \cdots \quad \vec{a}_m] \,.
 \end{equation*}
+Hamming loss as alternative for binary labels: 
+$${\displaystyle L_{\textit{Ham}}(\vec{y},\hat{\vec{y}}) = \sum_{j=1}^m I(y_j = \hat{y}_j)}$$
+
 
 \end{frame}
 
@@ -482,17 +483,19 @@ Learning a model for each target independently is still state-of-the-art in extr
 Group of methods & Applicable setting \\
 \hline
 \hline
-A baseline method & B and C \\
-\alert{Methods that do not use domain knowledge} & B and C   \\ 
-Methods that use target relations & B, C and D  \\
-Methods that learn target relations & B and C \\
-Methods that use target representations & B, C and D \\
-Methods that learn target representations & B and C \\
+Independent models & B and C \\
+\alert{Similarity-enforcing methods} & B and C   \\ 
+Relation-exploiting methods & B, C and D  \\
+Relation-constructing methods & B and C \\
+Representation-exploiting methods & B, C and D \\
+Representation-constructing methods & B and C \\
 Matrix completion and hybrid methods & A \\
 \hline  
 \end{tabular}
 \end{center}
 \end{frame}
+
+
 
 %
 %\begin{frame}{Learning a model for each target independently with kernel ridge regression}
@@ -545,8 +548,7 @@ Matrix completion and hybrid methods & A \\
 
 
 \begin{frame}[fragile]
-\frametitle{Methods that do not use domain knowledge (B and C) \\
-Example: Mean-regularized multi-task learning\footnote{Evgeniou and Pontil, Regularized multi--task learning, KDD 2004.}}
+\frametitle{Mean-regularized multi-task learning\footnote{Evgeniou and Pontil, Regularized multi--task learning, KDD 2004.}}
 
 \vspace{0.2cm}
 \begin{columns}
@@ -580,6 +582,36 @@ Example: Mean-regularized multi-task learning\footnote{Evgeniou and Pontil, Regu
 \label{eq:meanreg}
 \min_A ||Y - XA ||^2_F + \lambda \sum_{i=1}^m ||\vec{a}_i - \frac{1}{m} \sum_{j=1}^m \vec{a}_j||^2 \, ,
 \end{equation*}
+\end{frame}
+
+\begin{frame}{Joint feature selection}
+\begin{itemize}
+\item Enforce that the same features are selected for different targets\footnote{Obozinski et al. Joint covariate selection and joint subspace selection
+for multiple classification problems. Statistics and Computing 2010}:
+$$
+\min_A ||Y - XA ||^2_F + \lambda \sum_{j=1}^p ||\vec{a}_j||^2  
+$$ 
+\item The vectors $\vec{a}_j$ now represent the rows of matrix $A^T$:
+\end{itemize}
+\begin{center}
+\includegraphics[width=0.9\textwidth,trim = 0 240 30 50,clip]{Figures/pictures/Dia21}
+\end{center}
+%\begin{eqnarray*}
+%\mbox{L2-norm per target:} && 
+%A= \begin{bmatrix}
+%a_{11} & \cdots & a_{1p} \\
+%\vdots & & \vdots \\
+%a_{m1} & \cdots & a_{mp}
+%\end{bmatrix} \\
+%\mbox{Mix L1/L2-norm per target:} && 
+%A= \begin{bmatrix}
+%a_{11} & \cdots & a_{1p} \\
+%\vdots & & \vdots \\
+%a_{m1} & \cdots & a_{mp}
+%\end{bmatrix}\\
+%&& \quad \qquad  (\vec{a}_1,\ldots \ldots,\vec{a}_p)
+%\end{eqnarray*}
+%$$
 \end{frame}
 
 
@@ -804,24 +836,57 @@ $$
 \end{itemize}
 \end{frame}
 
+\begin{frame}{A unifying view on MTP methods}
 
+\begin{center}
+\includegraphics[scale=0.3]{pics/tools}
 
-\begin{frame}{Methods that use target relations (B, C and D) \\
-Example: Graph-based regularization\footnote{Gopal and Yang, Recursive regularization for large-scale classification with hierarchical
-and graphical dependencies, KDD 2013.}}
+\begin{tabular}{ll}
+\hline
+Group of methods & Applicable setting \\
+\hline
+\hline
+Independent models & B and C \\
+Similarity-enforcing methods & B and C   \\ 
+\alert{Relation-exploiting methods} & B, C and D  \\
+Relation-constructing methods & B and C \\
+Representation-exploiting methods & B, C and D \\
+Representation-constructing methods & B and C \\
+Matrix completion and hybrid methods & A \\
+\hline  
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Exploiting relations in regularization terms}
 
 \begin{center}
 \includegraphics[width=\textwidth]{pics/targetrelations}
-\end{center}
+\end{center} \pause 
 
+Graph-based regularization is an approach that can be applied to the three types of relations\footnote{Gopal and Yang, Recursive regularization for large-scale classification with hierarchical
+and graphical dependencies, KDD 2013}: 
 \begin{equation*}
 \min_A ||Y - XA ||^2_F + \lambda \sum_{i=1}^m \sum_{j \in \mathcal{N}(i)} ||\vec{a}_i - \ \vec{a}_j||^2 
 \end{equation*}
 
 \end{frame}
 
+\begin{frame}{Hierarchical multi-label classfication}
 
-\begin{frame}{Methods that learn target relations (B and C) \\
+\vspace{-0.2cm}
+\begin{center}
+\includegraphics[width=\textwidth]{Figures/hloss}
+\end{center}
+
+\vspace{-0.2cm}
+In addition to performance gains in general, hierarchies can also be used to define specific loss functions, such as the H-loss\footnote{Bi and Kwok, Bayes-optimal hierarchical multi-label classification, IEEE Transactions on Knowledge and Data Engineering, 2014}: 
+$$L_H(\vec{y},\hat{\vec{y}}) = \sum_{i: y_i \neq \hat{y_i}} c_i \, I(\textit{anc}(y_i) = \textit{anc}(\hat{y}_i))$$
+$c_i$ depends on the depth of node $i$
+\end{frame}
+
+
+\begin{frame}{Relation-exploiting methods (B and C) \\
 Example: learning target hierarchies\footnote{Rangwala and Naik, Tutorial on Large-Scale Hierarchical Classification, KDD 2017.}}
 
 \includegraphics[width=\textwidth]{pics/hierarchies}
