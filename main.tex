@@ -885,8 +885,58 @@ $$L_H(\vec{y},\hat{\vec{y}}) = \sum_{i: y_i \neq \hat{y_i}} c_i \, I(\textit{anc
 $c_i$ depends on the depth of node $i$
 \end{frame}
 
+\begin{frame}{Exploiting similarity measures among targets}
 
-\begin{frame}{Relation-exploiting methods (B and C) \\
+\begin{center}
+\includegraphics[scale=0.3,trim = 600 0 0 90,clip]{pics/targetrelations}
+\end{center} 
+Can be done within the framework of vector-valued kernel functions\footnote{Alvarez et al., Kernels for vector-valued functions: a review, Foundation and Trends in Machine Learning}:
+\begin{equation*}
+\label{eq:pairwise}
+f(\vec{x},\vec{t}) = \vec{w}^T \Psi(\vec{x},\vec{t}) = \sum_{(\bar{\vec{x}},\bar{\vec{t}}) \in \mathcal{D}} \alpha_{(\bar{\vec{x}},\bar{\vec{t}})} \Gamma((\vec{x},\vec{t}),(\bar{\vec{x}},\bar{\vec{t}})) 
+\end{equation*}
+Model the joint kernel as a product of an instance kernel $k(\cdot,\cdot)$ and a target kernel $g(\cdot,\cdot)$: 
+$$\Gamma((\vec{x},\vec{t}),(\bar{\vec{x}},\bar{\vec{t}})) = k(\vec{x},\bar{\vec{x}}) \cdot g(\vec{t},\bar{\vec{t}})$$
+
+\end{frame}
+
+\begin{frame}{Converting graphs to similarities or target representations}
+
+\begin{itemize}
+\item {\bf Similarities:} use graph structure to express target similarities
+\item[] e.g.\ the shortest-path kernel between two nodes
+\item {\bf Representations:}  often characteristics of a specific vertex or edge
+\item[] e.g.\ the number of positive labels that are siblings of a vertex\footnote{Rousu et al., Kernel-based learning of hierarchical
+multilabel classification models, JMLR 2006} 
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.4,trim = 0 50 430 0,clip]{Figures/hloss}
+\end{center}
+\end{frame}
+
+\begin{frame}{A unifying view on MTP methods}
+
+\begin{center}
+\includegraphics[scale=0.3]{pics/tools}
+
+\begin{tabular}{ll}
+\hline
+Group of methods & Applicable setting \\
+\hline
+\hline
+Independent models & B and C \\
+Similarity-enforcing methods & B and C   \\ 
+Relation-exploiting methods & B, C and D  \\
+\alert{Relation-constructing methods} & B and C \\
+Representation-exploiting methods & B, C and D \\
+Representation-constructing methods & B and C \\
+Matrix completion and hybrid methods & A \\
+\hline  
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Relation-constructing methods (B and C) \\
 Example: learning target hierarchies\footnote{Rangwala and Naik, Tutorial on Large-Scale Hierarchical Classification, KDD 2017.}}
 
 \includegraphics[width=\textwidth]{pics/hierarchies}
@@ -900,6 +950,27 @@ Example: learning target hierarchies\footnote{Rangwala and Naik, Tutorial on Lar
 
 \end{frame}
 
+\begin{frame}{A unifying view on MTP methods}
+
+\begin{center}
+\includegraphics[scale=0.3]{pics/tools}
+
+\begin{tabular}{ll}
+\hline
+Group of methods & Applicable setting \\
+\hline
+\hline
+Independent models & B and C \\
+Similarity-enforcing methods & B and C   \\ 
+Relation-exploiting methods & B, C and D  \\
+Relation-constructing methods & B and C \\
+\alert{Representation-exploiting methods} & B, C and D \\
+Representation-constructing methods & B and C \\
+Matrix completion and hybrid methods & A \\
+\hline  
+\end{tabular}
+\end{center}
+\end{frame}
 
 \begin{frame}{Methods that use target representations (B, C and D) \\
 Example: Kronecker kernel ridge regression\footnote{Waegeman et al., A kernel framework for learning graded relations from data, IEEE Transaction on Fuzzy Systems, 2012}}
@@ -921,64 +992,20 @@ $$ \min_{\bm{\boldsymbol\alpha}} \, ||\bm{\kkernelm}\bm{\boldsymbol\alpha} -\bm{
 
 \end{frame}
 
-\begin{frame}{Methods that learn target representations (B and C) \\
-Example: low-rank parameter matrix approximation\footnote{Chen et al., A convex formulation for learning shared structures from
-multiple tasks, ICML 2009. }}
 
-\begin{center}
-\includegraphics[width=9cm]{pics/lowrank}
-\end{center}
+\begin{frame}{Two-step zero-shot learning\footnote{Pahikkala et al. A two-step approach for solving full and almost full cold-start problems in dyadic prediction, ECML/PKDD 2014.} \footnote{Romero-Paredes and Torr, An embarrassingly simple approach to zero-shot learning, ICML 2015.}}
+\begin{columns}[c]
+\column{0.6\textwidth}
+  \center 
+   \includegraphics[width=0.7\textheight]{Figures/concept2SRLS}
 
-$$\min_A ||Y - XA ||^2_F + \lambda \, \mathrm{rank}(A)$$
-
+\column{0.4\textwidth}
+\begin{enumerate}
+\item Build a kernel ridge regression model to generalize to \alert{new instances}
+\item Build a kernel ridge regression model to generalize to \alert{new tasks}
+\end{enumerate}
+\end{columns}
 \end{frame}
-
-\begin{frame}{Matrix completion and hybrid methods (A) \\
-Example: matrix factorization + bilinear models\footnote{Menon and Elkan, A log-linear model with latent features for dyadic prediction, ICDM 2010.}}
-
-\begin{center}
-\includegraphics[width=11cm]{pics/settingA}
-\end{center}
-
-\vspace{-0.4cm}
-\begin{equation*}
-\label{eq:pairwise}
-f(\vec{x},\vec{t}) = \vec{w}^T \big(\phi(\vec{x}) \otimes \psi(\vec{t})\big)    
-\end{equation*}
-\end{frame}
-
-\section{A specific multi-target prediction method}
-
-\begin{frame}{Overview of this talk}
-
-\tableofcontents
-
-\end{frame}
-
-
-
-
-%\begin{frame}{Can we improve on independently-learned models?}
- %\center
-%\vspace{-0.5cm}
-   %\includegraphics[width=\textwidth]{Figures/results1}
-   %
-%\end{frame}
-
-
-%\begin{frame}{Two-step zero-shot learning\footnote{Pahikkala et al. A two-step approach for solving full and almost full cold-start problems in dyadic prediction, ECML/PKDD 2014.} \footnote{Romero-Paredes and Torr, An embarrassingly simple approach to zero-shot learning, ICML 2015.}}
-%\begin{columns}[c]
-%\column{0.6\textwidth}
-  %\center 
-   %\includegraphics[width=0.7\textheight]{Figures/concept2SRLS}
-%
-%\column{0.4\textwidth}
-%\begin{enumerate}
-%\item Build a kernel ridge regression model to generalize to \alert{new instances}
-%\item Build a kernel ridge regression model to generalize to \alert{new tasks}
-%\end{enumerate}
-%\end{columns}
-%\end{frame}
 
 \begin{frame}{Two-step zero-shot learning\footnote{Pahikkala et al. A two-step approach for solving full and almost full cold-start problems in dyadic prediction, ECML/PKDD 2014.} \footnote{Romero-Paredes and Torr, An embarrassingly simple approach to zero-shot learning, ICML 2015.}}
 % voorbeeldje met boeken
@@ -1038,48 +1065,6 @@ results for protein-ligand interaction prediction}
    \includegraphics[width=\textwidth]{Figures/results4} \\
 \end{frame}
 
-
-\begin{frame}{Cross-validation: four different ways}
-\vspace{-0.6cm}
- \begin{columns}[c]
-\column{0.6\textwidth}
-  \center 
- 
-   \includegraphics[height=0.9\textheight]{Figures/CVSettings}
-\column{0.4\textwidth}
-\begin{itemize}
-\item Analytic shortcuts can be derived to perform LOOCV for each setting!
-
-\item \alert{Tuning $\lambda_d$ and $\lambda_t$ essentially free!}
-\end{itemize}
-\end{columns}
-
-\end{frame}
-
-\begin{frame}{Effect of regularization for the four settings}
-Data: protein-ligand interactions
-
-Evaluation by AUC (\textcolor{orange}{lighter} = better performance)
- \center
-   \includegraphics[width=\textwidth]{Figures/reg_landscape}
-   
-Clear difference between four settings and $\lambda_d$ and $\lambda_t$!
-\end{frame}
-
-\begin{frame}{Learning with mini-batches}
-\begin{columns}[c]
-\column{0.6\textwidth}
-  \center 
-   \includegraphics[height=0.8\textheight]{Figures/online}
-\column{0.4\textwidth}
-Exact updating of the parameters when new training instances and/or taks become available
-\begin{itemize}
-\item scalable for ``Big Data'' applications 
-\item updating model in dynamic environment
-\end{itemize}
-\end{columns}
-\end{frame}
-
 \begin{frame}{Zero-shot learning of document categorization}
  \center
 
@@ -1087,6 +1072,95 @@ Exact updating of the parameters when new training instances and/or taks become 
    \includegraphics[width=0.65\textwidth]{Figures/lc_wiki} \\
    $12,000$ labels: from $5,000$ to $350,000$ instances
 \end{frame}
+
+\begin{frame}{A unifying view on MTP methods}
+
+\begin{center}
+\includegraphics[scale=0.3]{pics/tools}
+
+\begin{tabular}{ll}
+\hline
+Group of methods & Applicable setting \\
+\hline
+\hline
+Independent models & B and C \\
+Similarity-enforcing methods & B and C   \\ 
+Relation-exploiting methods & B, C and D  \\
+Relation-constructing methods & B and C \\
+Representation-exploiting methods & B, C and D \\
+\alert{Representation-constructing methods} & B and C \\
+Matrix completion and hybrid methods & A \\
+\hline  
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Methods that learn target representations (B and C) \\
+Example: low-rank parameter matrix approximation\footnote{Chen et al., A convex formulation for learning shared structures from
+multiple tasks, ICML 2009. }}
+
+\begin{center}
+\includegraphics[width=9cm]{pics/lowrank}
+\end{center}
+
+$$\min_A ||Y - XA ||^2_F + \lambda \, \mathrm{rank}(A)$$
+
+\end{frame}
+
+\begin{frame}{A unifying view on MTP methods}
+
+\begin{center}
+\includegraphics[scale=0.3]{pics/tools}
+
+\begin{tabular}{ll}
+\hline
+Group of methods & Applicable setting \\
+\hline
+\hline
+Independent models & B and C \\
+Similarity-enforcing methods & B and C   \\ 
+Relation-exploiting methods & B, C and D  \\
+Relation-constructing methods & B and C \\
+Representation-exploiting methods & B, C and D \\
+Representation-constructing methods & B and C \\
+\alert{Matrix completion and hybrid methods} & A \\
+\hline  
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Matrix completion and hybrid methods (A) \\
+Example: matrix factorization + bilinear models\footnote{Menon and Elkan, A log-linear model with latent features for dyadic prediction, ICDM 2010.}}
+
+\begin{center}
+\includegraphics[width=11cm]{pics/settingA}
+\end{center}
+
+\vspace{-0.4cm}
+\begin{equation*}
+\label{eq:pairwise}
+f(\vec{x},\vec{t}) = \vec{w}^T \big(\phi(\vec{x}) \otimes \psi(\vec{t})\big)    
+\end{equation*}
+\end{frame}
+
+\section{Loss functions in multi-target prediction}
+
+\begin{frame}{Overview of this tutorial}
+
+\tableofcontents
+
+\end{frame}
+
+
+
+
+%\begin{frame}{Can we improve on independently-learned models?}
+ %\center
+%\vspace{-0.5cm}
+   %\includegraphics[width=\textwidth]{Figures/results1}
+   %
+%\end{frame}
+
 
 %\begin{frame}{Some take-home messages about two-step KRR}
 %
@@ -1129,34 +1203,34 @@ Waegeman et al. \\ Multi-Target Prediction: \\ A Unifying View on Problems and M
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Many thanks to...}
-\begin{center}
-Michiel Stock, Tapio Pahikkala, Antti Airola, Bernard De Baets,  Krzysztof Dembczynski, Eyke H{\"u}llermeier and Weiwei Cheng for collaborating on this topic!
-
-\vskip18pt
+%\begin{frame}
+%\frametitle{Many thanks to...}
 %\begin{center}
-\begin{minipage}[c]{.8\textwidth}
-\begin{center}
-
-\includegraphics[height=1.5cm]{pics/ms.jpg}
-\hskip0.5cm
-\includegraphics[height=1.5cm]{pics/tp.jpg}
-\hskip0.5cm
-\includegraphics[height=1.5cm]{pics/aa.jpg}
-\hskip0.5cm
-\includegraphics[height=1.5cm]{pics/bdb.jpg}
-\hskip0.5cm \\
-\vspace{1cm}
-\includegraphics[height=1.5cm]{pics/kd.jpg}
-\hskip1cm
-\includegraphics[height=1.5cm]{pics/eh.jpg}
-\hskip1cm
-\includegraphics[height=1.5cm]{pics/wc.jpg}
-\end{center}
-\end{minipage}
-\end{center}
-\end{frame}
+%Michiel Stock, Tapio Pahikkala, Antti Airola, Bernard De Baets,  Krzysztof Dembczynski, Eyke H{\"u}llermeier and Weiwei Cheng for collaborating on this topic!
+%
+%\vskip18pt
+%%\begin{center}
+%\begin{minipage}[c]{.8\textwidth}
+%\begin{center}
+%
+%\includegraphics[height=1.5cm]{pics/ms.jpg}
+%\hskip0.5cm
+%\includegraphics[height=1.5cm]{pics/tp.jpg}
+%\hskip0.5cm
+%\includegraphics[height=1.5cm]{pics/aa.jpg}
+%\hskip0.5cm
+%\includegraphics[height=1.5cm]{pics/bdb.jpg}
+%\hskip0.5cm \\
+%\vspace{1cm}
+%\includegraphics[height=1.5cm]{pics/kd.jpg}
+%\hskip1cm
+%\includegraphics[height=1.5cm]{pics/eh.jpg}
+%\hskip1cm
+%\includegraphics[height=1.5cm]{pics/wc.jpg}
+%\end{center}
+%\end{minipage}
+%\end{center}
+%\end{frame}
 
 %\begin{frame}{Selected references}
 %\begin{itemize}
