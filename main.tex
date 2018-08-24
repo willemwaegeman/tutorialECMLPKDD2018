@@ -1,7 +1,11 @@
 \documentclass[]{beamer}
 %\documentclass[handout]{beamer}
 \usetheme{Boadilla} 
-%\usecolortheme{spruce}
+%\usecolortheme{seagull}
+%\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{blocks}[default]%[shadow=false]
+
+\setbeamertemplate{footnote}{\tiny\makebox[1em][l]{\insertfootnotemark}\insertfootnotetext\par}
 
 
 
@@ -29,6 +33,7 @@
 \usepackage{stmaryrd} 
 \usepackage{dsfont}
 \usepackage{color,colortbl} 
+\usepackage{pgfplots}
 %\usepackage{bibentry}
 \usepackage{tikz}
 \usetikzlibrary{mindmap,trees}
@@ -42,6 +47,7 @@
 \usetikzlibrary{shapes,snakes}
 \usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,
   decorations.pathreplacing,decorations.pathmorphing,shapes,matrix,shapes.symbols}
+\usetikzlibrary{shapes.misc}
 
 \usepackage{multirow}
 % \usepackage{beamerthemesplit} // Activate for custom appearance
@@ -81,6 +87,8 @@
 \newcommand{\objset}{D}
 \newcommand{\taskset}{T}
 \newcommand{\labelvec}{\bm{y}}
+\newcommand{\Algo}[1]{{#1}}
+
 
 \setbeamertemplate{footline}[frame number]
 \beamertemplatenavigationsymbolsempty 
@@ -148,6 +156,7 @@
 \newcommand{\calH}{\mathcal{H}}
 \newcommand{\calL}{\mathcal{L}}
 \newcommand{\calO}{\mathcal{O}} 
+\newcommand{\calC}{\mathcal{C}} 
 
 %\newcommand{\loss}{L}
 %\newcommand{\regret}{\textnormal{Reg}}
@@ -158,9 +167,15 @@
 %\newcommand{\sgn}[1]{\textrm{sgn}\left(#1\right)}
 %\newcommand{\bm}{\mathds{1}}
 
-\renewcommand{\alert}[1]{\textbf{\color{red} #1}}
+\definecolor{putblue}{RGB}{0,0,124}
+\definecolor{putred}{RGB}{204,33,69}
+\renewcommand{\alert}[1]{\textbf{\color{putblue} #1}}
+\renewcommand{\emph}[1]{\textbf{\color{putblue}#1}}
 %\renewcommand{\emph}[1]{\textbf{\color{icml_tutorial}#1}}
 
+
+\setbeamercolor{title}{bg=white,fg=putblue}
+\setbeamercolor{subtitle}{bg=white,fg=putblue}
 
 %\newcommand {\autographics}[1] {
   %\begin{center}
@@ -936,19 +951,381 @@ Matrix completion and hybrid methods & A \\
 \end{center}
 \end{frame}
 
-\begin{frame}{Relation-constructing methods (B and C) \\
-Example: learning target hierarchies\footnote{Rangwala and Naik, Tutorial on Large-Scale Hierarchical Classification, KDD 2017.}}
+\begin{frame}{Constructing target hierarchies}
 
 \includegraphics[width=\textwidth]{pics/hierarchies}
 
 \begin{itemize}
-\item It might be difficult for a human expert to define a hierarchy
+\item It might be difficult for a human expert to define a hierarchy\footnote{Rangwala and Naik, Tutorial on Large-Scale Hierarchical Classification, KDD 2017.}
 \item Perhaps one can try to learn the hierarchy from data? 
 \item Algorithms: level flattening, node removal, hierarchy modification, hierarchy generation, etc.
 \end{itemize}
 
 
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Label trees ($\neq$ decision trees) }
+
+\begin{center}
+		\vskip3pt
+			\tikzset{onslide/.code args={<#1>#2}{%
+					\only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+				}}
+				%\hspace{15pt}
+				\begin{tikzpicture}[scale = 0.3,every node/.style={scale=0.8},
+				regnode/.style={circle,draw,minimum width=1.5ex,inner sep=0pt},
+				leaf/.style={circle,fill=black,draw,minimum width=1.5ex,inner sep=0pt},
+				pleaf/.style={rectangle,rounded corners=1ex,draw,font=\scriptsize,inner sep=3pt},
+				pnode/.style={rectangle,rounded corners=1ex,draw,font=\scriptsize,inner sep=3pt},
+				rootnode/.style={rectangle,rounded corners=1ex,draw,font=\scriptsize,inner sep=3pt},
+				level/.style={sibling distance=24em/#1, level distance=10ex}
+				]
+				\node (z) [rootnode] {$0$}
+				child {node (a) [pnode] {$1$} 
+					child {node [label=below:{\makebox[1cm][c]{$y_1$}}] (b) [pleaf] {3} edge from parent node[above left]{}}
+					child {node [label=below:{\makebox[1cm][c]{$y_2$}}] (g) [pleaf] {4} edge from parent node[above right]{}}
+					edge from parent node[above left]{}
+				}
+				child {node (j) [pnode] {$2$}
+					child {node [label=below:{\makebox[1cm][c]{$y_3$}}] (k) [pleaf] {5} edge from parent node[above left]{}}
+					child {node [label=below:{\makebox[1cm][c]{$y_4$}}] (l) [pleaf] {6}
+						{
+							child [grow=right] {node (s) {} edge from parent[draw=none]
+								child [grow=up] {node (t) {} edge from parent[draw=none]
+									child [grow=up] {node (u) {} edge from parent[draw=none]}
+								}
+							}
+						}
+						edge from parent node[above right]{}
+					}
+					edge from parent node[above right]{}
+				};
+				\end{tikzpicture}
+\end{center}
+\begin{itemize}
+\item Organize classifiers in a tree structure (one leaf $\Leftrightarrow$ one label)
+\item Mainly used in multi-class and multi-label classification
+\item Goal is fast prediction: almost logarithmic in the number of labels
+\item Algorithms: Label embedding trees\footnote{Bengio et al., Label embedding trees for large multi-class tasks, NIPS 2010}, Nested dichotomies\footnote{Frank and Kramer, Ensembles of nested dichotomies for multi-class problems, ICML 2004},
+Conditional~probability~trees\footnote{Beygelzimer et al., Conditional probability tree estimation analysis and algorithms. UAI 2009}, Hierarchical softmax\footnote{Morin and Bengio, Hierarchical probabilistic neural network language model, AISTATS 2005}, FastText\footnote{Joulin et al., Bag of tricks for efficient text classifcation. CoRR,
+abs/1607.01759, 2016}, Probabilistic classifier chains\footnote{Dembczynski et al., Bayes optimal multilabel classification via probabilistic classifier chains, ICML 2010}%
+\end{itemize}
+\vskip9pt
+\end{frame} 
+
+
+\begin{frame}
+\frametitle{Hierarchical softmax / Probabilistic classifier trees}
+
+\begin{center}
+\begin{tikzpicture}[scale = .65,every node/.style={scale=.65},
+	regnode/.style={circle,draw,minimum width=1.5ex,inner sep=0pt},
+	leaf/.style={circle,fill=black,draw,minimum width=1.5ex,inner sep=9pt},
+	pleaf/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=9pt}, %line width=2pt},
+	pnode/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=9pt},
+	rootnode/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=12pt},
+	%level 1/.style={sibling distance=23em, level distance=13ex},
+	%level 2/.style={sibling distance=11em, level distance=13ex},
+	%regnode/.style={circle,draw,minimum width=1.5ex,inner sep=0pt},
+	%leaf/.style={circle,fill=black,draw,minimum width=1.5ex,inner sep=3pt},
+	%pleaf/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=3pt},
+	%pnode/.style={rectangle,draw,font=\small,inner sep=3pt},
+	%rootnode/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=3pt},
+	level 1/.style={sibling distance=19em, level distance=11ex},
+	level 2/.style={sibling distance=11em, level distance=11ex},
+	]
+	\node (z) [rootnode] {$\bz^0$}
+				child {node (a) [pnode] {$\bz^1 = (0)$} 
+					child {node [label=below:{\makebox[1cm][c]{$\bz=(0,0)$}}] (b) [pleaf] {$y=1$} edge from parent node[above left]{$0$}}
+					child {node [label=below:{\makebox[1cm][c]{$\bz=(0,1)$}}] (g) [pleaf] {$y=2$} edge from parent node[above right]{$1$}}
+					edge from parent node[above left] {$0$}
+				}
+				child {node (j) [pnode] {$\bz^1 = (1)$}
+					child {node [label=below:{\makebox[1cm][c]{$\bz=(1,0)$}}] (k) [pleaf] {$y=3$} edge from parent node[above left]{$0$}}
+					child {node [label=below:{\makebox[1cm][c]{$\bz=(1,1)$}}] (l) [pleaf] {$y=4$}
+						edge from parent node[above right]{{$1$}}
+					}
+					edge from parent node[above right]{{$1$}}
+				};
+\end{tikzpicture}
+%\hskip12pt
+%\begin{tikzpicture}[scale = .65,every node/.style={scale=.65},
+%	regnode/.style={circle,draw,minimum width=1.5ex,inner sep=0pt},
+%	leaf/.style={circle,fill=black,draw,minimum width=1.5ex,inner sep=3pt},
+%	pleaf/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=3pt},
+%	pnode/.style={rectangle,draw,font=\small,inner sep=3pt},
+%	rootnode/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=3pt},
+%	level 1/.style={sibling distance=13em, level distance=7ex},
+%	level 2/.style={sibling distance=9em, level distance=7ex},
+%	level 3/.style={sibling distance=9em, level distance=7ex}
+%	]
+%	\node (z) [rootnode] {$\by^0$}
+%				child {node  (a) [label=below:{\makebox[1cm][c]{$\by = (0)$}},pleaf] {$y=1$} 
+%					edge from parent node[above left] {$0$}
+%				}
+%				child {node (j) [pnode] {$\by^1 = (1)$}
+%					child {node (b) [pnode] {$\by^2 = (1,0)$}
+%					child {node [label=below:{\makebox[1cm][c]{$\by=(1,0,0)$}}] (c) [pleaf] {$y=2$} edge from parent node[above left]{$0$}}
+%					child {node [label=below:{\makebox[1cm][c]{$\by=(1,0,1)$}}] (d) [pleaf] {$y=3$} edge from parent node[above right]{$1$}}
+%					edge from parent node[above left] {$0$}					
+%					}
+%					child {node [label=below:{\makebox[1cm][c]{$\by=(1,1)$}}] (l) [pleaf] {$y=4$}
+%						edge from parent node[above right]{{$1$}}
+%					}
+%					edge from parent node[above right]{{$1$}}
+%				};
+%\end{tikzpicture}
+\end{center}
+\begin{itemize}
+\item Encode the targets by a \emph{prefix code} ($\Rightarrow$ tree structure)\footnote{ Dembczynski et al., Consistency of
+probabilistic classifier trees. ECMLPKDD 2016}
+\item Multi-class classification: each label $y$ \emph{coded} by $\bz = (z_1, \ldots, z_l) \in \calC$
+%\item An internal node identified by a \emph{partial} code $\bz^i = (z_1, \ldots, z_i)$
+\item Multi-label classification: a label vector $\by = (y_1, \ldots, y_m)$ is a prefix code.
+%\item The code does \emph{not} have to be binary $\Rightarrow$ $b$-ary trees
+%\item Different \emph{structures} possible: random tree, Huffman tree, trained structure
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\begin{frame}
+%\frametitle{Hierarchical softmax (HSM)}
+%\begin{itemize}
+%\item HSM estimates $\Pr(y\given\bx) $ by following a \emph{path} from the root to a leaf:
+%\begin{minipage}[b][1.5cm][c]{\textwidth}
+%\only<1>{$$
+%\Pr(y \given \bx) = \Pr(\bz \given \bx) = \prod_{i=1}^l \Pr(z_i | {\bz}^{i-1}, \bx)
+%$$}
+%\only<2>{$$
+%\Pr(z_1 \given \bx) \Pr(z_2 \given z_1, \bx) = \frac{\Pr(z_1, \bx)}{\Pr(\bx)}\frac{\Pr(z_2, z_1, \bx)}{\Pr(z_1,\bx)} = \Pr(z_1, z_2 \given \bx)
+%$$}
+%\end{minipage}
+%\begin{center}
+%\scalebox{0.9}{%
+%\begin{tikzpicture}[scale = 0.65,every node/.style={scale=0.65},
+	%regnode/.style={circle,draw,minimum width=1.5ex,inner sep=0pt},
+	%leaf/.style={circle,fill=black,draw,minimum width=1.5ex,inner sep=9pt},
+	%pleaf/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=9pt}, %line width=2pt},
+	%pnode/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=9pt},
+	%rootnode/.style={rectangle,rounded corners=.5ex,draw,font=\small,inner sep=12pt},
+	%level 1/.style={sibling distance=23em, level distance=13ex},
+	%level 2/.style={sibling distance=11em, level distance=13ex},
+%]
+%\node (z) [rootnode] {$\bx$}
+  %child {node (a) [pnode] {$\Pr(z_1=0 \given \bx)=0.4$} 
+    %child {node [label=below:{\color{blue}\small \thickmuskip=0mu $\Pr(\bz=(0,0)\given \bx)=0.4$}] (b) [pleaf] {\thickmuskip=-1.5mu $\Pr(z_2=0 \given z_1=0, \bx)=1.0$} edge from parent node[above left]{$z_2=0$}}
+    %child {node [label=below:{\small \thickmuskip=0mu $\Pr(\bz=(0,1) \given x)=0.0$}] (g) [pleaf] {\thickmuskip=-1.5mu $\Pr(z_2=1 \given z_1=0, \bx)=0.0$} edge from parent node[above right]{$z_2=1$}}
+    %edge from parent node[above left]{$z_1=0$}
+  %}
+  %child {node (j) [pnode] {$\Pr(z_1=1 \given \bx)=0.6$}
+    %child {node [label=below:{ \small \thickmuskip=0mu $\Pr(\bz=(1,0) \given \bx)=0.24$}] (k) [pleaf] {\thickmuskip=-1.5mu $\Pr(z_2=0 \given z_1=1, \bx)=0.4$} edge from parent node[above left]{$z_2=0$}}
+      %child {node [label=below:{\color{red} \small \thickmuskip=0mu $\Pr(\bz=(1,1) \given \bx)=0.36$}] (l) [pleaf] {\thickmuskip=-1.5mu $\Pr(z_2=1 \given z_1=1, \bx)=0.6$}
+         %{
+              %child [grow=right] {node (s) {} edge from parent[draw=none]
+                %child [grow=up] {node (t) {} edge from parent[draw=none]
+                  %child [grow=up] {node (u) {} edge from parent[draw=none]}
+                %}
+              %}
+        %}
+    %edge from parent node[above right]{$z_2=1$}
+  %}
+  %edge from parent node[above right]{$z_1=1$}
+%};
+%\end{tikzpicture}
+%}%
+%\end{center}
+%\end{itemize}
+%\begin{minipage}[t][3cm][t]{\textwidth}
+		%\vskip3pt
+			%\begin{itemize}
+				%\item Training: \emph{separate} learning problems in the \emph{internal} nodes %($\sum_{z_t} \Pr(z_t \given \bz^{t-1}) = 1$)
+				%\item Prediction: \emph{depth first search}/\emph{beam search}
+			%\end{itemize}
+%\end{minipage}
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+\begin{frame}
+\frametitle{Probabilistic classifier chains}
+
+\begin{itemize}
+\item Estimate the {joint} conditional distribution $\Pr(\vec{Y} \given  \vec{x})$. 
+\item For optimizing the subset 0/1 loss:  $$ \ell_{0/1}(\by, \hat{y}) = \assert{\by \ne \hat{y}}$$
+\item Repeatedly apply the \emph{product rule of probability}:
+$$
+\Pr(\vec{Y} = \vec{y} \given \vec{x}) = \prod_{i=1}^{m} \Pr(Y_i = y_i \given \vec{x}, y_1, \ldots,y_{i-1}) \, .
+$$
+\item  Learning relies on constructing probabilistic classifiers for estimating 
+$$
+\Pr(Y_i = y_i|\vec{x}, y_1, \ldots,y_{i-1}) \,,
+$$
+{independently} for each $i = 1, \ldots, m$. 
+%\item One can use scoring functions $f_i(\bx^\prime,y_i)$ and use logistic transformation.
+%\item By using the linear models, the overall scoring function takes the form:
+%$$
+%f(\bx,\by) = \sum_{i=1}^m f_i(\bx, y_i) + \sum_{y_k,y_l} \! f_{k,l}(y_k,y_l) 
+%$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Inference relies on exploiting a probability tree:
+\end{itemize}
+\vspace{0.1cm}
+\begin{center}
+\begin{tikzpicture}[scale = 0.85,every node/.style={scale=0.85},
+	regnode/.style={circle,draw,minimum width=1.5ex,inner sep=0pt},
+	leaf/.style={circle,fill=black,draw,minimum width=1.5ex,inner sep=0pt},
+	pleaf/.style={rectangle,rounded corners=1ex,draw,font=\scriptsize,inner sep=3pt,line width=1pt},
+	pnode/.style={rectangle,rounded corners=1ex,draw,font=\scriptsize,inner sep=3pt},
+	rootnode/.style={rectangle,rounded corners=1ex,draw,font=\small,inner sep=4pt},
+	level/.style={sibling distance=16em/#1, level distance=12ex}
+]
+\node (z) [rootnode] {$\bx$}
+  child {node (a) [pnode] {$P(y_1=0 \given \bx)=0.4$} 
+    child {node [label=below:{\scriptsize \thickmuskip=0mu $P(\by=(0,0)\given \bx)=0$}] (b) [pleaf] {\thickmuskip=-1.5mu $P(y_2=0 \given y_1=0, \bx)=0.0$} edge from parent node[above left]{$y_2=0$}}
+    child {node [label=below:{\color{blue} \scriptsize \thickmuskip=0mu $P(\by=(0,1) \given x)=0.4$}] (g) [pleaf] {\thickmuskip=-1.5mu $P(y_2=1 \given y_1=0, \bx)=1.0$} edge from parent node[above right]{$y_2=1$}}
+    edge from parent node[above left]{$y_1=0$}
+  }
+  child {node (j) [pnode] {$P(y_1=1 \given \bx)=0.6$}
+    child {node [label=below:{\scriptsize \thickmuskip=0mu $P(\by=(1,0) \given \bx)=0.24$}] (k) [pleaf] {\thickmuskip=-1.5mu $P(y_2=0 \given y_1=1, \bx)=0.4$} edge from parent node[above left]{$y_2=0$}}
+      child {node [label=below:{\color{red} \scriptsize \thickmuskip=0mu $P(\by=(1,1) \given \bx)=0.36$}] (l) [pleaf] {\thickmuskip=-1.5mu $P(y_2=1 \given y_1=1, \bx)=0.6$}
+         {
+              child [grow=right] {node (s) {} edge from parent[draw=none]
+                child [grow=up] {node (t) {} edge from parent[draw=none]
+                  child [grow=up] {node (u) {} edge from parent[draw=none]}
+                }
+              }
+        }
+    edge from parent node[above right]{$y_2=1$}
+  }
+  edge from parent node[above right]{$y_1=1$}
+};
+
+%\path (s) -- (t) node [midway] {$\lambda_{2}$};
+%\path (t) -- (u) node [midway] {$\lambda_{1}$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{-0.4cm}
+\begin{itemize}
+\item For subset 0/1 loss one needs to find $
+\bh(\bx) = \argmax_{\by \in \calY} \Pr(\by \given \bx)
+$.
+\item Greedy and approximate search techniques with guarantees exist.\footnote{Kumar et al., Beam search algorithms for multilabel
+learning, Machine Learning 2013}
+\item Other losses: compute the prediction on a sample from $\Pr(\vec{Y} \given  \vec{x})$.\footnote{23 Dembczynski et al., An analysis of chaining
+in multi-label classification, ECAI 2012}
+%\item[]
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Constructing target similarities by output kernel learning}
+
+\begin{itemize}
+\item Consider models $\bf{f}: \mathcal{X} \rightarrow \mathbb{R}^m$
+\item Training dataset $\{\bf{x}_i,\bf{y}_i\}_{i=1}^n$
+\item Learnable correlation matrix $\bf{\Gamma}$ between targets
+\item Learn output kernel and model parameters jointly\footnote{Dinuzzo et al., Learning Output Kernels with Block Coordinate Descent, ICML 2011}:
+$$\min_{\bf{\Gamma} \in \mathbb{R}^{m \times m}} \left[ \min_{\bf{f} \in \mathcal{F}} \sum_{i=1}^n \frac{||\bf{f}(\bf{x}_i) - \bf{y}_i||_2^2}{2\lambda} + \frac{||\bf{f}||^2_\mathcal{F}}{2} + \frac{
+||\bf{\Gamma}||^2_F}{2} \right]$$
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.2]{Figures/okl}
+\end{center}
+
+\end{frame}
+
+%\begin{frame}[fragile] 
+%\frametitle{Probabilistic classifier chains}
+%
+%\begin{table}
+%\caption{PCC vs. SSVMs on Hamming loss and PCC vs. BR on subset 0/1 loss.%\footnote{\bibentry{Dembczynski_et_al_2012c}\\[1pt]\bibentry{Finley_Joachims_2008}}
+%}
+%\begin{center}
+%\small{\textsc{
+%\begin{tabular}{l r@{$\pm$}l r@{$\pm$}l @{$\quad\quad$} r@{$\pm$}l r@{$\pm$}l}
+%\toprule
+%Dataset & \multicolumn{2}{c}{PCC} & \multicolumn{2}{c@{$\quad\quad$}}{SSVM Best}  & \multicolumn{2}{c}{PCC} & \multicolumn{2}{c}{BR}  \\ 
+%&  \multicolumn{4}{c@{$\quad\quad$}}{Hamming loss} & \multicolumn{4}{c}{subset 0/1 loss} \\  
+%\midrule
+%Scene       &  0.104 &.004  & 0.101&.003 &  0.385&.014  & 0.509&.014\\
+%Yeast        &  0.203 &.005 &  0.202&.005  &  0.761&.014 &  0.842&.012\\ 
+%Synth1      & 0.067 &.001  & 0.069&.001    & 0.239&.006 & 0.240&.006 \\
+%Synth2      & 0.000 &.000  & 0.058&.001  & 0.000&.000  & 0.832&.004 \\
+%Reuters     & 0.060 &.002  & 0.045&.001  & 0.598&.009 & 0.689&.008 \\
+%Mediamill &  0.172 &.001  & 0.182&.001  &  0.885&.003  & 0.902&.003   \\
+%\bottomrule
+%\end{tabular}
+%}}
+%\vspace{0cm}
+%\end{center}
+%\end{table}
+%
+%\end{frame}
+
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\begin{frame}
+%\frametitle{HSM for MLC}
+%\begin{itemize}[<+->]
+%\item \emph{Pick-one-label} heuristic used, for example, in \Algo{FastText}:
+%$$
+%\eta'_j(\bx) = \Pr'(y_j = 1 \given \bx) = \sum_{\by \in \calY} y_j \frac{\Pr(\by \given \bx)}{\sum_{j'=1}^m y_{j'}}
+%$$
+%\item \emph{Theorem}: inconsistent for label-wise logistic loss and precision$@k$
+%\vskip9pt
+%%\begin{center}
+%\begin{footnotesize}
+%\begin{tabular}{c c}
+%\toprule
+%labels $\by$ & probability $\Pr(\by \given \bx)$ \\
+%\midrule
+%$\{1\}$ & 0.15 \\
+%$\{2\}$ & 0.10 \\
+%$\{1, 2\}$ & 0.25 \\
+%$\{3\}$ & 0.30 \\
+%$\{4\}$ & 0.20 \\
+%\bottomrule
+%\end{tabular}
+%\hskip12pt
+%\begin{tabular}{l l}
+%\toprule
+%True marg. probs & P-o-l marg. probs \\
+%\midrule
+%$\eta_1(\bx) = 0.4$ & $\eta'_3(\bx) = 0.3$ \\
+%$\eta_2(\bx) = 0.35$ & $\eta'_1(\bx) = 0.275$ \\
+%$\eta_3(\bx) = 0.3$ & $\eta'_2(\bx) = 0.225$ \\
+%$\eta_4(\bx) =0.2$ & $\eta'_4(\bx) =0.2$ \\
+%\bottomrule
+%& \\
+%\end{tabular}
+%\end{footnotesize}
+%%\end{center}
+%\item \vskip9pt \emph{Theorem}: consistent for precision$@k$ for independent labels
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}{Construcing hierarchies to obtain additional insight}
+
+\begin{itemize}
+\item Application in climate science
+\item Result of learning 20000 tasks simultaneously with a multi-task learning method
+\item Followed by hierarchical clustering of the learned weight vectors\footnote{Papagiannopoulou et al. Globral hydro-climatic biomes identified with multi-task learning, Geoscientific Model Development Discussions 2018}:
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.2]{Figures/biomes} 
+\end{center}
+
+\end{frame}
+
 
 \begin{frame}{A unifying view on MTP methods}
 
@@ -972,8 +1349,24 @@ Matrix completion and hybrid methods & A \\
 \end{center}
 \end{frame}
 
-\begin{frame}{Methods that use target representations (B, C and D) \\
-Example: Kronecker kernel ridge regression\footnote{Waegeman et al., A kernel framework for learning graded relations from data, IEEE Transaction on Fuzzy Systems, 2012}}
+\begin{frame}{A target representation in computer vision}
+
+\begin{center}
+\includegraphics[scale=0.4]{Figures/semanticclasses} \\
+Target representations are the key element of zero-shot learning methods\footnote{Examples taken from the CVPR 2016 Tutorial on Zero-shot learning for Computer Vision} 
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Target representations can take many forms}
+
+\begin{center}
+\includegraphics[width=\textwidth,trim = 0 0 0 90,clip]{Figures/representations}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Kronecker kernel ridge regression}
 
 \vspace{0.5cm}
 Pairwise model representation in the primal: 
@@ -981,7 +1374,7 @@ Pairwise model representation in the primal:
 \label{eq:pairwise}
 f(\vec{x},\vec{t}) = \vec{w}^T \left(\phi(\vec{x}) \otimes \psi(\vec{t}) \right) 
 \end{equation*}
-Kronecker product pairwise kernel in the dual:
+Kronecker product pairwise kernel in the dual\footnote{Waegeman et al., A kernel framework for learning graded relations from data, IEEE Transaction on Fuzzy Systems, 2012}:
 \begin{eqnarray*} 
 f(\vec{x},\vec{t})= \sum_{(\bar{\vec{x}},\bar{\vec{t}}) \in \mathcal{D}} \alpha_{(\bar{\vec{x}},\bar{\vec{t}})}  k(\vec{x},\bar{\vec{x}}) \cdot g(\vec{t},\bar{\vec{t}})  = \sum_{(\bar{\vec{x}},\bar{\vec{t}}) \in \mathcal{D}} \alpha_{(\bar{\vec{x}},\bar{\vec{t}})} \Gamma((\vec{x},\vec{t}),(\bar{\vec{x}},\bar{\vec{t}})) 
 \end{eqnarray*}
@@ -992,20 +1385,20 @@ $$ \min_{\bm{\boldsymbol\alpha}} \, ||\bm{\kkernelm}\bm{\boldsymbol\alpha} -\bm{
 
 \end{frame}
 
-
-\begin{frame}{Two-step zero-shot learning\footnote{Pahikkala et al. A two-step approach for solving full and almost full cold-start problems in dyadic prediction, ECML/PKDD 2014.} \footnote{Romero-Paredes and Torr, An embarrassingly simple approach to zero-shot learning, ICML 2015.}}
-\begin{columns}[c]
-\column{0.6\textwidth}
-  \center 
-   \includegraphics[width=0.7\textheight]{Figures/concept2SRLS}
-
-\column{0.4\textwidth}
-\begin{enumerate}
-\item Build a kernel ridge regression model to generalize to \alert{new instances}
-\item Build a kernel ridge regression model to generalize to \alert{new tasks}
-\end{enumerate}
-\end{columns}
-\end{frame}
+%
+%\begin{frame}{Two-step zero-shot learning\footnote{Pahikkala et al. A two-step approach for solving full and almost full cold-start problems in dyadic prediction, ECML/PKDD 2014.} \footnote{Romero-Paredes and Torr, An embarrassingly simple approach to zero-shot learning, ICML 2015.}}
+%\begin{columns}[c]
+%\column{0.6\textwidth}
+  %\center 
+   %\includegraphics[width=0.7\textheight]{Figures/concept2SRLS}
+%
+%\column{0.4\textwidth}
+%\begin{enumerate}
+%\item Build a kernel ridge regression model to generalize to \alert{new instances}
+%\item Build a kernel ridge regression model to generalize to \alert{new tasks}
+%\end{enumerate}
+%\end{columns}
+%\end{frame}
 
 \begin{frame}{Two-step zero-shot learning\footnote{Pahikkala et al. A two-step approach for solving full and almost full cold-start problems in dyadic prediction, ECML/PKDD 2014.} \footnote{Romero-Paredes and Torr, An embarrassingly simple approach to zero-shot learning, ICML 2015.}}
 % voorbeeldje met boeken

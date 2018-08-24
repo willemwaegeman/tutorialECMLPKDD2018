@@ -1,34 +1,51 @@
-\frametitle{Mean-regularized multi-task learning\footnote{Evgeniou and Pontil, Regularized multi--task learning, KDD 2004.}}
-
-\vspace{0.2cm}
-\begin{columns}
-\column{5cm}
-\small{
 \begin{itemize}
-\item \emph{Simple assumption}: models for different targets are related to each other.
-\item \emph{Simple solution}: the parameters of these models should have similar values.
-\item \emph{Approach}: bias the parameter vectors towards their mean vector.
-%\item \emph{Disadvantage}: the assumption of all target models being similar might be invalid for many applications.
+\item Inference relies on exploiting a probability tree:
 \end{itemize}
-}
-\column{5.5cm}
+\vspace{0.1cm}
+\begin{center}
+\begin{tikzpicture}[scale = 0.85,every node/.style={scale=0.85},
+	regnode/.style={circle,draw,minimum width=1.5ex,inner sep=0pt},
+	leaf/.style={circle,fill=black,draw,minimum width=1.5ex,inner sep=0pt},
+	pleaf/.style={rectangle,rounded corners=1ex,draw,font=\scriptsize,inner sep=3pt,line width=1pt},
+	pnode/.style={rectangle,rounded corners=1ex,draw,font=\scriptsize,inner sep=3pt},
+	rootnode/.style={rectangle,rounded corners=1ex,draw,font=\small,inner sep=4pt},
+	level/.style={sibling distance=16em/#1, level distance=12ex}
+]
+\node (z) [rootnode] {$\bx$}
+  child {node (a) [pnode] {$P(y_1=0 \given \bx)=0.4$}
+    child {node [label=below:{\scriptsize \thickmuskip=0mu $P(\by=(0,0)\given \bx)=0$}] (b) [pleaf] {\thickmuskip=-1.5mu $P(y_2=0 \given y_1=0, \bx)=0.0$} edge from parent node[above left]{$y_2=0$}}
+    child {node [label=below:{\color{blue} \scriptsize \thickmuskip=0mu $P(\by=(0,1) \given x)=0.4$}] (g) [pleaf] {\thickmuskip=-1.5mu $P(y_2=1 \given y_1=0, \bx)=1.0$} edge from parent node[above right]{$y_2=1$}}
+    edge from parent node[above left]{$y_1=0$}
+  }
+  child {node (j) [pnode] {$P(y_1=1 \given \bx)=0.6$}
+    child {node [label=below:{\scriptsize \thickmuskip=0mu $P(\by=(1,0) \given \bx)=0.24$}] (k) [pleaf] {\thickmuskip=-1.5mu $P(y_2=0 \given y_1=1, \bx)=0.4$} edge from parent node[above left]{$y_2=0$}}
+      child {node [label=below:{\color{red} \scriptsize \thickmuskip=0mu $P(\by=(1,1) \given \bx)=0.36$}] (l) [pleaf] {\thickmuskip=-1.5mu $P(y_2=1 \given y_1=1, \bx)=0.6$}
+         {
+              child [grow=right] {node (s) {} edge from parent[draw=none]
+                child [grow=up] {node (t) {} edge from parent[draw=none]
+                  child [grow=up] {node (u) {} edge from parent[draw=none]}
+                }
+              }
+        }
+    edge from parent node[above right]{$y_2=1$}
+  }
+  edge from parent node[above right]{$y_1=1$}
+};
 
-\begin{tikzpicture}[
-  level 1 concept/.append style={font=\sf, level distance = 21mm},
-  level 2 concept/.append style={font=\sf, level distance = 21mm},
-  every node/.append style={scale=0.5}]
-
-  \path[mindmap, concept color=black,text=white]
-
-    node[concept] {Mean}
-    child[grow = 90, concept color=green!50!black] { node[concept] {Target 1}}
-    child[grow = 180,concept color=blue] { node[concept] {Target 2}}
-	child[grow = 270,concept color=red] { node[concept] {Target 3} }
-	child[grow = 360,concept color=orange] { node[concept] {Target 4} };
+%\path (s) -- (t) node [midway] {$\lambda_{2}$};
+%\path (t) -- (u) node [midway] {$\lambda_{1}$};
 \end{tikzpicture}
-\end{columns}
-\vspace{0.2cm}
-\begin{equation*}
-\label{eq:meanreg}
-\min_A ||Y - XA ||^2_F + \lambda \sum_{i=1}^m ||\vec{a}_i - \frac{1}{m} \sum_{j=1}^m \vec{a}_j||^2 \, ,
-\end{equation*}
+\end{center}
+
+\vspace{-0.4cm}
+\begin{itemize}
+\item For subset 0/1 loss one needs to find $
+\bh(\bx) = \argmax_{\by \in \calY} \Pr(\by \given \bx)
+$.
+\item Greedy and approximate search techniques with guarantees exist.\footnote{Kumar et al., Beam search algorithms for multilabel
+learning, Machine Learning 2013}
+\item Other losses: compute the prediction on a sample from $\Pr(\vec{Y} \given  \vec{x})$.\footnote{23 Dembczynski et al., An analysis of chaining
+in multi-label classification, ECAI 2012}
+%\item[]
+\end{itemize}
+
