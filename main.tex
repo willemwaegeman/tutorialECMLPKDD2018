@@ -1366,6 +1366,30 @@ Target representations are the key element of zero-shot learning methods\footnot
 
 \end{frame}
 
+\begin{frame}{Learning target embeddings from text: Word2Vec}
+
+Predict the probability of the next word $w_t$ given the previous words $h$\footnote{Mikolov et al., Efficient Estimation of Word Representations in
+Vector Space, Arxiv 2013}:
+$$P(w_t \given h) = \frac{\exp(f(w_t,h))}{\sum_{\mathrm{all words}} \exp(f(w_t,h))}$$
+\begin{columns}
+\begin{column}{5cm}
+\includegraphics[scale=0.2]{Figures/word2vec}
+\end{column}
+\begin{column}{6cm}
+\hspace{1cm} \includegraphics[scale=0.2]{Figures/kingqueen}
+\end{column}
+\end{columns}
+
+
+
+\end{frame}
+
+\begin{frame}{Different learning settings revisited}
+   \center
+	\vspace{0.4cm}
+   \includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
+\end{frame}
+
 \begin{frame}{Kronecker kernel ridge regression}
 
 \vspace{0.5cm}
@@ -1374,7 +1398,7 @@ Pairwise model representation in the primal:
 \label{eq:pairwise}
 f(\vec{x},\vec{t}) = \vec{w}^T \left(\phi(\vec{x}) \otimes \psi(\vec{t}) \right) 
 \end{equation*}
-Kronecker product pairwise kernel in the dual\footnote{Waegeman et al., A kernel framework for learning graded relations from data, IEEE Transaction on Fuzzy Systems, 2012}:
+Kronecker product pairwise kernel in the dual\footnote{Stock et al., A comparative study of pairwise learning methods based on kernel ridge regression, Neural Computation 2018}:
 \begin{eqnarray*} 
 f(\vec{x},\vec{t})= \sum_{(\bar{\vec{x}},\bar{\vec{t}}) \in \mathcal{D}} \alpha_{(\bar{\vec{x}},\bar{\vec{t}})}  k(\vec{x},\bar{\vec{x}}) \cdot g(\vec{t},\bar{\vec{t}})  = \sum_{(\bar{\vec{x}},\bar{\vec{t}}) \in \mathcal{D}} \alpha_{(\bar{\vec{x}},\bar{\vec{t}})} \Gamma((\vec{x},\vec{t}),(\bar{\vec{x}},\bar{\vec{t}})) 
 \end{eqnarray*}
@@ -1440,30 +1464,63 @@ $$
 \end{frame}
 
 
-
-
-
-\begin{frame}{Almost zero-shot learning: \\
-definition and experimental setup}
- \center
-
-   \includegraphics[width=\textwidth]{Figures/relationMatrices} \\
-	
-	Gradually increase the number of training instances for the ``new" task 
-\end{frame}
-
-\begin{frame}{Almost zero-shot learning: \\
-results for protein-ligand interaction prediction}
- \center
-   \includegraphics[width=\textwidth]{Figures/results4} \\
-\end{frame}
+%
+%\begin{frame}{Almost zero-shot learning: \\
+%definition and experimental setup}
+ %\center
+%
+   %\includegraphics[width=\textwidth]{Figures/relationMatrices} \\
+	%
+	%Gradually increase the number of training instances for the ``new" task 
+%\end{frame}
+%
+%\begin{frame}{Almost zero-shot learning: \\
+%results for protein-ligand interaction prediction}
+ %\center
+   %\includegraphics[width=\textwidth]{Figures/results4} \\
+%\end{frame}
 
 \begin{frame}{Zero-shot learning of document categorization}
  \center
 
 \vspace{-0.5cm}
    \includegraphics[width=0.65\textwidth]{Figures/lc_wiki} \\
-   $12,000$ labels: from $5,000$ to $350,000$ instances
+   $12,000$ labels: from $5,000$ to $350,000$ instances\footnote{M. Stock, Exact and efficient algorithms for pairwise learning, PhD thesis, 2017}
+\end{frame}
+
+
+\begin{frame}{Zero-shot learning in computer vision}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{Figures/zero-shot}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Zero-shot learning in computer vision}
+
+\vspace{0.5cm}
+Pairwise model representation as before: 
+\begin{equation*}
+\label{eq:pairwise}
+f(\vec{x},\vec{t}) = \vec{w}^T \left(\phi(\vec{x}) \otimes \psi(\vec{t}) \right) 
+\end{equation*}
+Inference in a structured prediction fashion: 
+$$\hat{c}(\vec{x}) = \argmax_{\vec{t} \in \mathcal{T}} f(\vec{x},\vec{t})$$
+Different optimization problems: 
+\begin{itemize}
+\item Multi-class objective\footnote{Akata et al., Evaluation of Output Embeddings for Fine-Grained Image Classification, CVPR2015}
+\item Ranking objective\footnote{Frome et al., Devise: A deep visual-semantic embedding
+model, NIPS 2013}
+\item Regression objective\footnote{Socher et al., g. Zero-shot learning through cross-modal transfer, NIPS 2013}
+\item Canonical correlation analysis
+\end{itemize}
+Different model formulations: 
+\begin{itemize}
+\item Linear embeddings
+\item Nonlinear embeddings
+\end{itemize}
+\vspace{0.3cm}
 \end{frame}
 
 \begin{frame}{A unifying view on MTP methods}
@@ -1488,8 +1545,7 @@ Matrix completion and hybrid methods & A \\
 \end{center}
 \end{frame}
 
-\begin{frame}{Methods that learn target representations (B and C) \\
-Example: low-rank parameter matrix approximation\footnote{Chen et al., A convex formulation for learning shared structures from
+\begin{frame}{Low-rank approximation of the parameter matrix\footnote{Chen et al., A convex formulation for learning shared structures from
 multiple tasks, ICML 2009. }}
 
 \begin{center}
@@ -1499,6 +1555,179 @@ multiple tasks, ICML 2009. }}
 $$\min_A ||Y - XA ||^2_F + \lambda \, \mathrm{rank}(A)$$
 
 \end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\frame{
+  \frametitle{Low-rank approximation of the parameter matrix}
+  
+
+
+\begin{itemize}
+ \item $A$: parameter matrix of dimensionality $p \times m$ 
+\item $p$: the number of features
+\item $m$: the number of targets
+\item Assume a low-rank structure of $A$:
+
+\begin{center}
+$$  U \qquad \qquad \times \qquad  V \qquad \qquad  =  \qquad  A$$
+
+\includegraphics[width=0.75\textwidth,trim = 0 0 0 0,clip]{Figures/nmf2}
+
+%\begin{columns}
+%\column{0.45\columnwidth}
+%\centering
+%$
+%\begin{bmatrix}
+%\rule[.5ex]{4.5em}{0.4pt}\vec{a}_1 \rule[.5ex]{4.5em}{0.4pt}\\
+%\rule[.5ex]{4.5em}{0.4pt}\vec{a}_2 \rule[.5ex]{4.5em}{0.4pt}\\
+%\vdots \\
+%\rule[.5ex]{4.5em}{0.4pt}\vec{a}_n \rule[.5ex]{4.5em}{0.4pt}\\
+%\end{bmatrix}_{p\times m} \Rightarrow
+%$ 
+%
+%\column{0.35\columnwidth}
+%$
+%\begin{bmatrix}
+%\rule[.5ex]{1.5em}{0.4pt}\vec{z}_1 \rule[.5ex]{1.5em}{0.4pt}\\
+%\rule[.5ex]{1.5em}{0.4pt}\vec{z}_2 \rule[.5ex]{1.5em}{0.4pt}\\
+%\vdots \\
+%\rule[.5ex]{1.5em}{0.4pt}\vec{z}_n \rule[.5ex]{1.5em}{0.4pt}\\
+%\end{bmatrix}_{p\times \hat{m}}
+%\hspace{-0.2in}
+%$
+%\end{columns}
+\end{center}
+
+\item We can write $A=VU$ and $A \vec{x} = VU \vec{x}$
+\item $V$ is a $p \times \hat{m}$ matrix
+\item  $U$ i an $\hat{m} \times m$ matrix
+
+\item $\hat{m}$ is the rank of $A$
+
+\end{itemize}
+
+}
+
+\begin{frame}{Low-rank approximation of the parameter matrix}{Overview of methods}
+
+\begin{itemize}
+\item Popular for multi-output regression, multi-task learning and multi-label classification
+\item Linear as well as nonlinear methods
+\item Algorithms: 
+\begin{itemize}
+\item Principal component analysis\footnote{Weston et al., Kernel dependency estimation, NIPS 2002}, Canonical correlation analysis\footnote{Multi-label prediction via sparse infinite CCA, NIPS 2009}, Partial least squares
+\item Singular value decomposition\footnote{Tai and Lin, Multilabel classification with principal label space transformation, Neural Computation 2012}, Alternating structure optimization\footnote{Zhou et al., Clustered Multi-Task Learning Via Alternating Structure Optimization, NIPS 2011}
+\item Compressed sensing\footnote{Hsu et al., Multi-label prediction via compressed sensing. NIPS 2009}, Output codes\footnote{Zhang and Schneider, Multi-label Output Codes using Canonical Correlation Analysis, UAI 2011}, Landmark labels\footnote{Balasubramanian and Lebanon, The landmark selection method for multiple output
+prediction, ICML 2012}, Bloom filters\footnote{Ciss\'e et al., Robust bloom filters for large multilabel
+classification tasks, NIPS 2013}, Auto-encoders\footnote{Wicker et al., A nonlinear label compression and transformation
+method for multi-label classification using autoencoders, PAKDD 2016}
+\end{itemize}
+\end{itemize}
+\vspace{0.3cm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\frame{
+  %\frametitle{\normalsize Low-dimensional Label Embeddings}
+%
+%\begin{itemize}
+%
+%\item Otherwise, we may directly map the input $\vec{x}$ to its corresponding prediction $\hat{\vec{y}} = \vec{U}^{\dagger}\vec{V}\vec{x}$ 
+%\item Here $\vec{U}^{\dagger}$ is the decompression matrix which lifts intermediary prediction $\vec{V}\vec{x}$ from the embedding space to original label space \pause
+%
+%\end{itemize}
+%
+%\begin{columns}
+%\column{0.30\columnwidth}
+%\centering
+%$
+%\begin{bmatrix}
+%\rule[.5ex]{2.0em}{0.4pt}\vec{x}_1 \rule[.5ex]{2.0em}{0.4pt}\\
+%\rule[.5ex]{2.0em}{0.4pt}\vec{x}_2 \rule[.5ex]{2.0em}{0.4pt}\\
+%\vdots \\
+%\rule[.5ex]{2.0em}{0.4pt}\vec{x}_n \rule[.5ex]{2.0em}{0.4pt}\\
+%\end{bmatrix}_{n\times d}
+%\Rightarrow{\vec{V}}\hspace{-0.3in}
+%$
+%\column{0.30\columnwidth}
+%\centering
+%$
+%\hspace{-0.3in}
+%\begin{bmatrix}
+%\rule[.5ex]{1.5em}{0.4pt}\vec{z}_1 \rule[.5ex]{1.5em}{0.4pt}\\
+%\rule[.5ex]{1.5em}{0.4pt}\vec{z}_2 \rule[.5ex]{1.5em}{0.4pt}\\
+%\vdots \\
+%\rule[.5ex]{1.5em}{0.4pt}\vec{z}_n \rule[.5ex]{1.5em}{0.4pt}\\
+%\end{bmatrix}_{n\times \hat{m}}
+%\Rightarrow{\vec{U}^{\dagger}}\hspace{-0.3in}
+%$
+%\column{0.40\columnwidth}
+%$
+%\begin{bmatrix}
+%\rule[.5ex]{3.5em}{0.4pt}\vec{y}_1 \rule[.5ex]{3.5em}{0.4pt}\\
+%\rule[.5ex]{3.5em}{0.4pt}\vec{y}_2 \rule[.5ex]{3.5em}{0.4pt}\\
+%\vdots \\
+%\rule[.5ex]{3.5em}{0.4pt}\vec{y}_n \rule[.5ex]{3.5em}{0.4pt}\\
+%\end{bmatrix}_{n\times m}
+%$ 
+%
+%\end{columns}
+%
+%}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\frame{
+  %\frametitle{\normalsize Label Embedding Methods}
+%
+%Various methods differ in terms of the embedding/compression and de-compression methods they employ
+%
+%\begin{itemize}
+ %\item  Methods for label embedding
+	%\begin{itemize}
+		 	%\item Compressed Sensing \footnote{\bibentry{Hsu_et_al_2009}}
+ 		%\item Label Embedding for Missing Labels (LEML) \footnote{\bibentry{Yu_et_al_2014}}
+ 		%\item Sparse Local Embeddings for Extreme Classification (SLEEC) 			\footnote{\bibentry{Bhatia_etal_2015}}
+ 	%\end{itemize}
+ %
+%\end{itemize}
+%}
+
+\frame{
+  \frametitle{Target embeddings in neural networks}
+  
+  \begin{columns}
+\column{0.40\columnwidth}
+\begin{itemize}
+\item Shallow Networks - SVM
+	\begin{itemize}
+	\vspace{-0.2in}
+		\item Direct mapping of input to output
+	\end{itemize}
+\end{itemize}
+\centering
+\input{shallow}\pause
+\column{0.45\columnwidth}
+\begin{itemize}
+\vspace{-0.10in}
+\item Label embedding 
+\begin{itemize}
+	\item Mapping input to output via embedding layer
+\end{itemize}
+\end{itemize}
+\input{deep}
+\end{columns}
+}
 
 \begin{frame}{A unifying view on MTP methods}
 
