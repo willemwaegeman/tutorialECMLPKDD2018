@@ -132,18 +132,24 @@
 \headcommand {\beamer@framepages {70}{70}}
 \headcommand {\slideentry {2}{0}{49}{71/71}{}{0}}
 \headcommand {\beamer@framepages {71}{71}}
-\headcommand {\sectionentry {3}{Loss functions in multi-target prediction}{72}{Loss functions in multi-target prediction}{0}}
-\headcommand {\beamer@sectionpages {16}{71}}
-\headcommand {\beamer@subsectionpages {16}{71}}
-\headcommand {\slideentry {3}{0}{1}{72/72}{}{0}}
+\headcommand {\slideentry {2}{0}{50}{72/72}{}{0}}
 \headcommand {\beamer@framepages {72}{72}}
-\headcommand {\sectionentry {4}{Conclusions}{73}{Conclusions}{0}}
-\headcommand {\beamer@sectionpages {72}{72}}
-\headcommand {\beamer@subsectionpages {72}{72}}
-\headcommand {\slideentry {4}{0}{1}{73/73}{}{0}}
+\headcommand {\slideentry {2}{0}{51}{73/73}{}{0}}
 \headcommand {\beamer@framepages {73}{73}}
-\headcommand {\beamer@partpages {1}{73}}
-\headcommand {\beamer@subsectionpages {73}{73}}
-\headcommand {\beamer@sectionpages {73}{73}}
-\headcommand {\beamer@documentpages {73}}
-\headcommand {\def \inserttotalframenumber {66}}
+\headcommand {\slideentry {2}{0}{52}{74/74}{}{0}}
+\headcommand {\beamer@framepages {74}{74}}
+\headcommand {\sectionentry {3}{Loss functions in multi-target prediction}{75}{Loss functions in multi-target prediction}{0}}
+\headcommand {\beamer@sectionpages {16}{74}}
+\headcommand {\beamer@subsectionpages {16}{74}}
+\headcommand {\slideentry {3}{0}{1}{75/75}{}{0}}
+\headcommand {\beamer@framepages {75}{75}}
+\headcommand {\sectionentry {4}{Conclusions}{76}{Conclusions}{0}}
+\headcommand {\beamer@sectionpages {75}{75}}
+\headcommand {\beamer@subsectionpages {75}{75}}
+\headcommand {\slideentry {4}{0}{1}{76/76}{}{0}}
+\headcommand {\beamer@framepages {76}{76}}
+\headcommand {\beamer@partpages {1}{76}}
+\headcommand {\beamer@subsectionpages {76}{76}}
+\headcommand {\beamer@sectionpages {76}{76}}
+\headcommand {\beamer@documentpages {76}}
+\headcommand {\def \inserttotalframenumber {69}}

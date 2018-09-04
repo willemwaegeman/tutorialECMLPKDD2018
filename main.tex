@@ -430,8 +430,7 @@ Similarity-enforcing methods & B and C   \\
 Relation-exploiting methods & B, C and D  \\
 Relation-constructing methods & B and C \\
 Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & B and C \\
-Matrix completion and hybrid methods & A \\
+Representation-constructing methods & A, B and C \\
 \hline  
 \end{tabular}
 \end{center}
@@ -503,8 +502,7 @@ Independent models & B and C \\
 Relation-exploiting methods & B, C and D  \\
 Relation-constructing methods & B and C \\
 Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & B and C \\
-Matrix completion and hybrid methods & A \\
+Representation-constructing methods & A, B and C \\
 \hline  
 \end{tabular}
 \end{center}
@@ -866,8 +864,7 @@ Similarity-enforcing methods & B and C   \\
 \alert{Relation-exploiting methods} & B, C and D  \\
 Relation-constructing methods & B and C \\
 Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & B and C \\
-Matrix completion and hybrid methods & A \\
+Representation-constructing methods & A, B and C \\
 \hline  
 \end{tabular}
 \end{center}
@@ -944,8 +941,7 @@ Similarity-enforcing methods & B and C   \\
 Relation-exploiting methods & B, C and D  \\
 \alert{Relation-constructing methods} & B and C \\
 Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & B and C \\
-Matrix completion and hybrid methods & A \\
+Representation-constructing methods & A, B and C \\
 \hline  
 \end{tabular}
 \end{center}
@@ -1342,8 +1338,7 @@ Similarity-enforcing methods & B and C   \\
 Relation-exploiting methods & B, C and D  \\
 Relation-constructing methods & B and C \\
 \alert{Representation-exploiting methods} & B, C and D \\
-Representation-constructing methods & B and C \\
-Matrix completion and hybrid methods & A \\
+Representation-constructing methods & A, B and C \\
 \hline  
 \end{tabular}
 \end{center}
@@ -1538,20 +1533,19 @@ Similarity-enforcing methods & B and C   \\
 Relation-exploiting methods & B, C and D  \\
 Relation-constructing methods & B and C \\
 Representation-exploiting methods & B, C and D \\
-\alert{Representation-constructing methods} & B and C \\
-Matrix completion and hybrid methods & A \\
+\alert{Representation-constructing methods} & A, B and C \\
 \hline  
 \end{tabular}
 \end{center}
 \end{frame}
 
-\begin{frame}{Low-rank approximation of the parameter matrix\footnote{Chen et al., A convex formulation for learning shared structures from
-multiple tasks, ICML 2009. }}
+\begin{frame}{Low-rank approximation in Settings B and C}
 
 \begin{center}
 \includegraphics[width=9cm]{pics/lowrank}
 \end{center}
-
+Typically perform a low-rank approximation of the parameter matrix\footnote{Chen et al., A convex formulation for learning shared structures from
+multiple tasks, ICML 2009. }:
 $$\min_A ||Y - XA ||^2_F + \lambda \, \mathrm{rank}(A)$$
 
 \end{frame}
@@ -1564,7 +1558,7 @@ $$\min_A ||Y - XA ||^2_F + \lambda \, \mathrm{rank}(A)$$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \frame{
-  \frametitle{Low-rank approximation of the parameter matrix}
+  \frametitle{Low-rank approximation in Settings B and C}
   
 
 
@@ -1614,7 +1608,7 @@ $$  U \qquad \qquad \times \qquad  V \qquad \qquad  =  \qquad  A$$
 
 }
 
-\begin{frame}{Low-rank approximation of the parameter matrix}{Overview of methods}
+\begin{frame}{Low-rank approximation in Settings B and C}{Overview of methods}
 
 \begin{itemize}
 \item Popular for multi-output regression, multi-task learning and multi-label classification
@@ -1729,29 +1723,35 @@ method for multi-label classification using autoencoders, PAKDD 2016}
 \end{columns}
 }
 
-\begin{frame}{A unifying view on MTP methods}
 
+\begin{frame}{Low-rank approximation in Setting A}
+
+Factorize the matrix $Y$ instead of the parameter matrix $A$: 
 \begin{center}
-\includegraphics[scale=0.3]{pics/tools}
-
-\begin{tabular}{ll}
-\hline
-Group of methods & Applicable setting \\
-\hline
-\hline
-Independent models & B and C \\
-Similarity-enforcing methods & B and C   \\ 
-Relation-exploiting methods & B, C and D  \\
-Relation-constructing methods & B and C \\
-Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & B and C \\
-\alert{Matrix completion and hybrid methods} & A \\
-\hline  
-\end{tabular}
+\includegraphics[width=11cm]{Figures/matrixcompletion2}
 \end{center}
+$$Y \qquad = \qquad  U \qquad \times \qquad V \qquad $$
+
 \end{frame}
 
-\begin{frame}{Matrix completion and hybrid methods (A) \\
+\begin{frame}{Low-rank approximation in Setting A}
+{Overview of algorithms}
+
+\begin{itemize}
+\item Nuclear norm minimizationan\footnote{Candes and Recht, Exact low-rank matrix completion via convex optimization. Foundations
+of Computational Mathematics 2008}
+\item Gaussian processes\footnote{Lawrence and Urtasun, Non-linear matrix factorization with Gaussian processes, ICML 2009}
+\item Probabilistic methods\footnote{Shan and Banerjee, Generalized probabilistic matrix factorizations for collaborative
+filtering, ICDM 2010} 
+\item Spectral regularization\footnote{Mazumder et al., Spectral regularization algorithms for learning large incomplete matrices., JMLR 2010} 
+\item Non-negative matrix factorization\footnote{Gaujoux and Seoighe, A flexible R package for nonnegative matrix factorization.
+BMC bioinformatics 2010}
+\item Alternating least-squares minimization\footnote{Jain et al., Low-rank matrix completion using alternating minimization, ACM Symposium on Theory of Computing 2013}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Hybrid matrix factorization for Setting A) \\
 Example: matrix factorization + bilinear models\footnote{Menon and Elkan, A log-linear model with latent features for dyadic prediction, ICDM 2010.}}
 
 \begin{center}
@@ -1764,6 +1764,37 @@ Example: matrix factorization + bilinear models\footnote{Menon and Elkan, A log-
 f(\vec{x},\vec{t}) = \vec{w}^T \big(\phi(\vec{x}) \otimes \psi(\vec{t})\big)    
 \end{equation*}
 \end{frame}
+
+\begin{frame}{Hybrid matrix factorization for Setting A}
+
+Basilico and Hofmann, 2004;
+Abernethy et al, 2008; Adams et al, 2010; Fang and Si, 2011; Zhou et al, 2011a; Menon and
+Elkan, 2011; Zhou et al, 2012b).
+
+\end{frame}
+
+\begin{frame}{When is it useful to construct target representations?}
+\begin{center}
+Does not work well in extreme multi-label classification\footnote{Babbar and Sch\"olkopf, DISMEC: Distributed Sparse Machines for Extreme Multi-label classification, WSDM 2017}:
+
+\includegraphics[scale=0.3]{Figures/dismec} 
+\end{center}
+\end{frame}
+
+\begin{frame}{When is it useful to construct target representations?}{SVD interpretation}
+\begin{center}
+Representation of instance (or feature) \hspace{1cm} Representation of target
+\includegraphics[scale=0.5]{Figures/svd} 
+\end{center}
+\begin{itemize}
+\item $\sigma_1,\sigma_2,...$: singular values of $A$
+\item Rank of $A$ = number of non-zero \alert{singular values}
+\item \alert{High rank} when a lot of singular values differ from zero
+\item \alert{Low rank} when a lot of singular values are zero
+\item Singular values \alert{give insight} in what can be gained
+\end{itemize}
+\end{frame}
+
 
 \section{Loss functions in multi-target prediction}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2018.1.30)  31 AUG 2018 17:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2018.1.30)  4 SEP 2018 16:16
 entering extended mode
 **./main.tex
 (main.tex
@@ -1190,32 +1190,32 @@ LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
 <pics/tools.png, id=169, 582.175pt x 331.2375pt>
 File: pics/tools.png Graphic file (type png)
 <use pics/tools.png>
-Package pdftex.def Info: pics/tools.png  used on input line 438. on input line 438.
-Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 438.
+Package pdftex.def Info: pics/tools.png  used on input line 437. on input line 437.
+Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 437.
  [17
 
  <./pics/tools.png>]
 <Figures/pictures/Slide13.jpg, id=177, 722.7pt x 542.025pt>
 File: Figures/pictures/Slide13.jpg Graphic file (type jpg)
 <use Figures/pictures/Slide13.jpg>
-Package pdftex.def Info: Figures/pictures/Slide13.jpg  used on input line 444. on input line 444.
-Package pdftex.def Info: Requested size: 308.06367pt x 218.62741pt on input line 444.
+Package pdftex.def Info: Figures/pictures/Slide13.jpg  used on input line 443. on input line 443.
+Package pdftex.def Info: Requested size: 308.06367pt x 218.62741pt on input line 443.
  [18
 
  <./Figures/pictures/Slide13.jpg>]
 <Figures/pictures/Slide14.jpg, id=185, 722.7pt x 542.025pt>
 File: Figures/pictures/Slide14.jpg Graphic file (type jpg)
 <use Figures/pictures/Slide14.jpg>
-Package pdftex.def Info: Figures/pictures/Slide14.jpg  used on input line 450. on input line 450.
-Package pdftex.def Info: Requested size: 308.06367pt x 218.62741pt on input line 450.
+Package pdftex.def Info: Figures/pictures/Slide14.jpg  used on input line 449. on input line 449.
+Package pdftex.def Info: Requested size: 308.06367pt x 218.62741pt on input line 449.
  [19
 
  <./Figures/pictures/Slide14.jpg>]
 <Figures/pictures/Slide15.jpg, id=194, 722.7pt x 542.025pt>
 File: Figures/pictures/Slide15.jpg Graphic file (type jpg)
 <use Figures/pictures/Slide15.jpg>
-Package pdftex.def Info: Figures/pictures/Slide15.jpg  used on input line 455. on input line 455.
-Package pdftex.def Info: Requested size: 308.06367pt x 218.62741pt on input line 455.
+Package pdftex.def Info: Figures/pictures/Slide15.jpg  used on input line 454. on input line 454.
+Package pdftex.def Info: Requested size: 308.06367pt x 218.62741pt on input line 454.
 [20
 
  <./Figures/pictures/Slide15.jpg>] [21
@@ -1224,10 +1224,10 @@ Package pdftex.def Info: Requested size: 308.06367pt x 218.62741pt on input line
 <Figures/dismec.jpg, id=214, 1166.3575pt x 674.52pt>
 File: Figures/dismec.jpg Graphic file (type jpg)
 <use Figures/dismec.jpg>
-Package pdftex.def Info: Figures/dismec.jpg  used on input line 489. on input line 489.
-Package pdftex.def Info: Requested size: 349.90994pt x 202.35756pt on input line 489.
+Package pdftex.def Info: Figures/dismec.jpg  used on input line 488. on input line 488.
+Package pdftex.def Info: Requested size: 349.90994pt x 202.35756pt on input line 488.
 
-Overfull \hbox (7.61464pt too wide) in paragraph at lines 489--489
+Overfull \hbox (7.61464pt too wide) in paragraph at lines 488--488
  [][] 
  []
 
@@ -1236,8 +1236,8 @@ Overfull \hbox (7.61464pt too wide) in paragraph at lines 489--489
  <./Figures/dismec.jpg>]
 File: pics/tools.png Graphic file (type png)
 <use pics/tools.png>
-Package pdftex.def Info: pics/tools.png  used on input line 511. on input line 511.
-Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 511.
+Package pdftex.def Info: pics/tools.png  used on input line 509. on input line 509.
+Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 509.
  [23
 
 ]
@@ -1249,8 +1249,8 @@ Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 
 <Figures/pictures/Dia21.jpg, id=241, 722.7pt x 542.025pt>
 File: Figures/pictures/Dia21.jpg Graphic file (type jpg)
 <use Figures/pictures/Dia21.jpg>
-Package pdftex.def Info: Figures/pictures/Dia21.jpg  used on input line 630. on input line 630.
-Package pdftex.def Info: Requested size: 308.06367pt x 111.61865pt on input line 630.
+Package pdftex.def Info: Figures/pictures/Dia21.jpg  used on input line 628. on input line 628.
+Package pdftex.def Info: Requested size: 308.06367pt x 111.61865pt on input line 628.
  [25
 
  <./Figures/pictures/Dia21.jpg>]
@@ -1269,18 +1269,18 @@ Missing character: There is no ; in font nullfont!
 <Figures/weightsharing.png, id=260, 488.26317pt x 264.40244pt>
 File: Figures/weightsharing.png Graphic file (type png)
 <use Figures/weightsharing.png>
-Package pdftex.def Info: Figures/weightsharing.png  used on input line 801. on input line 801.
-Package pdftex.def Info: Requested size: 292.96014pt x 158.64267pt on input line 801.
+Package pdftex.def Info: Figures/weightsharing.png  used on input line 799. on input line 799.
+Package pdftex.def Info: Requested size: 292.96014pt x 158.64267pt on input line 799.
  [28
 
  <./Figures/weightsharing.png>]
 <Figures/pretrain2.jpg, id=267, 702.625pt x 447.6725pt>
 File: Figures/pretrain2.jpg Graphic file (type jpg)
 <use Figures/pretrain2.jpg>
-Package pdftex.def Info: Figures/pretrain2.jpg  used on input line 809. on input line 809.
-Package pdftex.def Info: Requested size: 281.04501pt x 179.06583pt on input line 809.
+Package pdftex.def Info: Figures/pretrain2.jpg  used on input line 807. on input line 807.
+Package pdftex.def Info: Requested size: 281.04501pt x 179.06583pt on input line 807.
 
-Overfull \vbox (2.29272pt too high) detected at line 809
+Overfull \vbox (2.29272pt too high) detected at line 807
  []
 
 [29
@@ -1289,82 +1289,82 @@ Overfull \vbox (2.29272pt too high) detected at line 809
 <Figures/biva.png, id=273, 341.53014pt x 174.5115pt>
 File: Figures/biva.png Graphic file (type png)
 <use Figures/biva.png>
-Package pdftex.def Info: Figures/biva.png  used on input line 829. on input line 829.
-Package pdftex.def Info: Requested size: 128.0374pt x 65.42566pt on input line 829.
+Package pdftex.def Info: Figures/biva.png  used on input line 827. on input line 827.
+Package pdftex.def Info: Requested size: 128.0374pt x 65.42566pt on input line 827.
  [30
 
  <./Figures/biva.png>]
 <Figures/JS.png, id=282, 355.3275pt x 245.63196pt>
 File: Figures/JS.png Graphic file (type png)
 <use Figures/JS.png>
-Package pdftex.def Info: Figures/JS.png  used on input line 852. on input line 852.
-Package pdftex.def Info: Requested size: 199.16928pt x 137.68413pt on input line 852.
+Package pdftex.def Info: Figures/JS.png  used on input line 850. on input line 850.
+Package pdftex.def Info: Requested size: 199.16928pt x 137.68413pt on input line 850.
  [31
 
  <./Figures/JS.png>]
 File: Figures/JS.png Graphic file (type png)
 <use Figures/JS.png>
-Package pdftex.def Info: Figures/JS.png  used on input line 852. on input line 852.
-Package pdftex.def Info: Requested size: 199.16928pt x 137.68413pt on input line 852.
+Package pdftex.def Info: Figures/JS.png  used on input line 850. on input line 850.
+Package pdftex.def Info: Requested size: 199.16928pt x 137.68413pt on input line 850.
  [32
 
 ]
 File: pics/tools.png Graphic file (type png)
 <use pics/tools.png>
-Package pdftex.def Info: pics/tools.png  used on input line 874. on input line 874.
-Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 874.
+Package pdftex.def Info: pics/tools.png  used on input line 871. on input line 871.
+Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 871.
  [33
 
 ]
 <pics/targetrelations.jpg, id=300, 981.6675pt x 316.18124pt>
 File: pics/targetrelations.jpg Graphic file (type jpg)
 <use pics/targetrelations.jpg>
-Package pdftex.def Info: pics/targetrelations.jpg  used on input line 888. on input line 888.
-Package pdftex.def Info: Requested size: 342.2953pt x 110.24535pt on input line 888.
+Package pdftex.def Info: pics/targetrelations.jpg  used on input line 885. on input line 885.
+Package pdftex.def Info: Requested size: 342.2953pt x 110.24535pt on input line 885.
  [34
 
  <./pics/targetrelations.jpg>]
 File: pics/targetrelations.jpg Graphic file (type jpg)
 <use pics/targetrelations.jpg>
-Package pdftex.def Info: pics/targetrelations.jpg  used on input line 888. on input line 888.
-Package pdftex.def Info: Requested size: 342.2953pt x 110.24535pt on input line 888.
+Package pdftex.def Info: pics/targetrelations.jpg  used on input line 885. on input line 885.
+Package pdftex.def Info: Requested size: 342.2953pt x 110.24535pt on input line 885.
  [35
 
 ]
 <Figures/hloss.jpg, id=312, 886.31125pt x 268.00125pt>
 File: Figures/hloss.jpg Graphic file (type jpg)
 <use Figures/hloss.jpg>
-Package pdftex.def Info: Figures/hloss.jpg  used on input line 901. on input line 901.
-Package pdftex.def Info: Requested size: 342.2953pt x 103.50589pt on input line 901.
+Package pdftex.def Info: Figures/hloss.jpg  used on input line 898. on input line 898.
+Package pdftex.def Info: Requested size: 342.2953pt x 103.50589pt on input line 898.
  [36
 
  <./Figures/hloss.jpg>]
 File: pics/targetrelations.jpg Graphic file (type jpg)
 <use pics/targetrelations.jpg>
-Package pdftex.def Info: pics/targetrelations.jpg  used on input line 916. on input line 916.
-Package pdftex.def Info: Requested size: 113.82568pt x 67.75357pt on input line 916.
+Package pdftex.def Info: pics/targetrelations.jpg  used on input line 913. on input line 913.
+Package pdftex.def Info: Requested size: 113.82568pt x 67.75357pt on input line 913.
  [37
 
 ]
 File: Figures/hloss.jpg Graphic file (type jpg)
 <use Figures/hloss.jpg>
-Package pdftex.def Info: Figures/hloss.jpg  used on input line 930. on input line 930.
-Package pdftex.def Info: Requested size: 181.87585pt x 87.1239pt on input line 930.
+Package pdftex.def Info: Figures/hloss.jpg  used on input line 927. on input line 927.
+Package pdftex.def Info: Requested size: 181.87585pt x 87.1239pt on input line 927.
  [38
 
 ]
 File: pics/tools.png Graphic file (type png)
 <use pics/tools.png>
-Package pdftex.def Info: pics/tools.png  used on input line 952. on input line 952.
-Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 952.
+Package pdftex.def Info: pics/tools.png  used on input line 948. on input line 948.
+Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 948.
  [39
 
 ]
 <pics/hierarchies.jpg, id=342, 931.48pt x 312.16624pt>
 File: pics/hierarchies.jpg Graphic file (type jpg)
 <use pics/hierarchies.jpg>
-Package pdftex.def Info: pics/hierarchies.jpg  used on input line 965. on input line 965.
-Package pdftex.def Info: Requested size: 342.2953pt x 114.71376pt on input line 965.
+Package pdftex.def Info: pics/hierarchies.jpg  used on input line 961. on input line 961.
+Package pdftex.def Info: Requested size: 342.2953pt x 114.71376pt on input line 961.
  [40
 
  <./pics/hierarchies.jpg>]
@@ -1386,18 +1386,18 @@ Package pdftex.def Info: Requested size: 342.2953pt x 114.71376pt on input line 
 <Figures/okl.jpg, id=373, 1472.50125pt x 593.21625pt>
 File: Figures/okl.jpg Graphic file (type jpg)
 <use Figures/okl.jpg>
-Package pdftex.def Info: Figures/okl.jpg  used on input line 1242. on input line 1242.
-Package pdftex.def Info: Requested size: 294.49504pt x 118.64114pt on input line 1242.
+Package pdftex.def Info: Figures/okl.jpg  used on input line 1238. on input line 1238.
+Package pdftex.def Info: Requested size: 294.49504pt x 118.64114pt on input line 1238.
  [45
 
  <./Figures/okl.jpg>]
 <Figures/biomes.jpg, id=382, 1767.60374pt x 615.29875pt>
 File: Figures/biomes.jpg Graphic file (type jpg)
 <use Figures/biomes.jpg>
-Package pdftex.def Info: Figures/biomes.jpg  used on input line 1327. on input line 1327.
-Package pdftex.def Info: Requested size: 353.5145pt x 123.05756pt on input line 1327.
+Package pdftex.def Info: Figures/biomes.jpg  used on input line 1323. on input line 1323.
+Package pdftex.def Info: Requested size: 353.5145pt x 123.05756pt on input line 1323.
 
-Overfull \hbox (11.2192pt too wide) in paragraph at lines 1327--1327
+Overfull \hbox (11.2192pt too wide) in paragraph at lines 1323--1323
  [] 
  []
 
@@ -1406,51 +1406,51 @@ Overfull \hbox (11.2192pt too wide) in paragraph at lines 1327--1327
  <./Figures/biomes.jpg>]
 File: pics/tools.png Graphic file (type png)
 <use pics/tools.png>
-Package pdftex.def Info: pics/tools.png  used on input line 1350. on input line 1350.
-Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 1350.
+Package pdftex.def Info: pics/tools.png  used on input line 1345. on input line 1345.
+Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 1345.
  [47
 
 ]
 <Figures/semanticclasses.jpg, id=393, 744.7825pt x 439.6425pt>
 File: Figures/semanticclasses.jpg Graphic file (type jpg)
 <use Figures/semanticclasses.jpg>
-Package pdftex.def Info: Figures/semanticclasses.jpg  used on input line 1359. on input line 1359.
-Package pdftex.def Info: Requested size: 297.90771pt x 175.85388pt on input line 1359.
+Package pdftex.def Info: Figures/semanticclasses.jpg  used on input line 1354. on input line 1354.
+Package pdftex.def Info: Requested size: 297.90771pt x 175.85388pt on input line 1354.
  [48
 
  <./Figures/semanticclasses.jpg>]
 <Figures/representations.jpg, id=399, 722.7pt x 542.025pt>
 File: Figures/representations.jpg Graphic file (type jpg)
 <use Figures/representations.jpg>
-Package pdftex.def Info: Figures/representations.jpg  used on input line 1367. on input line 1367.
-Package pdftex.def Info: Requested size: 342.2953pt x 213.93338pt on input line 1367.
+Package pdftex.def Info: Figures/representations.jpg  used on input line 1362. on input line 1362.
+Package pdftex.def Info: Requested size: 342.2953pt x 213.93338pt on input line 1362.
  [49
 
  <./Figures/representations.jpg>]
 <Figures/word2vec.jpg, id=408, 878.28125pt x 645.41125pt>
 File: Figures/word2vec.jpg Graphic file (type jpg)
 <use Figures/word2vec.jpg>
-Package pdftex.def Info: Figures/word2vec.jpg  used on input line 1385. on input line 1385.
-Package pdftex.def Info: Requested size: 175.65314pt x 129.07996pt on input line 1385.
+Package pdftex.def Info: Figures/word2vec.jpg  used on input line 1380. on input line 1380.
+Package pdftex.def Info: Requested size: 175.65314pt x 129.07996pt on input line 1380.
 
-Overfull \hbox (33.38936pt too wide) in paragraph at lines 1385--1385
+Overfull \hbox (33.38936pt too wide) in paragraph at lines 1380--1380
 [][]  
  []
 
 <Figures/kingqueen.jpg, id=409, 602.25pt x 444.66125pt>
 File: Figures/kingqueen.jpg Graphic file (type jpg)
 <use Figures/kingqueen.jpg>
-Package pdftex.def Info: Figures/kingqueen.jpg  used on input line 1385. on input line 1385.
-Package pdftex.def Info: Requested size: 120.44786pt x 88.93066pt on input line 1385.
+Package pdftex.def Info: Figures/kingqueen.jpg  used on input line 1380. on input line 1380.
+Package pdftex.def Info: Requested size: 120.44786pt x 88.93066pt on input line 1380.
 [50
 
  <./Figures/word2vec.jpg> <./Figures/kingqueen.jpg>]
 File: Figures/pictures/Slide16.jpg Graphic file (type jpg)
 <use Figures/pictures/Slide16.jpg>
-Package pdftex.def Info: Figures/pictures/Slide16.jpg  used on input line 1391. on input line 1391.
-Package pdftex.def Info: Requested size: 308.06367pt x 231.04817pt on input line 1391.
+Package pdftex.def Info: Figures/pictures/Slide16.jpg  used on input line 1386. on input line 1386.
+Package pdftex.def Info: Requested size: 308.06367pt x 231.04817pt on input line 1386.
 
-Overfull \vbox (11.15598pt too high) detected at line 1391
+Overfull \vbox (11.15598pt too high) detected at line 1386
  []
 
 [51
@@ -1459,31 +1459,31 @@ Overfull \vbox (11.15598pt too high) detected at line 1391
 d
 <to be read again> 
                    \relax 
-l.1410 \end{frame}
+l.1405 \end{frame}
                    [52
 
 ]
 <Figures/pictures/Slide8.jpg, id=425, 722.7pt x 542.025pt>
 File: Figures/pictures/Slide8.jpg Graphic file (type jpg)
 <use Figures/pictures/Slide8.jpg>
-Package pdftex.def Info: Figures/pictures/Slide8.jpg  used on input line 1431. on input line 1431.
-Package pdftex.def Info: Requested size: 256.72147pt x 160.45003pt on input line 1431.
+Package pdftex.def Info: Figures/pictures/Slide8.jpg  used on input line 1426. on input line 1426.
+Package pdftex.def Info: Requested size: 256.72147pt x 160.45003pt on input line 1426.
  [53
 
  <./Figures/pictures/Slide8.jpg>]
 <Figures/pictures/Slide9.jpg, id=433, 722.7pt x 542.025pt>
 File: Figures/pictures/Slide9.jpg Graphic file (type jpg)
 <use Figures/pictures/Slide9.jpg>
-Package pdftex.def Info: Figures/pictures/Slide9.jpg  used on input line 1438. on input line 1438.
-Package pdftex.def Info: Requested size: 256.72147pt x 160.45003pt on input line 1438.
+Package pdftex.def Info: Figures/pictures/Slide9.jpg  used on input line 1433. on input line 1433.
+Package pdftex.def Info: Requested size: 256.72147pt x 160.45003pt on input line 1433.
  [54
 
  <./Figures/pictures/Slide9.jpg>]
 <Figures/pictures/Slide10.jpg, id=441, 722.7pt x 542.025pt>
 File: Figures/pictures/Slide10.jpg Graphic file (type jpg)
 <use Figures/pictures/Slide10.jpg>
-Package pdftex.def Info: Figures/pictures/Slide10.jpg  used on input line 1444. on input line 1444.
-Package pdftex.def Info: Requested size: 256.72147pt x 160.45003pt on input line 1444.
+Package pdftex.def Info: Figures/pictures/Slide10.jpg  used on input line 1439. on input line 1439.
+Package pdftex.def Info: Requested size: 256.72147pt x 160.45003pt on input line 1439.
  [55
 
  <./Figures/pictures/Slide10.jpg>] [56
@@ -1500,25 +1500,25 @@ Package pdftex.def Info: Requested size: 256.72147pt x 160.45003pt on input line
 <Figures/lc_wiki.pdf, id=475, pagebox=cropbox, 503.47742pt x 476.03867pt>
 File: Figures/lc_wiki.pdf Graphic file (type pdf)
 <use Figures/lc_wiki.pdf>
-Package pdftex.def Info: Figures/lc_wiki.pdf  used on input line 1489. on input line 1489.
-Package pdftex.def Info: Requested size: 222.48985pt x 210.36562pt on input line 1489.
+Package pdftex.def Info: Figures/lc_wiki.pdf  used on input line 1484. on input line 1484.
+Package pdftex.def Info: Requested size: 222.48985pt x 210.36562pt on input line 1484.
  [61
 
  <./Figures/lc_wiki.pdf>]
 <Figures/zero-shot.jpg, id=496, 648.4225pt x 474.77374pt>
 File: Figures/zero-shot.jpg Graphic file (type jpg)
 <use Figures/zero-shot.jpg>
-Package pdftex.def Info: Figures/zero-shot.jpg  used on input line 1498. on input line 1498.
-Package pdftex.def Info: Requested size: 256.72147pt x 187.97186pt on input line 1498.
+Package pdftex.def Info: Figures/zero-shot.jpg  used on input line 1493. on input line 1493.
+Package pdftex.def Info: Requested size: 256.72147pt x 187.97186pt on input line 1493.
  [62
 
  <./Figures/zero-shot.jpg>]pdfTeX warning (ext4): destination with the same identifier (name{eq:pairwise}) has been alre
 ady used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1524 \end{frame}
+l.1519 \end{frame}
                   
-Overfull \vbox (5.1434pt too high) detected at line 1524
+Overfull \vbox (5.1434pt too high) detected at line 1519
  []
 
 [63
@@ -1526,51 +1526,54 @@ Overfull \vbox (5.1434pt too high) detected at line 1524
 ]
 File: pics/tools.png Graphic file (type png)
 <use pics/tools.png>
-Package pdftex.def Info: pics/tools.png  used on input line 1546. on input line 1546.
-Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 1546.
+Package pdftex.def Info: pics/tools.png  used on input line 1540. on input line 1540.
+Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 1540.
  [64
 
 ]
 <pics/lowrank.jpg, id=512, 744.7825pt x 347.2975pt>
 File: pics/lowrank.jpg Graphic file (type jpg)
 <use pics/lowrank.jpg>
-Package pdftex.def Info: pics/lowrank.jpg  used on input line 1557. on input line 1557.
-Package pdftex.def Info: Requested size: 256.0748pt x 119.40971pt on input line 1557.
+Package pdftex.def Info: pics/lowrank.jpg  used on input line 1551. on input line 1551.
+Package pdftex.def Info: Requested size: 256.0748pt x 119.40971pt on input line 1551.
  [65
 
  <./pics/lowrank.jpg>]
 <Figures/nmf2.jpg, id=518, 367.3725pt x 89.58469pt>
 File: Figures/nmf2.jpg Graphic file (type jpg)
 <use Figures/nmf2.jpg>
-Package pdftex.def Info: Figures/nmf2.jpg  used on input line 1615. on input line 1615.
-Package pdftex.def Info: Requested size: 256.72147pt x 62.60632pt on input line 1615.
+Package pdftex.def Info: Figures/nmf2.jpg  used on input line 1609. on input line 1609.
+Package pdftex.def Info: Requested size: 256.72147pt x 62.60632pt on input line 1609.
  [66
 
  <./Figures/nmf2.jpg>] [67
 
 ] (shallow.tex) (deep.tex)
-Overfull \hbox (20.66562pt too wide) in paragraph at lines 114--1730
+Overfull \hbox (20.66562pt too wide) in paragraph at lines 114--1724
 [][] 
  []
 
 [68
 
 ] (shallow.tex) (deep.tex)
-Overfull \hbox (20.66562pt too wide) in paragraph at lines 114--1730
+Overfull \hbox (20.66562pt too wide) in paragraph at lines 114--1724
 [][] 
  []
 
 [69
 
 ]
-File: pics/tools.png Graphic file (type png)
-<use pics/tools.png>
-Package pdftex.def Info: pics/tools.png  used on input line 1752. on input line 1752.
-Package pdftex.def Info: Requested size: 174.65384pt x 99.37201pt on input line 1752.
+<Figures/matrixcompletion2.jpg, id=544, 881.54344pt x 487.06969pt>
+File: Figures/matrixcompletion2.jpg Graphic file (type jpg)
+<use Figures/matrixcompletion2.jpg>
+Package pdftex.def Info: Figures/matrixcompletion2.jpg  used on input line 1735. on input line 1735.
+Package pdftex.def Info: Requested size: 312.9803pt x 172.92952pt on input line 1735.
  [70
 
+ <./Figures/matrixcompletion2.jpg>] [71
+
 ]
-<pics/settingA.png, id=549, 715.67375pt x 339.2675pt>
+<pics/settingA.png, id=555, 715.67375pt x 339.2675pt>
 File: pics/settingA.png Graphic file (type png)
 <use pics/settingA.png>
 Package pdftex.def Info: pics/settingA.png  used on input line 1766. on input line 1766.
@@ -1580,11 +1583,31 @@ pdfTeX warning (ext4): destination with the same identifier (name{eq:pairwise}) 
 <to be read again> 
                    \relax 
 l.1766 \end{frame}
-                   [71
+                   [72
 
- <./pics/settingA.png>] (main.toc) [72
+ <./pics/settingA.png>]
+File: Figures/dismec.jpg Graphic file (type jpg)
+<use Figures/dismec.jpg>
+Package pdftex.def Info: Figures/dismec.jpg  used on input line 1774. on input line 1774.
+Package pdftex.def Info: Requested size: 349.90994pt x 202.35756pt on input line 1774.
 
-] [73
+Overfull \hbox (7.61464pt too wide) in paragraph at lines 1774--1774
+ [][] 
+ []
+
+[73
+
+]
+<Figures/svd.png, id=568, 657.95813pt x 218.31563pt>
+File: Figures/svd.png Graphic file (type png)
+<use Figures/svd.png>
+Package pdftex.def Info: Figures/svd.png  used on input line 1788. on input line 1788.
+Package pdftex.def Info: Requested size: 328.97826pt x 109.15753pt on input line 1788.
+ [74
+
+ <./Figures/svd.png>] (main.toc) [75
+
+] [76
 
 ]
 \tf@nav=\write6
@@ -1596,11 +1619,11 @@ l.1766 \end{frame}
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1869.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1869.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1892.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1892.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1869.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1869.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1892.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1892.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: DEE6F6184CF46796FA5F93231B72ABEC;257.
 
@@ -1612,10 +1635,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 34429 strings out of 493314
- 846934 string characters out of 3138864
- 1069906 words of memory out of 3000000
- 37021 multiletter control sequences out of 15000+200000
+ 34451 strings out of 493314
+ 847287 string characters out of 3138864
+ 1069010 words of memory out of 3000000
+ 37035 multiletter control sequences out of 15000+200000
  24083 words of font info for 89 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,17n,98p,792b,1831s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1636,9 +1659,9 @@ C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program
 fonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/amsfonts/symbols/msam7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm1
 0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/hoekwater/stmary10.pfb>
-Output written on main.pdf (73 pages, 4390778 bytes).
+Output written on main.pdf (76 pages, 4499602 bytes).
 PDF statistics:
- 692 PDF objects out of 1000 (max. 8388607)
- 156 named destinations out of 1000 (max. 500000)
- 444 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 710 PDF objects out of 1000 (max. 8388607)
+ 162 named destinations out of 1000 (max. 500000)
+ 454 words of extra memory for PDF output out of 10000 (max. 10000000)
 
