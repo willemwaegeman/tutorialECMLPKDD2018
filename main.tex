@@ -902,7 +902,7 @@ $c_i$ depends on the depth of node $i$
 \begin{center}
 \includegraphics[scale=0.3,trim = 600 0 0 90,clip]{pics/targetrelations}
 \end{center} 
-Can be done within the framework of vector-valued kernel functions\footnote{Alvarez et al., Kernels for vector-valued functions: a review, Foundation and Trends in Machine Learning}:
+Can be done within the framework of vector-valued kernel functions\footnote{Alvarez et al., Kernels for vector-valued functions: a review, Foundation and Trends in Machine Learning, 2012}:
 \begin{equation*}
 \label{eq:pairwise}
 f(\vec{x},\vec{t}) = \vec{w}^T \Psi(\vec{x},\vec{t}) = \sum_{(\bar{\vec{x}},\bar{\vec{t}}) \in \mathcal{D}} \alpha_{(\bar{\vec{x}},\bar{\vec{t}})} \Gamma((\vec{x},\vec{t}),(\bar{\vec{x}},\bar{\vec{t}})) 
@@ -1475,12 +1475,13 @@ $$
    %\includegraphics[width=\textwidth]{Figures/results4} \\
 %\end{frame}
 
-\begin{frame}{Zero-shot learning of document categorization}
+\begin{frame}{In which situations does zero-shot learning work?} \pause 
  \center
 
 \vspace{-0.5cm}
    \includegraphics[width=0.65\textwidth]{Figures/lc_wiki} \\
    $12,000$ labels: from $5,000$ to $350,000$ instances\footnote{M. Stock, Exact and efficient algorithms for pairwise learning, PhD thesis, 2017}
+	\vspace{0.2cm}
 \end{frame}
 
 
@@ -1751,18 +1752,23 @@ BMC bioinformatics 2010}
 
 \end{frame}
 
-\begin{frame}{Hybrid matrix factorization for Setting A) \\
-Example: matrix factorization + bilinear models\footnote{Menon and Elkan, A log-linear model with latent features for dyadic prediction, ICDM 2010.}}
+\begin{frame}{Matrix factorization with side information for Setting A}
 
 \begin{center}
-\includegraphics[width=11cm]{pics/settingA}
+\includegraphics[scale=0.3]{pics/settingA}
 \end{center}
-
-\vspace{-0.4cm}
+\begin{itemize}
+\item Construct \alert{implicit} features $(\vec{x}^I,\vec{t}^I)$ for users and items with matrix factorization methods
+\item Exploit \alert{explicit} features $(\vec{x}^E,\vec{t}^E)$ (a.k.a. side information)
+\item Concatenate: 
+$$\vec{x}^C = (\vec{x}^I,\vec{x}^E), \qquad \vec{t}^C = (\vec{t}^I,\vec{t}^E)$$
+\item Apply methods that we have seen before\footnote{Menon and Elkan, A log-linear model with latent features for dyadic prediction, ICDM 2010}\footnote{Volkovs and Zemel, Collaborative filtering with 17 parameters, NIPS 2012}: 
+\end{itemize}
 \begin{equation*}
 \label{eq:pairwise}
-f(\vec{x},\vec{t}) = \vec{w}^T \big(\phi(\vec{x}) \otimes \psi(\vec{t})\big)    
+f(\vec{x}^C,\vec{t}^C) = \vec{w}^T \big(\phi(\vec{x}^C) \otimes \psi(\vec{t}^C)\big)    
 \end{equation*}
+\vspace{-0.2cm}
 \end{frame}
 
 \begin{frame}{Hybrid matrix factorization for Setting A}
@@ -1786,6 +1792,9 @@ Does not work well in extreme multi-label classification\footnote{Babbar and Sch
 Representation of instance (or feature) \hspace{1cm} Representation of target
 \includegraphics[scale=0.5]{Figures/svd} 
 \end{center}
+\vspace{-0.3cm}
+$$p \times m \qquad \quad \qquad p \times p \qquad \qquad \qquad p \times m \qquad \qquad m \times m$$
+\vspace{-0.3cm}
 \begin{itemize}
 \item $\sigma_1,\sigma_2,...$: singular values of $A$
 \item Rank of $A$ = number of non-zero \alert{singular values}
@@ -1853,6 +1862,21 @@ Representation of instance (or feature) \hspace{1cm} Representation of target
 Waegeman et al. \\ Multi-Target Prediction: \\ A Unifying View on Problems and Methods}
 
 \end{center}
+
+\end{frame}
+
+\begin{frame}{Multi-target prediction papers at ECML/PKDD 2018}
+
+\begin{itemize}
+\item \alert{Djerrab et al.}, Output Fisher embedding regression, Tuesday, 15h20
+\item \alert{Pikalos et al.}, Global multi-output decision trees for interaction prediction, Thursday 11h20
+\item \alert{Masera and Blanzieri}, AWX: An integrated approach to hierarchical multi-label classification, Tuesday 14h40
+\item \alert{Decubber et al.}, Deep F-measure maximization in multi-label classification: a comparative study, Tuesday 14h20
+\item \alert{Park and Read}, A blended metric for multi-label optimization and evaluation, Thursday 11h40
+\item \alert{Deep collaborative filtering with multifaceted contextual information in location-based social networks, Thursday 14h20
+
+
+\end{itemize}
 
 \end{frame}
 
