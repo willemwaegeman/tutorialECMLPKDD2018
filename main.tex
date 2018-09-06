@@ -35,6 +35,8 @@
 \usepackage{color,colortbl} 
 \usepackage{pgfplots}
 %\usepackage{bibentry}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 \usepackage{tikz}
 \usetikzlibrary{mindmap,trees}
 \usetikzlibrary{decorations.pathreplacing}
@@ -230,7 +232,7 @@ Ghent University, Belgium
 		\begin{frame}[plain]
         \begin{tikzpicture}[remember picture,overlay]
             \node[at=(current page.center)] {
-                \includegraphics[scale=0.5]{pics/holland}
+                \includegraphics[scale=0.3]{Figures/nl}
             };
         \end{tikzpicture}
      \end{frame}
@@ -405,6 +407,13 @@ A multi-target prediction setting is characterized by instances $\vec{x} \in \ma
 
 \end{frame}
 
+\section{Loss functions in multi-target prediction}
+
+\begin{frame}{Overview of this tutorial}
+
+\tableofcontents
+
+\end{frame}
 
 \section{A unifying view on MTP methods}
 
@@ -477,6 +486,15 @@ $${\displaystyle L_{\textit{Ham}}(\vec{y},\hat{\vec{y}}) = \sum_{j=1}^m I(y_j = 
 
 \end{frame}
 
+\begin{frame}{The results section of a typical MTP paper...}
+\begin{center}
+\includegraphics[scale=0.45, trim = 0 50 0 100,clip]{Figures/barplots} \\
+
+Independent models a.k.a.\ binary relevance, models that do not exploit target dependencies, one-versus-all, etc.
+\end{center}
+\end{frame}
+
+
 \begin{frame}
 
 \begin{center}
@@ -486,6 +504,73 @@ Learning a model for each target independently is still state-of-the-art in extr
 \end{center}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\frame{
+  \frametitle{ DiSMEC - Distributed Sparse Machines for XMC }
+
+\begin{algorithmic}[1]
+ \Require  {Training data $\mathcal{T} = \{(\vec{x}_1,\vec{y}_1) \ldots (\vec{x}_n,\vec{y}_n) \}$, input dimensionality $p$, label set $\{1 \ldots m\}$, $B=\lfloor\frac{m}{1000}\rfloor+1$  and pruning threshold $\Delta$}
+
+\Ensure{Learnt $p \times m$ matrix $\vec{W}$ in sparse format} \pause 
+
+\State Load single copy of input vectors $\vec{X} = \{\vec{x}_1 \ldots \vec{x}_n \}$ in the main memory  %\Comment{\textit{Refactor data without replication}} 
+
+\State Load binary sign vectors $\vec{s}_{j} = \{+1,-1\}_{i=1}^n$ separately for each label \pause 
+
+\For{$\{b=0; b < B; b++ \}$} \Comment{\alert{1st parallelization}}
+
+        \State \#pragma omp parallel for private($j$)  \Comment{\alert{2nd parallelization}}
+
+       \For{$\{j=b\times1000; j \leq (b + 1)\times1000; j++ \}$}
+
+\State Using $(\vec{X}, \vec{s}_{j})$, train weight vector $\vec{a}_{j}$ on a single core
+
+\State \alert{Prune ambiguous weights} in $\vec{a}_{j}$ 
+\EndFor
+
+\State \Return $p \times 1000$ matrix $A$  
+
+\EndFor
+
+\State \Return $p \times m$ weight matrix $\vec{A}$ 
+\end{algorithmic} \pause 
+\begin{itemize} 
+\item Learns model for LSHTCWiki-325K in 6 hours on 400 cores
+\item Model size is 3GB due to pruning step
+\end{itemize}
+}
+
+\frame{
+  \frametitle{ Distribution of Learnt Weights}
+
+\begin{columns}
+\column{0.5\columnwidth}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{Figures/wiki10nonsparabs0p8.png}
+\caption{Before pruning}
+\end{figure}
+
+%\end{itemize}
+\column{0.5\columnwidth}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{Figures/l2c1abs0p8.png}
+\caption{After pruning small weights}
+\end{figure}
+\end{columns}
+\begin{itemize}
+\item Of the 3 Billion weights, 97\% are s.t, $W_{d',m'} \leq |0.01|$, and hence non-discriminative
+\item Storing them leads to large model sizes but no benefit in classification
+\end{itemize}
+
+}
+
 
 \begin{frame}{A unifying view on MTP methods}
 
@@ -807,16 +892,32 @@ Commonly-used training method: first train on targets that have a lot of observa
 \end{frame}
 
 \begin{frame}
+
+\begin{center}
+\includegraphics[scale=0.5]{Figures/interaction}
+\end{center}
+\begin{exampleblock}{Question}
+In which situations are similarity-enforcing models capable of outperforming independent models w.r.t.\ predictive performance? 
+\begin{itemize}
+\item Always
+\item When $p$ is sufficiently large
+\item When $m$ is sufficiently enough
+\item When the targets are sufficiently correlated
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
 \frametitle{An intuitive explanation: James-Stein estimation}
 
 \begin{itemize}
-\item Consider a multivariate normal distribution $\by \sim N(\vec{\theta}, \sigma^2\mathbf{I})$.
+\item Consider a sample of a multivariate normal distribution $\by \sim N(\vec{\theta}, \sigma^2\mathbf{I})$.
 \begin{center}
 \includegraphics[width = 4.5cm]{Figures/biva}
 \end{center}
 \item What is the best estimator of the mean vector $\vec{\theta}$?
-\item Evaluation w.r.t. MSE: $\mathbb{E}[(\vec\theta - \hat{\vec\theta})^2]$
-\item Single-observation maximum likelihood estimator: $\hat{\vec\theta}^{\mathrm{ML}} = \by$
+\item Evaluation w.r.t. MSE: $\mathbb{E}[(\vec\theta - \hat{\vec\theta})^2]$ \pause 
+\item Single-observation maximum likelihood estimator: $\hat{\vec\theta}^{\mathrm{ML}} = \by$ \pause 
 \item James-Stein estimator\footnote{W. James and C. Stein. Estimation with quadratic loss. In Proc. Fourth Berkeley Symp. Math.
 Statist. Prob. 1, pages 361-379, 1961}: 
 $$
@@ -869,6 +970,13 @@ Representation-constructing methods & A, B and C \\
 \end{tabular}
 \end{center}
 \end{frame}
+
+\begin{frame}{Different learning settings revisited}
+   \center
+	\vspace{0.4cm}
+   \includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
+\end{frame}
+
 
 \begin{frame}{Exploiting relations in regularization terms}
 
@@ -1805,13 +1913,7 @@ $$p \times m \qquad \quad \qquad p \times p \qquad \qquad \qquad p \times m \qqu
 \end{frame}
 
 
-\section{Loss functions in multi-target prediction}
 
-\begin{frame}{Overview of this tutorial}
-
-\tableofcontents
-
-\end{frame}
 
 
 
