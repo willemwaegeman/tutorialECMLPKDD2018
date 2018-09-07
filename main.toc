@@ -1,4 +1,4 @@
-\beamer@sectionintoc {1}{A unifying view on MTP problems}{9}{0}{1}
-\beamer@sectionintoc {2}{Loss functions in multi-target prediction}{16}{0}{2}
-\beamer@sectionintoc {3}{A unifying view on MTP methods}{17}{0}{3}
-\beamer@sectionintoc {4}{Conclusions}{88}{0}{4}
+\beamer@sectionintoc {1}{A unifying view on MTP problems}{10}{0}{1}
+\beamer@sectionintoc {2}{Loss functions in multi-target prediction}{17}{0}{2}
+\beamer@sectionintoc {3}{A unifying view on MTP methods}{18}{0}{3}
+\beamer@sectionintoc {4}{Conclusions}{90}{0}{4}

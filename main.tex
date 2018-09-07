@@ -314,6 +314,15 @@ the example of predicting student marks}
 
 \end{frame}
 
+\begin{frame}{Upcoming article}
+
+\begin{center}
+\includegraphics[width=\textwidth,trim = 0 0 0 0,clip]{Figures/dami}
+\end{center}
+
+\end{frame}
+
+
 \section{A unifying view on MTP problems}
 
 
@@ -475,13 +484,14 @@ Solving as a joint optimization problem:
 \label{eq:multiridge}
 \min_A ||Y - XA ||^2_F +  \sum_{i=1}^m \lambda_i \,||\vec{a}_i||^2 \,,
 \end{equation*}
+$$Y: (n \times m) \qquad  X: (n \times p) \qquad A: (p \times m)$$
 With the following notations: 
 \begin{equation*}
 \label{eq:notation}
 X = \begin{bmatrix} \phi(\vec{x}_1)^T \\ \vdots \\ \phi(\vec{x}_n)^T \end{bmatrix} \qquad A = [\vec{a}_1 \quad \cdots \quad \vec{a}_m] \,.
 \end{equation*}
-Hamming loss as alternative for binary labels: 
-$${\displaystyle L_{\textit{Ham}}(\vec{y},\hat{\vec{y}}) = \sum_{j=1}^m I(y_j = \hat{y}_j)}$$
+%Hamming loss as alternative for binary labels: 
+%$${\displaystyle L_{\textit{Ham}}(\vec{y},\hat{\vec{y}}) = \sum_{j=1}^m I(y_j = \hat{y}_j)}$$
 
 
 \end{frame}
@@ -516,9 +526,9 @@ Learning a model for each target independently is still state-of-the-art in extr
 \begin{algorithmic}[1]
  \Require  {Training data $\mathcal{T} = \{(\vec{x}_1,\vec{y}_1) \ldots (\vec{x}_n,\vec{y}_n) \}$, input dimensionality $p$, label set $\{1 \ldots m\}$, $B=\lfloor\frac{m}{1000}\rfloor+1$  and pruning threshold $\Delta$}
 
-\Ensure{Learnt $p \times m$ matrix $\vec{W}$ in sparse format} \pause 
+\Ensure{Learnt $p \times m$ matrix $A$ in sparse format} \pause 
 
-\State Load single copy of input vectors $\vec{X} = \{\vec{x}_1 \ldots \vec{x}_n \}$ in the main memory  %\Comment{\textit{Refactor data without replication}} 
+\State Load single copy of input vectors $X = \{\vec{x}_1 \ldots \vec{x}_n \}$ in the main memory  %\Comment{\textit{Refactor data without replication}} 
 
 \State Load binary sign vectors $\vec{s}_{j} = \{+1,-1\}_{i=1}^n$ separately for each label \pause 
 
@@ -537,7 +547,7 @@ Learning a model for each target independently is still state-of-the-art in extr
 
 \EndFor
 
-\State \Return $p \times m$ weight matrix $\vec{A}$ 
+\State \Return $p \times m$ weight matrix $A$ 
 \end{algorithmic} \pause 
 \begin{itemize} 
 \item Learns model for LSHTCWiki-325K in 6 hours on 400 cores
@@ -565,7 +575,7 @@ Learning a model for each target independently is still state-of-the-art in extr
 \end{figure}
 \end{columns}
 \begin{itemize}
-\item Of the 3 Billion weights, 97\% are s.t, $W_{d',m'} \leq |0.01|$, and hence non-discriminative
+\item Of the 3 Billion weights, 97\% are s.t, $A_ij \leq |0.01|$, and hence non-discriminative
 \item Storing them leads to large model sizes but no benefit in classification
 \end{itemize}
 
@@ -688,8 +698,8 @@ Representation-constructing methods & A, B and C \\
 for multiple classification problems. Statistics and Computing 2010}:
 $$
 \min_A ||Y - XA ||^2_F + \lambda \sum_{j=1}^p ||\vec{a}_j||^2  
-$$ 
-\item The vectors $\vec{a}_j$ now represent the rows of matrix $A^T$:
+$$ \pause 
+\item The vectors $\vec{a}_j$ now represent the columns of matrix $A^T$:
 \end{itemize}
 \begin{center}
 \includegraphics[width=0.9\textwidth,trim = 0 240 30 50,clip]{Figures/pictures/Dia21}
@@ -874,7 +884,7 @@ $$
 %
 %\end{frame}
 
-\begin{frame}{MTP in (Deep) Neural Networks}
+\begin{frame}{Enforcing similarity in (Deep) Neural Networks}
 \begin{center}
 Commonly-used architecture: weight sharing among targets\footnote{Caruana, Multitask learning: A knowledge-based source of inductive bias. Machine
 Learning 1997} \\
@@ -901,7 +911,7 @@ In which situations are similarity-enforcing models capable of outperforming ind
 \begin{itemize}
 \item Always
 \item When $p$ is sufficiently large
-\item When $m$ is sufficiently enough
+\item When $m$ is sufficiently large
 \item When the targets are sufficiently correlated
 \end{itemize}
 \end{exampleblock}
