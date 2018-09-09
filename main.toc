@@ -1,5 +1,5 @@
 \beamer@sectionintoc {1}{Introduction}{2}{0}{1}
 \beamer@sectionintoc {2}{A unifying view on MTP problems}{10}{0}{2}
-\beamer@sectionintoc {3}{Loss functions in multi-target prediction}{30}{0}{3}
-\beamer@sectionintoc {4}{A unifying view on MTP methods}{64}{0}{4}
-\beamer@sectionintoc {5}{Conclusions}{139}{0}{5}
+\beamer@sectionintoc {3}{MTP loss functions}{41}{0}{3}
+\beamer@sectionintoc {4}{A unifying view on MTP methods}{90}{0}{4}
+\beamer@sectionintoc {5}{Conclusions}{163}{0}{5}

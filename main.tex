@@ -3,7 +3,7 @@
 \usetheme{Boadilla} 
 %\usecolortheme{seagull}
 %\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
-\setbeamertemplate{blocks}[default]%[shadow=false]
+%\setbeamertemplate{blocks}[default]%[shadow=false]
 
 \setbeamertemplate{footnote}{\tiny\makebox[1em][l]{\insertfootnotemark}\insertfootnotetext\par}
 
@@ -203,17 +203,18 @@
 
 \title[]{Multi-Target Prediction:\\ 
 A Unifying View on Problems and Methods}
-\author[Willem Waegeman]{Willem Waegeman}
+\author[Willem Waegeman]{Willem Waegeman, Eyke H\"ullermeier and Krzysztof Dembczysnki} 
+%\author[Eyke]{Eyke H\"ullermeier}
 %\date[NIPS 2015]{NIPS: extreme classification workshop\\December 12, 2015}
 \institute[VFU] % (optional)
 {
   \inst{}
-  Research Unit Knowledge-based Systems (KERMIT)\\
-Department of Mathematical Modelling, Statistics and Bioinformatics\\
-Ghent University, Belgium
+Department of Data Analysis and Mathematical Modelling, Ghent University, Belgium \\
+Department of Computer Science, University of Paderborn, Germany \\
+Institute of Computing Science, Poznan University of Technology, Poland
 }
 
-\date{October 13 2017}
+\date{September 10 ECML/PKDD 2018 }
 
 \begin{document}
 
@@ -323,6 +324,9 @@ the example of predicting student marks}
 \end{frame}
 
 
+%%% begin changes %%%
+
+
 \section{A unifying view on MTP problems}
 
 
@@ -332,149 +336,8 @@ the example of predicting student marks}
 
 \end{frame}
 
-%
-%\begin{frame}{Let's assume a document hierarchy: \\
-%How would you call this machine learning problem?}
-%\begin{center}
-%\includegraphics[width=0.75\textwidth,trim = 0 0 100 0,clip]{Figures/pictures/Slide5}
-%\end{center}
-%\end{frame}
-%
-%\begin{frame}{Let's assume a target representation: \\
-%How would you call this machine learning problem?}
-%\begin{center}
-%\includegraphics[width=0.8\textwidth,trim = 0 0 100 30,clip]{Figures/pictures/Slide6}
-%\end{center}
-%
-%\end{frame}
-%
-%\begin{frame}{Let's assume a target representation: \\
-%How would you call this machine learning problem?}
-%\vspace{0.8cm}
-%\includegraphics[width=0.9\textwidth,trim = 0 0 0 90,clip]{Figures/pictures/Slide4}
-%
-%\end{frame}
-%
-%
-%
-%\begin{frame}{Generalizing to new targets}
-%% voorbeeldje met boeken
-%%\vspace{0.6cm}
-%$$\qquad g(.,.): \mbox{target similarity}$$
-%
-%\includegraphics[width=0.9\textwidth,trim = 0 0 0 60,clip]{Figures/pictures/Slide7}
-%\end{frame}
-%
-%\begin{frame}{Important subdivision of different learning settings}
-   %\center
-	%\vspace{0.4cm}
-   %\includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
-%\end{frame}
-%
-%%\begin{frame}
-%%\frametitle{Multi-target prediction}
-%%\begin{itemize}
-%%\item \emph{Multi-Target Prediction:} For a feature vector $\bx$ predict accurately \\a vector of responses $\by$ using a function $\bh(\bx)$:
-%%$$
-%%\bx = (x_1,x_2,\ldots,x_p) \xrightarrow{~~\bh(\bx)~~} \by = (y_1, y_2, \ldots, y_m)
-%%$$
-%%\item \emph{Main challenges:} 
-%%\begin{itemize}
-%%\item Appropriate modeling of target dependencies between targets 
-%%$$
-%%y_1, y_2, \ldots, y_m
-%%$$
-%%\item A multitude of multivariate loss functions defined over the output vector 
-%%$$\ell(\by, \bh(\bx))$$
-%%%to measure the quality of prediction.
-%%\end{itemize}
-%%\item \emph{Main question:} %Can we improve over independent models trained for each target?
-%%\begin{itemize}
-%%\item Can we improve over independent models trained for each target? 
-%%\end{itemize}
-%%\item \emph{Two views:} %the individual target and joint target view.
-%%\begin{itemize}
-%%\item The individual-target view
-%%\item The joint-target view
-%%\end{itemize}
-%%\end{itemize}
-%%
-%%\end{frame}
-%
-%\begin{frame}{General framework}
-%
-%\begin{definition}
-%A multi-target prediction setting is characterized by instances $\vec{x} \in \mathcal{X}$ and targets $\vec{t} \in \mathcal{T}$ with the following properties: 
-%\begin{itemize} 
-%\item[1.] A training dataset consists of triplets $(\vec{x}_i,\vec{t}_j,y_{ij})$, where $y_{ij} \in \mathcal{Y}$.  
-%\item[2.] In total $n$ instances and $m$ targets are observed during training, with $n$ and $m$ finite numbers. 
-%\item[3.]As such, the scores $y_{ij}$ of the training data can be arranged in an $n \times m$ matrix $Y$.
-%\item[4.] The score set $\mathcal{Y}$ is one-dimensional. It consists of nominal, ordinal or real values.  
-%\item[5.] The goal consists of making predictions for any instance-target couple $(\vec{x},\vec{t}) \in \mathcal{X} \times \mathcal{T}$.   
-%\end{itemize}
-%\end{definition}
-%
-%\end{frame}
-%
-%\section{Loss functions in multi-target prediction}
-%
-%\begin{frame}{Overview of this tutorial}
-%
-%\tableofcontents
-%
-%\end{frame}
-%
-%
-%%%% begin changes %%%
 
 
-%\section{A unifying view on MTP problems}
-
-%
-%\begin{frame}{Overview of this talk}
-%
-%\tableofcontents
-%
-%\end{frame}
-
-
-\begin{frame}{Let's assume a document hierarchy: \\
-How would you call this machine learning problem?}
-\begin{center}
-\includegraphics[width=0.75\textwidth,trim = 0 0 100 0,clip]{Figures/pictures/Slide5}
-\end{center}
-\end{frame}
-
-\begin{frame}{Let's assume a target representation: \\
-How would you call this machine learning problem?}
-\begin{center}
-\includegraphics[width=0.8\textwidth,trim = 0 0 100 30,clip]{Figures/pictures/Slide6}
-\end{center}
-
-\end{frame}
-
-\begin{frame}{Let's assume a target representation: \\
-How would you call this machine learning problem?}
-\vspace{0.8cm}
-\includegraphics[width=0.9\textwidth,trim = 0 0 0 90,clip]{Figures/pictures/Slide4}
-
-\end{frame}
-
-
-
-\begin{frame}{Generalizing to new targets}
-% voorbeeldje met boeken
-%\vspace{0.6cm}
-$$\qquad g(.,.): \mbox{target similarity}$$
-
-\includegraphics[width=0.9\textwidth,trim = 0 0 0 60,clip]{Figures/pictures/Slide7}
-\end{frame}
-
-\begin{frame}{Important subdivision of different learning settings}
-   \center
-	\vspace{0.4cm}
-   \includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
-\end{frame}
 
 %\begin{frame}
 %\frametitle{Multi-target prediction}
@@ -555,6 +418,13 @@ A multivariate regression problem is a specific instantiation of the general fra
 \end{definition}
 \end{frame}
 
+
+\begin{frame}{Multivariate regression}
+% voorbeeldje met boeken
+\includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide1}
+\end{frame}
+
+
 \begin{frame}{Conventional MTP settings}
 \begin{definition}[Multi-task learning] 
 A multi-task learning problem is a specific instantiation of the general framework, which exhibits the following additional properties: 
@@ -567,6 +437,11 @@ A multi-task learning problem is a specific instantiation of the general framewo
 \end{frame}
 
 
+\begin{frame}{Multi-task learning}
+% voorbeeldje met boeken
+\includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide3}
+\end{frame}
+
 
 \begin{frame}{Conventional MTP settings}
 \begin{definition}[Multi-label classification] 
@@ -578,6 +453,11 @@ A multi-label classification problem is a specific instantiation of the general 
 \item[P8b.] The score set is $\mathcal{Y} = \{0,1\}$. 
 \end{enumerate}
 \end{definition}
+\end{frame}
+
+\begin{frame}{Multi-label classification}
+% voorbeeldje met boeken
+\includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide2}
 \end{frame}
 
 
@@ -594,43 +474,47 @@ A multi-label classification problem is a specific instantiation of the general 
 \end{frame}
 
 
+
+
+
 \begin{frame}{Conventional MTP settings}
 \begin{itemize}
 \item
 In \emph{label ranking}\footnote{E.H., J.\ F\"urnkranz, W.\ Cheng, K.\ Brinker. Label Ranking by Learning Pairwise Preferences, Artificial Intelligence, 172, 2008.}, each instance is associated with a ranking (total order) of the targets.
-\item 
-Thus, the score $y_{ij} \in \{1,...,m\}$ for a pair $(\bx_i, \boldsymbol{t}_j)$ is the position of $\boldsymbol{t}_j$ in the ranking associated with $\bx$.
-% i.e.,  each row of the score matrix $Y$ is a permuation of $\{1,...,m\}$. 
-
-\item Training data: $\{(\bx_1,\by_1), (\bx_2,\by_2), \ldots, (\bx_n,\by_n)\} $, where $\by_i$ is a ranking (permutation) of a fixed number of labels/alternatives.
- 
-\item Predict permutation $(y_{\pi(1)}, y_{\pi(2)}, \ldots, y_{\pi(m)})$  for a given $\bx$. 
 \end{itemize}
-
-\vskip6pt
-
-\begin{minipage}[c][4cm][c]{\textwidth}
+%\vspace{0.8cm}
 \begin{center}
-\begin{tabular}{lcc@{$\qquad$} ccc}
-\toprule
-%&  &  &  \includegraphics[width=1cm]{pics/car_1.png} & \includegraphics[width=1cm]{pics/car_2.png} &  \includegraphics[width=1cm]{pics/car_3.png}\\
-& $X_1$ & $X_2$ & $Y_1$ & $Y_2$ & $Y_3$ \\
-\midrule
-$\bx_1$ & 5.0 & 4.5 & 1 & 3 &  2 \\
-$\bx_2$ & 2.0 & 2.5 & 2 & 1 &  3 \\
-$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & & $\vdots$ \\
-$\bx_n$ & 3.0 & 3.5 & 3 & 1 & 2 \\
-\midrule
-$\bx$  
-& 4.0 & 2.5 & ? & ? & ?\\
-%\only<2>{& 4.0 & 2.5 & 1 & 2 & 3}\\
- \bottomrule
-\end{tabular}
+\includegraphics[width=0.8\textwidth]{Figures/pictures/labelranking}
 \end{center}
-\end{minipage}
-% 
+\end{frame}
+
+
+
+
+
+\begin{frame}{Let's assume a document hierarchy: \\
+How would you call this machine learning problem?}
+\begin{center}
+\includegraphics[width=0.75\textwidth,trim = 0 0 100 0,clip]{Figures/pictures/Slide5}
+\end{center}
+\end{frame}
+
+\begin{frame}{Let's assume a target representation: \\
+How would you call this machine learning problem?}
+\begin{center}
+\includegraphics[width=0.8\textwidth,trim = 0 0 100 30,clip]{Figures/pictures/Slide6}
+\end{center}
 
 \end{frame}
+
+\begin{frame}{Let's assume a target representation: \\
+How would you call this machine learning problem?}
+\vspace{0.8cm}
+\includegraphics[width=0.9\textwidth,trim = 0 0 0 90,clip]{Figures/pictures/Slide4}
+
+\end{frame}
+
+
 
 
 
@@ -659,6 +543,9 @@ Generally speaking, such settings cover problems that obey the four properties l
 \end{frame}
 
 
+
+
+
 \begin{frame}{Inductive versus transductive learning problems}
 \begin{itemize} 
 \item In the previous problems, 
@@ -675,12 +562,29 @@ Generally speaking, such settings cover problems that obey the four properties l
 
 
 \begin{frame}{Inductive versus transductive learning problems}
+% voorbeeldje met boeken
+%\vspace{0.6cm}
+$$\qquad g(.,.): \mbox{target similarity}$$
+
+\includegraphics[width=0.9\textwidth,trim = 0 0 0 60,clip]{Figures/pictures/Slide7}
+\end{frame}
+
+\begin{frame}{Important subdivision of different learning settings}
+   \center
+	\vspace{0.4cm}
+   \includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
+\end{frame}
+
+
+\begin{frame}{Inductive versus transductive learning problems}
 \begin{definition}[Zero-shot learning]
 A zero-shot learning problem is a specific instantiation of the general framework with the following additional property: 
 \begin{enumerate}
 \item[P5*.] $m < m^* = |\mathcal{T}|$. Some targets are hence not observed during training, but may nevertheless appear at prediction time.  
 \end{enumerate}
 \end{definition}
+\pause
+
 \begin{itemize}
 \item By substituting P5 with P5*, one now tackles problems that are inductive instead of transductive w.r.t.\ targets. 
 \item The same subdivision can be made for instances. 
@@ -688,6 +592,9 @@ A zero-shot learning problem is a specific instantiation of the general framewor
 \item Theoretically, settings B and C are identical/symmetric, though there are practical differences/asymmetries. 
 \end{itemize}
 \end{frame}
+
+
+
 
 \begin{frame}{Inductive versus transductive learning problems}
 \begin{definition}[Matrix completion]
@@ -706,23 +613,65 @@ A matrix completion problem is a specific instantiation of the general framework
 \begin{itemize}
 \item
 Our formal framework is rather generic.
+\pause
+
 \item
 In principle, every prediction problem with (original) output space $\mathcal{Y}$ could be seen as a special case by taking $\mathcal{T} = \mathcal{Y}$ and $\{0,1\}$ as a score set (or through any other binary reduction). 
+\pause
+
 \item Each candidate output is treated as a target, the task is to predict whether or not the sought output corresponds to that candidate. 
+\pause
+
 \item Consequently, a consistent prediction has to obey strong (deterministic) dependencies between the targets (a single 1, rest 0).  
+\pause 
+
 \item Includes multi-class classification and structured output prediction (SOP) as special cases.
-\item
-Yet, we do not consider such problems as special cases of MTP.
+\pause
+
+%\item
+%Yet, we do not consider such problems as special cases of MTP.
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}{What we don't cover under MTP}
+
+\begin{itemize}
+\item
+Multi-class classification as a special case of MTP (?)
+\end{itemize}
+%\vspace{0.8cm}
+\begin{center}
+\includegraphics[width=0.35\textwidth]{Figures/pictures/multiclass0}
+\includegraphics[width=0.7\textwidth]{Figures/pictures/multiclass}
+\end{center}
+\end{frame}
+
+
+
 
 \begin{frame}{What we don't cover under MTP}
 \begin{itemize}
 
-\item \emph{Conceptually}, viewing each candidate prediction as a separate target appears artificial (actually, one is still interested in a single prediction, not multiple ones). 
+\item \emph{Conceptually}, viewing each candidate prediction as a separate target appears artificial. Actually, one is still interested in a single prediction, not multiple ones.
+
+\item The multi-target problem was only produced through \emph{decomposition} of a singe-target problem into multiple binary tasks/decisions.   
+
 \item To comply with the corresponding \emph{consistency constraints}, a kind of post-processing (like the decoding step in ECOC) is normally required (separation over tasks is not even possible in principal).
 
 \medskip 
+
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{Figures/pictures/decomposition}
+\end{center}
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What we don't cover under MTP}
+\begin{itemize}
 
 \item \emph{Algorithmically}, the multi-target perspective is not typical of SOP. Instead, such methods are specifically tailored for output spaces that are often huge but equipped with a strong structure. 
 
@@ -734,7 +683,7 @@ Also excluded are prediction problems where the ground truth cannot be represent
 
 
 
-\section{Loss functions in multi-target prediction}
+\section{MTP loss functions}
 
 \begin{frame}{Overview of this talk}
 
@@ -746,10 +695,11 @@ Also excluded are prediction problems where the ground truth cannot be represent
 \begin{frame}
 \frametitle{Multi-target prediction}
 \begin{itemize}
-\item For a feature vector $\bx$, predict a vector of responses $\by = (y_1, y_2, \ldots, y_m)$ using a function/hypothesis $\bh(\bx)$:
+\item For a feature vector $\bx$, predict a vector of responses $\by = (y_1, y_2, \ldots, y_m)$ using a function/hypothesis $\bh$:
 $$
 \bx = (x_1,x_2,\ldots,x_p) \quad \xrightarrow{~~\bh(\bx)~~} \quad \hat{\by} = ( \hat{y}_1, \hat{y}_2, \ldots, \hat{y}_m)
 $$
+\pause
 
 \item Compared to single-target prediction, a multitude of \emph{multivariate loss functions} 
 $$
@@ -757,8 +707,10 @@ $$
 $$ 
 %$$\ell(\by, \bh(\bx))$$
 are conceivable. 
+\pause
 
-\item \emph{Problem:} Given a target loss $\ell(\cdot)$, find a (Bayes) predictor $\bh(\cdot)$ that minimizes expected loss with regard to $\ell(\cdot)$. 
+\item \emph{Problem:} Given a target loss $\ell$, find a (Bayes) predictor $\bh$ that minimizes expected loss with regard to $\ell$. 
+\pause
 
 \item \emph{Key question:} Can we achieve this goal through simple reduction, i.e., by training one model for each target independently? Or can we do better with more sophisticated methods?  
 
@@ -782,15 +734,12 @@ are conceivable.
 %\item The problem is usually decomposable over the targets.
 \item  Domain of $y_i$ is either continuous or nominal.
 \item  Independent models vs.\ regularized (shrunken) models.
+\item James-Stein paradox (to be discussed later).
 
 \end{itemize}
 
 \end{frame}
 
-
-\begin{frame}
-\frametitle{The James-Stein paradox}
-\end{frame}
 
 
 \begin{frame}
@@ -824,6 +773,7 @@ L = \sum_{i=1}^n \ell(\by_i, \bh(\bx_i))
 \, ,
 $$
 i.e., as a sum of losses over all (test) examples. 
+\pause
 
 \item \emph{Decomposable} over targets: A multivariate loss $\ell$ is decomposable over targets if it can be written as
 $$
@@ -875,6 +825,7 @@ L = \frac{1}{4} \left( {\only<2>{\color{putred}}L_1} + {\only<3>{\color{putred}}
 $$
 
 \end{frame}
+
 
 
 
@@ -955,7 +906,7 @@ $$
 L =  \sum_{i,j} \ell(y_{ij} , \hat{y}_{ij})
 $$
 \begin{center}
-Same weight of every predictions vs.\ same weight of every target.
+Same weight of every prediction vs.\ same weight of every target.
 \end{center}
 
 \end{frame}
@@ -1010,8 +961,125 @@ L = \frac{1}{6} \Big( {\only<2>{\color{putred}}\ell(\vec{y}_1,\hat{\vec{y}}_1)} 
 
 
 
+
 \begin{frame}
-\frametitle{Multi-label losses}
+\frametitle{Examples of MTP loss functions}
+\begin{itemize}
+
+\item \emph{F-measure}:
+$$
+F(\mathbf{Y}, \hat{\mathbf{Y}}) = \frac{2 \sum_{i=1}^K y_i \hat{y}_i}{\sum_{i=1}^K y_i + \sum_{i=1}^K \hat{y}_i} \, ,
+$$
+where $\mathbf{Y} = (y_1, \ldots , y_K) \in \{ 0,1 \}^K$ and $\hat{\mathbf{Y}} = (\hat{y}_1, \ldots , \hat{y}_K) \in \{ 0,1 \}^K$. Can be used in macro- and micro-averaging, but also instance-wise. 
+\end{itemize}
+\pause
+
+\bigskip
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Figures/pictures/fmeasure}
+\end{center}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Examples of MTP loss functions}
+\begin{itemize}
+
+\item \emph{F-measure}:
+$$
+F(\mathbf{Y}, \hat{\mathbf{Y}}) = \frac{2 \sum_{i=1}^K y_i \hat{y}_i}{\sum_{i=1}^K y_i + \sum_{i=1}^K \hat{y}_i} \, ,
+$$
+where $\mathbf{Y} = (y_1, \ldots , y_K) \in \{ 0,1 \}^K$ and $\hat{\mathbf{Y}} = (\hat{y}_1, \ldots , \hat{y}_K) \in \{ 0,1 \}^K$. Can be used in macro- and micro-averaging, but also instance-wise. 
+
+
+
+\item The \emph{Hamming loss} averages over mistakes on individual labels:    
+$$
+\ell_H(\by, \hat{\by}) = \frac{1}{m}  \, \sum_{i=1}^m \, \assert{y_i \neq  y_i}
+$$
+
+\pause
+
+\item The \emph{subset 0/1 loss} simply checks for entire correctness:  
+\begin{align*}
+\ell_{0/1}(\by, \hat{\by}) & = \assert{\by \ne \hat{\by}} =  \max_i \, \assert{y_i \neq  y_i}
+\end{align*}
+
+
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Examples of MTP loss functions}
+\begin{itemize}
+
+\item
+The \emph{rank loss} compares binary targets with a \emph{predicted ranking}:
+$$
+\ell_r(\vec{y},\sigma) = \sum_{(i,j): y_i > y_j}  \left (\llbracket \sigma(i) > \sigma(j) \rrbracket + \frac{1}{2} \llbracket \sigma(i)  = \sigma (j) \rrbracket  \right) \, ,
+$$
+where $\sigma$ is a permutation/ranking of the targets typically induced by a scoring function $\boldsymbol{f}:\, \mathcal{X} \rightarrow \mathbb{R}^m$ s.t.\ $\sigma(i) \leq \sigma(j) \Leftrightarrow f_i(\bx) \geq f_j(\bx)$. 
+
+\pause 
+
+\item \emph{Precision at position $k$} compares a binary targets with \emph{predicted top-ranking}:
+$$
+\mathrm{prec}@k(\by, \hat{Y}_k) = \frac{1}{k} \sum_{j \in \hat{Y}_k} \assert{y_j = 1} \,,
+$$
+where $\hat{Y}_k$ is a set of $k$ labels predicted by the learner (perhaps by thresholding a ranking/scoring function).
+
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Examples of MTP loss functions}
+\begin{itemize}
+\item \emph{Normalized Discounted Cumulative Gain at position $k$}:
+$$
+\mathrm{NDCG}@k(\by,  \sigma ) = N_k(\by) \sum_{r=1}^k  \frac{y_{\sigma(r)}}{\log(1 + r)} ,
+$$
+where $\sigma$ is a permutation of labels for $\bx$ returned by a \emph{ranker}, and $N_k(\by)$ normalizes NDCG$@k$ to the interval $[0,1]$:
+$$
+N_k(\by) = \left ( \sum_{r=1}^{\min(k, \sum_{i=1}^m y_i)}  \frac{1}{\log(1 + r)}  \right )^{-1}
+$$
+
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Examples of MTP loss functions}
+\begin{itemize}
+
+\item \emph{Squared error loss} (typically used in multivariate regression):
+$$
+\ell(\by, \hat{\by}) = \sum_{i=1}^m (y_i - \hat{y}_i)^2 \, ,
+$$
+where $\by , \hat{\by} \in \mathbb{R}^m$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Two simple yet extreme multi-label losses}
 \begin{itemize}
 \item The \emph{Hamming loss} averages over mistakes on individual labels:    
 $$
@@ -1020,8 +1088,7 @@ $$
 
 \item The \emph{subset 0/1 loss} simply checks for entire correctness:  
 \begin{align*}
-\displaystyle \ell_{0/1}(\by, \hat{\by}) & = \assert{\by \ne \hat{\by}} \\
-& =  \max_i \, \assert{y_i \neq  y_i}
+\displaystyle \ell_{0/1}(\by, \hat{\by}) & = \assert{\by \ne \hat{\by}}  =  \max_i \, \assert{y_i \neq  y_i}
 \end{align*}
 
 %\item {F-measure-based loss}: $\displaystyle \ell_F(\by,\bh) = 1 - \frac{2 \sum_{i=1}^m y_i h_i}{\sum_{i=1}^m y_i + \sum_{i=1}^m h_i}$\\[12pt]
@@ -1036,7 +1103,7 @@ $$
 \begin{frame}
 \frametitle{Hamming vs.\ subset 0/1 loss}
 \begin{itemize}
-\item What is the risk-minimizing (Bayes) prediction for the Hamming loss and the subset 0/1 loss, respectively, given the following conditional distribution $\Pr(Y_1,Y_2 \, \vert \, \vec{x})$?
+\item What is the risk-minimizing (Bayes) prediction for the Hamming loss $1/m  \, \sum_{i=1}^m \assert{y_i \neq  y_i}$ and the subset 0/1 loss $\assert{\by \ne \hat{\by}}$, respectively, given the following conditional distribution $\Pr(Y_1,Y_2 \, \vert \, \vec{x})$?
 
 \medskip
 
@@ -1076,7 +1143,7 @@ $y_1$ & $y_2$ & $\Pr(y_1,y_2 \, | \, \vec{x})$  \\
 \begin{frame}
 \frametitle{Hamming vs.\ subset 0/1 loss}
 \begin{itemize}
-\item What is the risk-minimizing (Bayes) prediction for the Hamming loss and the subset 0/1 loss, respectively, given the following conditional distribution $\Pr(Y_1,Y_2 \, \vert \, \vec{x})$?
+\item What is the risk-minimizing (Bayes) prediction for the Hamming loss $1/m  \, \sum_{i=1}^m \assert{y_i \neq  y_i}$ and the subset 0/1 loss $\assert{\by \ne \hat{\by}}$, respectively, given the following conditional distribution $\Pr(Y_1,Y_2 \, \vert \, \vec{x})$?
 
 \medskip
 
@@ -1095,14 +1162,13 @@ $y_1$ & $y_2$ & $\Pr(y_1,y_2)$  \\
 
 \small
 \begin{align*}
-\mathbb{E}_{\mathbf{Y}} \ell_H(\by, \hat{\by}) \; = \; & 0.3 \, \ell_H((0,0),\hat{\by}) +  0.3 \, \ell_H((0,1),\hat{\by}) + \\
-& 0.0 \, \ell_H((1,0),\hat{\by}) +  0.4 \, \ell_H((1,1),\hat{\by}) \\  
-= \; & 0.3( \assert{0 \neq y_1} + \assert{0 \neq y_2}) + 
+\mathbb{E}_{\mathbf{Y}} \ell_H(\by, \hat{\by}) \; = \; & 0.3 \, \ell_H((0,0),\hat{\by}) +  0.3 \, \ell_H((0,1),\hat{\by}) +  0.4 \, \ell_H((1,1),\hat{\by}) \\  
+= \; & \frac{1}{2} \big( 0.3( \assert{0 \neq y_1} + \assert{0 \neq y_2}) + 
 0.3( \assert{0 \neq y_1} + \assert{1 \neq y_2}) + \\
-& 0.0( \assert{1 \neq y_1} + \assert{0 \neq y_2}) +
-0.4( \assert{1 \neq y_1} + \assert{1 \neq y_2}) \\
-= \; & 0.6 \assert{0 \neq y_1} + 0.4 \assert{1 \neq y_1} + 0.3 \assert{0 \neq y_2} + 0.7 \assert{0 \neq y_2} \\
-= \; & \mathbb{E}_{Y_1} \ell_H(y_1, \hat{y}_1) + \mathbb{E}_{Y_2} \ell_H(y_2, \hat{y}_2)
+& \quad\quad\quad
+0.4( \assert{1 \neq y_1} + \assert{1 \neq y_2}) \big) \\
+= \; & \frac{1}{2} \big( 0.6 \assert{0 \neq y_1} + 0.4 \assert{1 \neq y_1} + 0.3 \assert{0 \neq y_2} + 0.7 \assert{0 \neq y_2} \big) \\
+= \; & 1/2 \, \mathbb{E}_{Y_1} \ell_H(y_1, \hat{y}_1) + 1/2 \, \mathbb{E}_{Y_2} \ell_H(y_2, \hat{y}_2)
 \end{align*}
 
 %\pause
@@ -1189,7 +1255,7 @@ where the supremum is taken over all probability distributions on $\mathcal{Y}$.
 
 Under specific conditions, the risk minimizers for $\ell_H$ %Hamming loss
 and $\ell_{\ZO}$ %subset 0/1 loss 
-are \emph{equivalent}, 
+are provably \emph{equivalent}, i.e.,
 $$\bh^*_H(\bx) = \bh^*_{\ZO}(\bx) \,,$$
 for example, when
 
@@ -1198,7 +1264,7 @@ for example, when
 \begin{itemize}
 \item the probability of the {joint mode} satisfies
 $$
-\Pr(\bh^*_{\ZO}(\bx)|\bx) > 0.5\, ,
+\Pr \big(\bh^*_{\ZO} (\bx)\, |\, \bx \big) > 0.5\, ,
 $$
 \item or the targets $Y_1, \ldots, Y_m$ are \emph{conditionally independent}.
 % i.e, 
@@ -1222,8 +1288,8 @@ We distinguish between conditional and unconditional (in)dependence of targets\f
 $$
 \Pr(\bY) \ne \prod_{i=1}^m \Pr(Y_i) 
 $$
-Often due to model similarities, i.e., $f_i(\bx) = g_i(\bx) + \epsilon_i$ for $i = 1, \ldots, m$, with similarities in the structural parts $g_i(\cdot)$.
-
+Often due to model similarities, i.e., $f_i(\bx) = g_i(\bx) + \epsilon_i$ for $i = 1, \ldots, m$, with similarities in the structural parts $g_i(\cdot)$, which implies \emph{correlation} between targets. 
+\pause
 
 \item \emph{Conditional dependence}:
 $$
@@ -1272,7 +1338,7 @@ $\Pr(Y_1 = 0 | x_1 = 1) \Pr(Y_2 = 0 | x_1 = 1) = 0.5 \times 0.5 = 0.25 \neq 0$.
 $$
 f_1(\bx) = \frac{1}{2} x_1 + \frac{1}{2} x_2, \quad f_2(\bx) = \frac{1}{2} x_1 - \frac{1}{2} x_2 
 $$
-\item Logistic model to get labels:
+\item Logistic model to assign labels:
 $$
 \Pr(y_i = 1) = \frac{1}{1 + \exp(-2f_i)}
 $$
@@ -1292,11 +1358,11 @@ $$
 \frametitle{Synthetic data}
 
 \begin{itemize}
-\item Two dependent models:
+\item Two conditionally dependent models:
 $$
 f_1(\bx) = \frac{1}{2} x_1 + \frac{1}{2} x_2 \quad f_2(y_1, \bx) = y_1 + \frac{1}{2} x_1 - \frac{1}{2} x_2 - \frac{2}{3}
 $$
-\item Logistic model to get labels:
+\item Logistic model to assign labels:
 $$
 \Pr(y_i = 1) = \frac{1}{1 + \exp(-2f_i)}
 $$
@@ -1365,17 +1431,17 @@ LP LR         & 0.3610 & 0.5146 \\
 \item
 The rank loss compares binary targets with a predicted ranking:
 $$
-L_r(\vec{y},\mathbf{h}(\vec{x})) = \sum_{(i,j): y_i > y_j}  \left (\llbracket h_i(\vec{x}) < h_j(\vec{x}) \rrbracket + \frac{1}{2} \llbracket h_i(\vec{x}) = h_j(\vec{x}) \rrbracket  \right )
+\ell_r(\vec{y},\boldsymbol{f}(\vec{x})) = \sum_{(i,j): y_i > y_j}  \left (\llbracket f_i(\vec{x}) < f_j(\vec{x}) \rrbracket + \frac{1}{2} \llbracket f_i(\vec{x}) = f_j(\vec{x}) \rrbracket  \right )
 $$
 
 \item
 To minimize this loss, it is enough to sort the targets by their probability of relevance. 
 
 \item
-\emph{Theorem}: A ranking function that sorts the labels according to their probability of relevance, i.e., using the scoring
-function $\mathbf{h}(\cdot)$ with
+\emph{Theorem}\footnote{K.D., W.W., W.\ Cheng, E.H. On Label Dependence and Loss Minimization in Multi-Label Classification. Machine Learning, 88, 2012.}: A ranking function that sorts the labels according to their probability of relevance, i.e., using the scoring
+function $\boldsymbol{f}(\cdot)$ with
 $$
-h_i(\vec{x}) \, = \, \Pr(Y_i = 1 \, | \, \vec{x}) \,,
+f_i(\vec{x}) \, = \, \Pr(Y_i = 1 \, | \, \vec{x}) \,,
 $$
 minimizes the expected rank loss.
 \end{itemize}
@@ -1402,20 +1468,24 @@ minimizes the expected rank loss.
 \frametitle{Loss functions and target dependence}
 \begin{itemize}
 \item Optimal (pointwise) prediction requires information about $\Pr( \by \, \vert \, \bx)$.
+\pause
+
 \item \emph{Independence} simplifies learning a lot, since learning marginals is much easier than learning a joint distribution ($\rightarrow$ graphical models).
-\item \emph{Structure of the loss function} has an important influence, too, due to the ``interaction'' of $\ell$ and $\Pr$:
+\pause
+
+\item \emph{Structure of the loss function} has an important influence, too, due to the ``interaction'' between $\ell$ and $\Pr$:
 $$
 \mathbb{E}_{\mathbf{Y}} \, \ell(\mathbf{Y}, \hat{\by}) =  \sum_{\by} \ell(\by, \hat{\by}) \Pr(\by \, \vert \, \bx) \, .
 $$
 In some cases, such as F-measure optimization, knowledge of properties of $\Pr$ instead of complete distribution is therefore enough. 
+\pause
+
 \item \emph{Conditional independence} of $\Pr$ and \emph{decomposability} of $\ell$ are sufficient conditions for Bayes-optimality of target-wise Bayes predictor.
 \end{itemize}
 \end{frame}
 
 
 %%% end changes %%%
-
-
 
 
 
@@ -1440,14 +1510,21 @@ Group of methods & Applicable setting \\
 \hline
 \alert{Independent models} & B \\
 Similarity-enforcing methods & B   \\ 
-Relation-exploiting methods & B, C and D  \\
-Relation-constructing methods & B and C \\
-Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & A, B and C \\
+Relation-exploiting methods & B and D  \\
+Relation-constructing methods & B \\
+Representation-exploiting methods & B and D \\
+Representation-constructing methods & A and B \\
 \hline  
 \end{tabular}
 \end{center}
 \end{frame}
+
+%\begin{frame}{Different learning settings revisited}
+   %\center
+	%\vspace{0.4cm}
+   %\includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
+%\end{frame}
+
 
 \begin{frame}{A baseline method:\\
 learning a model for each target independently}
@@ -1515,66 +1592,68 @@ Learning a model for each target independently is still state-of-the-art in extr
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\frame{
-  \frametitle{ DiSMEC - Distributed Sparse Machines for XMC }
-
-\begin{algorithmic}[1]
- \Require  {Training data $\mathcal{T} = \{(\vec{x}_1,\vec{y}_1) \ldots (\vec{x}_n,\vec{y}_n) \}$, input dimensionality $p$, label set $\{1 \ldots m\}$, $B=\lfloor\frac{m}{1000}\rfloor+1$  and pruning threshold $\Delta$}
-
-\Ensure{Learnt $p \times m$ matrix $A$ in sparse format} \pause 
-
-\State Load single copy of input vectors $X = \{\vec{x}_1 \ldots \vec{x}_n \}$ in the main memory  %\Comment{\textit{Refactor data without replication}} 
-
-\State Load binary sign vectors $\vec{s}_{j} = \{+1,-1\}_{i=1}^n$ separately for each label \pause 
-
-\For{$\{b=0; b < B; b++ \}$} \Comment{\alert{1st parallelization}}
-
-        \State \#pragma omp parallel for private($j$)  \Comment{\alert{2nd parallelization}}
-
-       \For{$\{j=b\times1000; j \leq (b + 1)\times1000; j++ \}$}
-
-\State Using $(\vec{X}, \vec{s}_{j})$, train weight vector $\vec{a}_{j}$ on a single core
-
-\State \alert{Prune ambiguous weights} in $\vec{a}_{j}$ 
-\EndFor
-
-\State \Return $p \times 1000$ matrix $A$  
-
-\EndFor
-
-\State \Return $p \times m$ weight matrix $A$ 
-\end{algorithmic} \pause 
-\begin{itemize} 
-\item Learns model for LSHTCWiki-325K in 6 hours on 400 cores
-\item Model size is 3GB due to pruning step
-\end{itemize}
-}
-
-\frame{
-  \frametitle{ Distribution of Learnt Weights}
-
-\begin{columns}
-\column{0.5\columnwidth}
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{Figures/wiki10nonsparabs0p8.png}
-\caption{Before pruning}
-\end{figure}
-
+%\frame{
+  %\frametitle{ DiSMEC - Distributed Sparse Machines for XMC }
+%
+%\begin{algorithmic}[1]
+ %\Require  {Training data $\mathcal{T} = \{(\vec{x}_1,\vec{y}_1) \ldots (\vec{x}_n,\vec{y}_n) \}$, input dimensionality $p$, label set $\{1 \ldots m\}$, $B=\lfloor\frac{m}{1000}\rfloor+1$  and pruning threshold $\Delta$}
+%
+%\Ensure{Learnt $p \times m$ matrix $A$ in sparse format} \pause 
+%
+%\State Load single copy of input vectors $X = \{\vec{x}_1 \ldots \vec{x}_n \}$ in the main memory  %\Comment{\textit{Refactor data without replication}} 
+%
+%\State Load binary sign vectors $\vec{s}_{j} = \{+1,-1\}_{i=1}^n$ separately for each label \pause 
+%
+%\For{$\{b=0; b < B; b++ \}$} \Comment{\alert{1st parallelization}}
+%
+        %\State \#pragma omp parallel for private($j$)  \Comment{\alert{2nd parallelization}}
+%
+       %\For{$\{j=b\times1000; j \leq (b + 1)\times1000; j++ \}$}
+%
+%\State Using $(\vec{X}, \vec{s}_{j})$, train weight vector $\vec{a}_{j}$ on a single core
+%
+%\State \alert{Prune ambiguous weights} in $\vec{a}_{j}$ 
+%\EndFor
+%
+%\State \Return $p \times 1000$ matrix $A$  
+%
+%\EndFor
+%
+%\State \Return $p \times m$ weight matrix $A$ 
+%\end{algorithmic} \pause 
+%\begin{itemize} 
+%\item Learns model for LSHTCWiki-325K in 6 hours on 400 cores
+%\item Model size is 3GB due to pruning step
 %\end{itemize}
-\column{0.5\columnwidth}
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{Figures/l2c1abs0p8.png}
-\caption{After pruning small weights}
-\end{figure}
-\end{columns}
-\begin{itemize}
-\item Of the 3 Billion weights, 97\% are s.t, $A_ij \leq |0.01|$, and hence non-discriminative
-\item Storing them leads to large model sizes but no benefit in classification
-\end{itemize}
+%}
+%
+%\frame{
+  %\frametitle{ Distribution of Learnt Weights}
+%
+%\begin{columns}
+%\column{0.5\columnwidth}
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=\textwidth]{Figures/wiki10nonsparabs0p8.png}
+%\caption{Before pruning}
+%\end{figure}
+%
+%%\end{itemize}
+%\column{0.5\columnwidth}
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=\textwidth]{Figures/l2c1abs0p8.png}
+%\caption{After pruning small weights}
+%\end{figure}
+%\end{columns}
+%\begin{itemize}
+%\item Of the 3 Billion weights, 97\% are s.t, $A_ij \leq |0.01|$, and hence non-discriminative
+%\item Storing them leads to large model sizes but no benefit in classification
+%\end{itemize}
+%
+%}
 
-}
+
 
 
 \begin{frame}{A unifying view on MTP methods}
@@ -1589,10 +1668,10 @@ Group of methods & Applicable setting \\
 \hline
 Independent models & B \\
 \alert{Similarity-enforcing methods} & B   \\ 
-Relation-exploiting methods & B, C and D  \\
-Relation-constructing methods & B and C \\
-Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & A, B and C \\
+Relation-exploiting methods & B and D  \\
+Relation-constructing methods & B \\
+Representation-exploiting methods & B and D \\
+Representation-constructing methods & A and B \\
 \hline  
 \end{tabular}
 \end{center}
@@ -1949,7 +2028,7 @@ $$
 $$
 \hat{\theta}^{\mathrm{JS+}} = \left (1 - \frac{(m-2)\sigma^2}{\|\by - \vec{v}\|^2} \right )(\by - \vec{v}) + \vec{v}
 $$
-\item Only outperforms the maximum likelihood estimator w.r.t. the sum of squared errors over all components.
+\item Only outperforms the maximum likelihood estimator w.r.t. the sum of squared errors over all components, \alert{and only when $m \geq 3$}
 %\item Does not outperform the squared error when evaluating an individual component (i.e. one target).
 
 \end{itemize}
@@ -1967,10 +2046,10 @@ Group of methods & Applicable setting \\
 \hline
 Independent models & B \\
 Similarity-enforcing methods & B   \\ 
-\alert{Relation-exploiting methods} & B, C and D  \\
-Relation-constructing methods & B and C \\
-Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & A, B and C \\
+\alert{Relation-exploiting methods} & B and D  \\
+Relation-constructing methods & B  \\
+Representation-exploiting methods & B and D \\
+Representation-constructing methods & A and B \\
 \hline  
 \end{tabular}
 \end{center}
@@ -1982,6 +2061,12 @@ Representation-constructing methods & A, B and C \\
    \includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
 \end{frame}
 
+
+\begin{frame}{An example from the introduction revisited}
+\begin{center}
+\includegraphics[width=0.75\textwidth,trim = 0 0 100 0,clip]{Figures/pictures/Slide5}
+\end{center}
+\end{frame}
 
 \begin{frame}{Exploiting relations in regularization terms}
 
@@ -2006,7 +2091,7 @@ and graphical dependencies, KDD 2013}:
 
 \vspace{-0.2cm}
 In addition to performance gains in general, hierarchies can also be used to define specific loss functions, such as the H-loss\footnote{Bi and Kwok, Bayes-optimal hierarchical multi-label classification, IEEE Transactions on Knowledge and Data Engineering, 2014}: 
-$$L_H(\vec{y},\hat{\vec{y}}) = \sum_{j: y_j \neq \hat{y_j}} c_j \, I(\textit{anc}(y_j) = \textit{anc}(\hat{y}_j))$$
+$$\ell_{Hier}(\vec{y},\hat{\vec{y}}) = \sum_{j: y_j \neq \hat{y_j}} c_j \, \assert{\textit{anc}(y_j) = \textit{anc}(\hat{y}_j)}$$
 $c_i$ depends on the depth of node $i$
 \end{frame}
 
@@ -2051,14 +2136,17 @@ Group of methods & Applicable setting \\
 \hline
 Independent models & B \\
 Similarity-enforcing methods & B   \\ 
-Relation-exploiting methods & B, C and D  \\
-\alert{Relation-constructing methods} & B and C \\
-Representation-exploiting methods & B, C and D \\
-Representation-constructing methods & A, B and C \\
+Relation-exploiting methods & B and D  \\
+\alert{Relation-constructing methods} & B \\
+Representation-exploiting methods & B and D \\
+Representation-constructing methods & A and B \\
 \hline  
 \end{tabular}
 \end{center}
 \end{frame}
+
+
+
 
 \begin{frame}{Constructing target hierarchies}
 
@@ -2425,10 +2513,10 @@ in multi-label classification, ECAI 2012}
 \begin{itemize}
 \item Consider models $\bf{f}: \mathcal{X} \rightarrow \mathbb{R}^m$
 \item Training dataset $\{\bf{x}_i,\bf{y}_i\}_{i=1}^n$
-\item Learnable correlation matrix $\bf{\Gamma}$ between targets
+\item Learnable gram matrix $G$ for output kernel $g(\vec{t},\vec{t}')$
 \item Learn output kernel and model parameters jointly\footnote{Dinuzzo et al., Learning Output Kernels with Block Coordinate Descent, ICML 2011}:
-$$\min_{\bf{\Gamma} \in \mathbb{R}^{m \times m}} \left[ \min_{\bf{f} \in \mathcal{F}} \sum_{i=1}^n \frac{||\bf{f}(\bf{x}_i) - \bf{y}_i||_2^2}{2\lambda} + \frac{||\bf{f}||^2_\mathcal{F}}{2} + \frac{
-||\bf{\Gamma}||^2_F}{2} \right]$$
+$$\min_{G \in \mathbb{R}^{m \times m}} \left[ \min_{\bf{f} \in \mathcal{F}} \sum_{i=1}^n \frac{||\bf{f}(\bf{x}_i,\cdot) - \bf{y}_i||_2^2}{2\lambda} + \frac{||\bf{f}||^2_\mathcal{F}}{2} + \frac{
+||G||^2_F}{2} \right]$$
 \end{itemize}
 \begin{center}
 \includegraphics[scale=0.2]{Figures/okl}
@@ -2436,7 +2524,7 @@ $$\min_{\bf{\Gamma} \in \mathbb{R}^{m \times m}} \left[ \min_{\bf{f} \in \mathca
 
 \end{frame}
 
-\begin{frame}{Construcing decision rules among targets}
+\begin{frame}{Constructing decision rules among targets}
 \begin{center}
 \includegraphics[scale=0.3]{Figures/rules} \\ \pause 
 Potential inferred rule\footnote{Loza-Mencia and Janssen, Learning rules for multi-label classification: a stacking and separate-and-conquer approach}: \alert{TEA $\rightarrow$ NOT LEMONADE} \\
@@ -2459,14 +2547,33 @@ Group of methods & Applicable setting \\
 \hline
 Independent models & B \\
 Similarity-enforcing methods & B   \\ 
-Relation-exploiting methods & B, C and D  \\
-Relation-constructing methods & B and C \\
-\alert{Representation-exploiting methods} & B, C and D \\
-Representation-constructing methods & A, B and C \\
+Relation-exploiting methods & B and D  \\
+Relation-constructing methods & B \\
+\alert{Representation-exploiting methods} & B and D \\
+Representation-constructing methods & A and B \\
 \hline  
 \end{tabular}
 \end{center}
 \end{frame}
+
+\begin{frame}{Different learning settings revisited}
+   \center
+	\vspace{0.4cm}
+   \includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
+\end{frame}
+
+\begin{frame}{An example revisited}
+\begin{center}
+\includegraphics[width=0.8\textwidth,trim = 0 0 100 30,clip]{Figures/pictures/Slide6}
+\end{center}
+
+\end{frame}
+
+%\begin{frame}{Two examples revisited}
+%\vspace{0.8cm}
+%\includegraphics[width=0.9\textwidth,trim = 0 0 0 90,clip]{Figures/pictures/Slide4}
+%
+%\end{frame}
 
 \begin{frame}{A target representation in computer vision}
 
@@ -2568,14 +2675,14 @@ $$ \min_{\bm{\boldsymbol\alpha}} \, ||\bm{\kkernelm}\bm{\boldsymbol\alpha} -\bm{
 \begin{itemize}
 \item Kernel evaluations for new test instance: 
 $$\bm{k}(\bm{x})=\left(\kernelf(\bm{x},\bm{x}_1),\ldots,\kernelf(\bm{x},\bm{x}_\osize)\right)\transpose$$ 
-$$\bm{g}(\bm{t})=\left(\gkernelf(\bm{t},\bm{t}_1),\ldots,\gkernelf(\bm{t},\bm{t}_\qsize)\right)\transpose$$ \pause 
+$$\bm{g}(\bm{t})=\left(\gkernelf(\bm{t},\bm{t}_1),\ldots,\gkernelf(\bm{t},\bm{t}_m)\right)\transpose$$ \pause 
 \item Step 1: prediction for $\bm{x}$ on all the training targets
 $$
-\mathbf{\predfun}_\taskset (\bm{x}) = \bm{k}(\bm{x})\transpose A^{IT} = \bm{k}(\bm{x})\transpose \left(\dkernelm+\regparam_d \idmatrix\right)^{-1} Y  $$ \pause 
+\mathbf{\predfun}_\taskset (\bm{x}) = \bm{k}(\bm{x})\transpose A^{IT} = \bm{k}(\bm{x})\transpose \left(\dkernelm+\regparam_1 \idmatrix\right)^{-1} Y  $$ \pause 
 \item Step 2: generalizing to new targets
 \begin{eqnarray*}
-\predfun^\text{TS}(\bm{x}, \bm{t}) &=&  \bm{g}(\bm{t})\transpose \left(\tkernelm+\regparam_t \idmatrix\right)^{-1}  \mathbf{\predfun}_\taskset (\bm{x})\transpose \\ \pause 
-&=& \bm{k}(\bm{x})\transpose \left(\dkernelm+\regparam_d \idmatrix\right)^{-1} Y  \left(\tkernelm+\regparam_t \idmatrix\right)^{-1} \bm{g}(\bm{t}) \\ \pause 
+\predfun^\text{TS}(\bm{x}, \bm{t}) &=&  \bm{g}(\bm{t})\transpose \left(\tkernelm+\regparam_2 \idmatrix\right)^{-1}  \mathbf{\predfun}_\taskset (\bm{x})\transpose \\ \pause 
+&=& \bm{k}(\bm{x})\transpose \left(\dkernelm+\regparam_1 \idmatrix\right)^{-1} Y  \left(\tkernelm+\regparam_2 \idmatrix\right)^{-1} \bm{g}(\bm{t}) \\ \pause 
 &=& \bm{k}(\bm{x})\transpose A^\text{TS} \bm{g}(\bm{t}) \\
 &=& \vec{w}^T \left(\phi(\vec{x}) \otimes \psi(\vec{t}) \right)
 \end{eqnarray*}
@@ -2682,14 +2789,21 @@ Group of methods & Applicable setting \\
 \hline
 Independent models & B \\
 Similarity-enforcing methods & B   \\ 
-Relation-exploiting methods & B, C and D  \\
-Relation-constructing methods & B and C \\
-Representation-exploiting methods & B, C and D \\
-\alert{Representation-constructing methods} & A, B and C \\
+Relation-exploiting methods & B and D  \\
+Relation-constructing methods & B \\
+Representation-exploiting methods & B and D \\
+\alert{Representation-constructing methods} & A and B \\
 \hline  
 \end{tabular}
 \end{center}
 \end{frame}
+
+\begin{frame}{Different learning settings revisited}
+   \center
+	\vspace{0.4cm}
+   \includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
+\end{frame}
+
 
 \begin{frame}{Low-rank approximation in Settings B and C}
 
@@ -2852,27 +2966,33 @@ method for multi-label classification using autoencoders, PAKDD 2016}
 \frame{
   \frametitle{Target embeddings in neural networks}
   
-  \begin{columns}
-\column{0.40\columnwidth}
-\begin{itemize}
-\item Shallow Networks - SVM
-	\begin{itemize}
-	\vspace{-0.2in}
-		\item Direct mapping of input to output
-	\end{itemize}
-\end{itemize}
-\centering
-\input{shallow}\pause
-\column{0.45\columnwidth}
-\begin{itemize}
-\vspace{-0.10in}
-\item Label embedding 
+  %\begin{columns}
+%\column{0.40\columnwidth}
+%\begin{itemize}
+%\item Shallow Networks - SVM
+	%\begin{itemize}
+	%\vspace{-0.2in}
+		%\item Direct mapping of input to output
+	%\end{itemize}
+%\end{itemize}
+%\centering
+%\input{shallow}\pause
+%\column{0.45\columnwidth}
+%\begin{itemize}
+%\vspace{-0.10in}
+%\item Label embedding 
+
+%\end{itemize}
+\begin{center}
+\begin{huge}
+\input{deep}
+\end{huge}
+\end{center}
+%\end{columns}
 \begin{itemize}
 	\item Mapping input to output via embedding layer
+	\item Nonlinear alternative to $A\vec{x} = VU \vec{x}$
 \end{itemize}
-\end{itemize}
-\input{deep}
-\end{columns}
 }
 
 
@@ -2922,13 +3042,29 @@ f(\vec{x}^C,\vec{t}^C) = \vec{w}^T \big(\phi(\vec{x}^C) \otimes \psi(\vec{t}^C)\
 \vspace{-0.2cm}
 \end{frame}
 
-\begin{frame}{Hybrid matrix factorization for Setting A}
+%\begin{frame}{Hybrid matrix factorization for Setting A}
+%
+%Basilico and Hofmann, 2004;
+%Abernethy et al, 2008; Adams et al, 2010; Fang and Si, 2011; Zhou et al, 2011a; Menon and
+%Elkan, 2011; Zhou et al, 2012b).
+%
+%\end{frame}
 
-Basilico and Hofmann, 2004;
-Abernethy et al, 2008; Adams et al, 2010; Fang and Si, 2011; Zhou et al, 2011a; Menon and
-Elkan, 2011; Zhou et al, 2012b).
-
-\end{frame}
+%\begin{frame}
+%
+%\begin{center}
+%\includegraphics[scale=0.5]{Figures/interaction}
+%\end{center}
+%\begin{exampleblock}{Question}
+%In which situations are relation and representation construction models capable of outperforming independent models w.r.t.\ predictive performance in Setting B? 
+%\begin{itemize}
+%\item Always
+%\item When $n$ is sufficiently large
+%\item When $m$ is sufficiently large
+%\item When the targets are sufficiently correlated
+%\end{itemize}
+%\end{exampleblock}
+%\end{frame}
 
 \begin{frame}{When is it useful to construct target representations?}
 \begin{center}
@@ -2948,7 +3084,7 @@ $$p \times m \qquad \quad \qquad p \times p \qquad \qquad \qquad p \times m \qqu
 \vspace{-0.3cm}
 \begin{itemize}
 \item $\sigma_1,\sigma_2,...$: singular values of $A$
-\item Rank of $A$ = number of non-zero \alert{singular values}
+\item Rank of $A$ = number of non-zero \alert{singular values} \pause 
 \item \alert{High rank} when a lot of singular values differ from zero
 \item \alert{Low rank} when a lot of singular values are zero
 \item Singular values \alert{give insight} in what can be gained
@@ -2999,12 +3135,13 @@ $$p \times m \qquad \quad \qquad p \times p \qquad \qquad \qquad p \times m \qqu
 \begin{itemize}
 \item Multi-target prediction is an active field of research that connects different types of machine learning problems
 \item In the corresponding subfields of machine learning, problems have typically been solved in isolation, without establishing connections between methods
-\item Two-step zero-shot learning is a simple MTP method with a lot of interesting properties
+\item When analyzing MTP methods, it is important to understand several concepts, such as the influence of loss functions, and the availability and absence of side knowledge
 \end{itemize}
 
 \begin{center}
 {\bf Upcoming paper: \\
-Waegeman et al. \\ Multi-Target Prediction: \\ A Unifying View on Problems and Methods}
+Waegeman et al. \\ Multi-Target Prediction: \\ A Unifying View on Problems and Methods} \\
+(available in a few days on Arxiv)
 
 \end{center}
 
@@ -3013,16 +3150,20 @@ Waegeman et al. \\ Multi-Target Prediction: \\ A Unifying View on Problems and M
 \begin{frame}{Multi-target prediction papers at ECML/PKDD 2018}
 
 \begin{itemize}
-\item \alert{Djerrab et al.}, Output Fisher embedding regression, Tuesday, 15h20
-\item \alert{Pikalos et al.}, Global multi-output decision trees for interaction prediction, Thursday 11h20
-\item \alert{Masera and Blanzieri}, AWX: An integrated approach to hierarchical multi-label classification, Tuesday 14h40
-\item \alert{Decubber et al.}, Deep F-measure maximization in multi-label classification: a comparative study, Tuesday 14h20
-\item \alert{Park and Read}, A blended metric for multi-label optimization and evaluation, Thursday 11h40
-\item \alert{Rafailidis and Crestani}, Deep collaborative filtering with multifaceted contextual information in location-based social networks, Thursday 14h20
-\item \alert{Du et al.}, POLAR: Attention-based CNN for one-shot personalized article recommendation, Thursday 14h40
-\item \alert{Lan et al.}, Personalized thread recommendation of MOOC discussion forums, Thursday 14h20
+\item \alert{Djerrab et al.}, Output Fisher embedding regression, Tuesday, 15h20 \pause
+\item \alert{Pikalos et al.}, Global multi-output decision trees for interaction prediction, Thursday 11h20 \pause 
+\item \alert{Masera and Blanzieri}, AWX: An integrated approach to hierarchical multi-label classification, Tuesday 14h40 \pause 
+\item \alert{Decubber et al.}, Deep F-measure maximization in multi-label classification: a comparative study, Tuesday 14h20 \pause 
+\item \alert{Park and Read}, A blended metric for multi-label optimization and evaluation, Thursday 11h40 \pause 
+\item \alert{Rafailidis and Crestani}, Deep collaborative filtering with multifaceted contextual information in location-based social networks, Thursday 14h20 \pause 
+\item \alert{Du et al.}, POLAR: Attention-based CNN for one-shot personalized article recommendation, Thursday 14h40 \pause 
+\item \alert{Lan et al.}, Personalized thread recommendation of MOOC discussion forums, Thursday 14h20 \pause 
 \item \alert{Marecek et al.}, Matrix completion under interval uncertainty, Thursday 16h30
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Questions? Remarks?}
 
 \end{frame}
 
