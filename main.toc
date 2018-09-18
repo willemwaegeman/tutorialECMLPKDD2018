@@ -1,5 +1,5 @@
 \beamer@sectionintoc {1}{Introduction}{2}{0}{1}
 \beamer@sectionintoc {2}{A unifying view on MTP problems}{10}{0}{2}
-\beamer@sectionintoc {3}{MTP loss functions}{41}{0}{3}
-\beamer@sectionintoc {4}{A unifying view on MTP methods}{90}{0}{4}
-\beamer@sectionintoc {5}{Conclusions}{163}{0}{5}
+\beamer@sectionintoc {3}{MTP loss functions}{44}{0}{3}
+\beamer@sectionintoc {4}{A unifying view on MTP methods}{94}{0}{4}
+\beamer@sectionintoc {5}{Conclusions}{166}{0}{5}
