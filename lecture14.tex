@@ -201,8 +201,7 @@
 %\def\newblock{\hskip .11em } %plus .33em minus .07em}
 
 
-\title[]{Multi-Target Prediction:\\ 
-A Unifying View on Problems and Methods}
+\title[]{Lecture 14: Multi-Target Prediction:\\ }
 \author[Willem Waegeman]{Willem Waegeman} 
 %\author[Eyke]{Eyke H\"ullermeier}
 %\date[NIPS 2015]{NIPS: extreme classification workshop\\December 12, 2015}
@@ -212,7 +211,7 @@ A Unifying View on Problems and Methods}
 Department of Data Analysis and Mathematical Modelling, Ghent University, Belgium \\
 }
 
-\date{September 30th 2019 }
+%\date{September 30th 2019 }
 
 \begin{document}
 
@@ -231,7 +230,7 @@ Department of Data Analysis and Mathematical Modelling, Ghent University, Belgiu
 		\begin{frame}[plain]
         \begin{tikzpicture}[remember picture,overlay]
             \node[at=(current page.center)] {
-                \includegraphics[scale=0.17]{Figures/and}
+                \includegraphics[scale=0.17]{Figures/ant}
             };
         \end{tikzpicture}
      \end{frame}
@@ -648,25 +647,25 @@ X = \begin{bmatrix} \phi(\vec{x}_1)^T \\ \vdots \\ \phi(\vec{x}_n)^T \end{bmatri
 
 
 \end{frame}
-%
-%\begin{frame}{The results section of a typical MTP paper...}
-%\begin{center}
-%\includegraphics[scale=0.45, trim = 0 50 0 100,clip]{Figures/barplots} \\
-%
-%Independent models a.k.a.\ binary relevance, models that do not exploit target dependencies, one-versus-all, etc.
-%\end{center}
-%\end{frame}
-%
-%
-%\begin{frame}
-%
-%\begin{center}
-%Learning a model for each target independently is still state-of-the-art in extreme multi-label classification\footnote{Babbar and Sch\"olkopf, DISMEC: Distributed Sparse Machines for Extreme Multi-label classification, WSDM 2017}:
-%
-%\includegraphics[scale=0.3]{Figures/dismec} 
-%\end{center}
-%
-%\end{frame}
+
+\begin{frame}{The results section of a typical MTP paper...}
+\begin{center}
+\includegraphics[scale=0.45, trim = 0 50 0 100,clip]{Figures/barplots} \\
+
+Independent models a.k.a.\ binary relevance, models that do not exploit target dependencies, one-versus-all, etc.
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+
+\begin{center}
+Learning a model for each target independently is still state-of-the-art in extreme multi-label classification\footnote{Babbar and Sch\"olkopf, DISMEC: Distributed Sparse Machines for Extreme Multi-label classification, WSDM 2017}:
+
+\includegraphics[scale=0.3]{Figures/dismec} 
+\end{center}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -734,6 +733,325 @@ X = \begin{bmatrix} \phi(\vec{x}_1)^T \\ \vdots \\ \phi(\vec{x}_n)^T \end{bmatri
 %
 %}
 
+
+\begin{frame}{A unifying view on MTP methods}
+
+\begin{center}
+\includegraphics[scale=0.3]{pics/tools}
+
+\begin{tabular}{ll}
+\hline
+Group of methods & Applicable setting \\
+\hline
+\hline
+Independent models & B \\
+\alert{Similarity-enforcing methods} & B   \\ 
+Relation-exploiting methods & B and D  \\
+Relation-constructing methods & B \\
+Representation-exploiting methods & B and D \\
+Representation-constructing methods & A and B \\
+\hline  
+\end{tabular}
+\end{center}
+\end{frame}
+
+
+
+%
+%\begin{frame}{Learning a model for each target independently with kernel ridge regression}
+%
+%
+%\begin{itemize}
+%\item Model for target $\bm{t}_j$:
+%$$ \predfun_j^{\text{IT}}(\bm{d}) = \sum_{i=1}^{\osize}
+%a_{ij}^\text{IT} \kernelf(\bm{d},\bm{d}_i) $$
+%\item[] $\osize$: number of labeled instances per target
+%\item[] $\lsize$: number of targets
+ %\item[] $\bm{d}_i$: feature representation of instance $i$ 
+%\item[] $\kernelf(\cdot,\cdot)$: a kernel for instances \pause 
+%\item[]
+%\item Optimization problem:
+%$$
+ %\min_{\mathbf{A}} \| \mathbf{Y} - \mathbf{KA} \|_F^2 + \regparam_d \trace[{\bm{A}}\transpose\dkernelm\bm{A}] $$
+%%with $\bm{A}^\text{IT}=[a_{ij}^\text{IT}]\in\mathbb{R}^{\osize\times\qsize}$ and  for the instances 
+%\item[] $\bm{Y}_{.j}\in\mathbb{R}^\osize$: the labels of target $\bm{t}_j$ 
+%\item[] $\dkernelm \in\mathbb{R}^{\osize\times\osize}$: the Gram matrix of instance kernel $\kernelf(\cdot,\cdot)$ 
+%%\item Solving the following linear system:
+%%$$\left(\dkernelm+\regparam_d\idmatrix\right)\bm{A}^\text{IT}=\bm{Y}$$
+%\end{itemize}
+%\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Multi-target prediction methods }
+%
+%\begin{itemize}
+%\item Methods that exploit the similarities between the structural parts of target models:
+%\begin{equation}
+%\label{eqn:slp_1}
+%\vec{y} = \mathbf{h} (\mathbf{f}(\vec{x}), \vec{x})\,,
+%\end{equation}
+%where $\mathbf{f}(\vec{x})$ is the prediction vector obtained by univariate methods, and  $\mathbf{h}(\cdot)$ are additional shrunken or regularized classifiers.
+%\item Alternatively, a similar model can be given by:
+%\begin{equation}
+%\label{eqn:slp_2}
+%\mathbf{h}^{-1}(\vec{y}, \vec{x}) = \mathbf{f}(\vec{x})\,,
+%\end{equation}
+%i.e., the output space (possibly along with the feature space) is first transformed, and than univariate (regression) methods are then trained on the new output variables $\mathbf{h}^{-1}(\vec{y}, \vec{x})$. 
+%\end{itemize}
+%
+%\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Mean-regularized multi-task learning\footnote{Evgeniou and Pontil, Regularized multi--task learning, KDD 2004.}}
+
+\vspace{0.2cm}
+\begin{columns}
+\column{5cm}
+\small{
+\begin{itemize}
+\item \emph{Simple assumption}: models for different targets are related to each other.
+\item \emph{Simple solution}: the parameters of these models should have similar values.
+\item \emph{Approach}: bias the parameter vectors towards their mean vector.
+%\item \emph{Disadvantage}: the assumption of all target models being similar might be invalid for many applications.
+\end{itemize}
+}
+\column{5.5cm}
+
+\begin{tikzpicture}[
+  level 1 concept/.append style={font=\sf, level distance = 21mm},
+  level 2 concept/.append style={font=\sf, level distance = 21mm},
+  every node/.append style={scale=0.5}]
+
+  \path[mindmap, concept color=black,text=white]
+
+    node[concept] {Mean}
+    child[grow = 90, concept color=green!50!black] { node[concept] {Target 1}}
+    child[grow = 180,concept color=blue] { node[concept] {Target 2}}
+	child[grow = 270,concept color=red] { node[concept] {Target 3} }
+	child[grow = 360,concept color=orange] { node[concept] {Target 4} };   
+\end{tikzpicture}
+\end{columns}
+\vspace{0.2cm}
+\begin{equation*}
+\label{eq:meanreg}
+\min_A ||Y - XA ||^2_F + \lambda \sum_{i=1}^m ||\vec{a}_i - \frac{1}{m} \sum_{j=1}^m \vec{a}_j||^2 \, ,
+\end{equation*}
+\end{frame}
+
+\begin{frame}{Joint feature selection}
+\begin{itemize}
+\item Enforce that the same features are selected for different targets\footnote{Obozinski et al. Joint covariate selection and joint subspace selection
+for multiple classification problems. Statistics and Computing 2010}:
+$$
+\min_A ||Y - XA ||^2_F + \lambda \sum_{j=1}^p ||\vec{a}_j||^2  
+$$ \pause 
+\item The vectors $\vec{a}_j$ now represent the columns of matrix $A^T$:
+\end{itemize}
+\begin{center}
+\includegraphics[width=0.9\textwidth,trim = 0 240 30 50,clip]{Figures/pictures/Dia21}
+\end{center}
+%\begin{eqnarray*}
+%\mbox{L2-norm per target:} && 
+%A= \begin{bmatrix}
+%a_{11} & \cdots & a_{1p} \\
+%\vdots & & \vdots \\
+%a_{m1} & \cdots & a_{mp}
+%\end{bmatrix} \\
+%\mbox{Mix L1/L2-norm per target:} && 
+%A= \begin{bmatrix}
+%a_{11} & \cdots & a_{1p} \\
+%\vdots & & \vdots \\
+%a_{m1} & \cdots & a_{mp}
+%\end{bmatrix}\\
+%&& \quad \qquad  (\vec{a}_1,\ldots \ldots,\vec{a}_p)
+%\end{eqnarray*}
+%$$
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Stacking (Stacked generalization)}
+
+\begin{itemize}
+\item Originally introduced as a general ensemble learning or blending technique.\footnote{Wolpert, Stacked generalization. Neural Networks 1992}
+\item Level 1 classifiers: apply a series of ML methods on the same dataset (or, one ML method on bootstrap samples of the dataset)
+\item Level 2 classifier: apply an ML method to a new dataset consisting of the predictions obtaining at Level 1 
+\end{itemize}
+
+\begin{center}
+\def\layersep{1.25cm}
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+    \tikzstyle{input neuron}=[neuron, fill=green!50];
+    \tikzstyle{output neuron}=[neuron, fill=red!50];
+    \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+    \tikzstyle{annot} = [text width=4em, text centered]
+
+   % Draw the input layer nodes
+   \foreach \name / \y in {1,...,4}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+        \node[input neuron] (I-\name) at (\y, 0) {$f_\y$};
+
+    % Draw the hidden layer nodes
+   \foreach \name / \y in {1}
+      % \path%[yshift=0.5cm]
+           \node[hidden neuron] (H-\name) at (2.5, \layersep) {$h_\y$};
+
+
+% % Draw the output layer node
+    \node[output neuron] (I) at (2.5, -\layersep) {$\bx$};
+%%
+%%    % Connect every node in the input layer with every node in the
+%%    % hidden layer.
+     \foreach \source in {1,...,4}
+        \foreach \dest in {1}
+            \path (I-\source) edge (H-\dest);
+%%
+%    % Connect every node in the hidden layer with the output layer
+  \foreach \source in {1,...,4}
+     \path (I) edge (I-\source);
+%
+   % Annotate the layers
+  \node[annot,left of=H-1, node distance=3cm] (hl) {Level 2}; 
+   \node[annot,below of=hl, node distance=\layersep] {Level 1};
+%%    \node[annot,right of=hl] {Output layer};
+\end{tikzpicture}
+\end{center}
+
+%D. Wolpert, Stacked Generalization, Machine Learning, 1992
+\end{frame}
+
+\begin{frame}
+\frametitle{Stacking applied to multi-target prediction\footnote{Cheng and H\"ullermeier, Combining Instance-based learning and Logistic Regreession for Multi-Label classification, Machine Learning, 2009} }
+
+\begin{columns}
+\begin{column}{5cm}
+\begin{itemize}
+\item Level 1 classifiers: learn a model for every target independently 
+\item Level 2 classifier: learn again a model for every target independently, using the predictions of the first step as features
+\end{itemize}
+\end{column}
+
+\begin{column}{6cm}
+\def\layersep{2.5cm}
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+    \tikzstyle{input neuron}=[neuron, fill=green!50];
+    \tikzstyle{output neuron}=[neuron, fill=red!50];
+    \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+    \tikzstyle{annot} = [text width=4em, text centered]
+
+   % Draw the input layer nodes
+   \foreach \name / \y in {1,...,4}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+        \node[input neuron] (I-\name) at (\y, 0) {$f_\y$};
+
+    % Draw the hidden layer nodes
+   \foreach \name / \y in {1,...,4}
+      % \path%[yshift=0.5cm]
+           \node[hidden neuron] (H-\name) at (\y, \layersep) {$h_\y$};
+
+
+% % Draw the output layer node
+    \node[output neuron] (I) at (2.5, -\layersep) {$\bx$};
+%%
+%%    % Connect every node in the input layer with every node in the
+%%    % hidden layer.
+     \foreach \source in {1,...,4}
+        \foreach \dest in {1,...,4}
+            \path (I-\source) edge (H-\dest);
+%%
+%    % Connect every node in the hidden layer with the output layer
+  \foreach \source in {1,...,4}
+     \path (I) edge (I-\source);
+%
+   % Annotate the layers
+  \node[annot,left of=H-1, node distance=1cm] (hl) {Level 2}; 
+   \node[annot,left of=I-1, node distance=1cm] {Level 1};
+%%    \node[annot,right of=hl] {Output layer};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+% 
+
+
+\end{frame}
+
+%
+%\begin{frame}
+%\frametitle{Stacking applied to multi-target prediction: general principle\footnote{Cheng and Huellermeier, Combining Instance-based learning and Logistic Regreession for Multi-Label classification, Machine Learning, 2009}}
+%
+%\begin{center}
+%\def\layersep{2.5cm}
+%\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    %\tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    %\tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+    %\tikzstyle{input neuron}=[neuron, fill=green!50];
+    %\tikzstyle{output neuron}=[neuron, fill=red!50];
+    %\tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+    %\tikzstyle{annot} = [text width=4em, text centered]
+%
+   %% Draw the input layer nodes
+   %\foreach \name / \y in {1,...,4}
+    %% This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+        %\node[input neuron] (I-\name) at (\y, 0) {$f_\y$};
+%
+    %% Draw the hidden layer nodes
+   %\foreach \name / \y in {1,...,4}
+      %% \path%[yshift=0.5cm]
+           %\node[hidden neuron] (H-\name) at (\y, \layersep) {$h_\y$};
+%
+%
+%% % Draw the output layer node
+    %\node[output neuron] (I) at (2.5, -\layersep) {$\bx$};
+%%%
+%%%    % Connect every node in the input layer with every node in the
+%%%    % hidden layer.
+     %\foreach \source in {1,...,4}
+        %\foreach \dest in {1,...,4}
+            %\path (I-\source) edge (H-\dest);
+%%%
+%%    % Connect every node in the hidden layer with the output layer
+  %\foreach \source in {1,...,4}
+     %\path (I) edge (I-\source);
+%%
+   %% Annotate the layers
+  %\node[annot,left of=H-1, node distance=1cm] (hl) {Level 2}; 
+   %\node[annot,left of=I-1, node distance=1cm] {Level 1};
+%%%    \node[annot,right of=hl] {Output layer};
+%\end{tikzpicture}
+%\end{center}
+%
+%% 
+%
+%
+%\end{frame}
+
+\begin{frame}{Enforcing similarity in (Deep) Neural Networks}
+\begin{center}
+Commonly-used architecture: weight sharing among targets\footnote{Caruana, Multitask learning: A knowledge-based source of inductive bias. Machine
+Learning 1997} \\
+\vspace{0.2cm}
+\includegraphics[scale=0.6]{Figures/weightsharing}
+\end{center}
+\end{frame}
+
+\begin{frame}{Re-using Pretrained Models in (Deep) Neural Networks}
+\begin{center}
+Commonly-used training method: first train on targets that have a lot of observations, only train some parameters for targets that have few observations \footnote{Keras Tutorial: Transfer Learning using pre-trained models } \\
+%\vspace{0.2cm}
+\includegraphics[scale=0.4]{Figures/pretrain2}
+\end{center}
+\end{frame}
 
 
 

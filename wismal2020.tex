@@ -214,11 +214,12 @@ Department of Computer Science, University of Paderborn, Germany \\
 Institute of Computing Science, Poznan University of Technology, Poland
 }
 
-\date{September 10 ECML/PKDD 2018 }
+\date{Winter School on Machine Learning, Gran Canaria, 2020 }
 
 \begin{document}
 
 \frame{\titlepage}
+
 
 \section{Introduction}
 
@@ -233,12 +234,19 @@ Institute of Computing Science, Poznan University of Technology, Poland
 		\begin{frame}[plain]
         \begin{tikzpicture}[remember picture,overlay]
             \node[at=(current page.center)] {
-                \includegraphics[scale=0.3]{Figures/nl}
+                \includegraphics[scale=0.5]{pics/multi-classlabel}
             };
         \end{tikzpicture}
      \end{frame}
 
 %\section{Introduction}
+
+
+\begin{frame}{Multi-label classification: \\
+the example of document categorization}
+% voorbeeldje met boeken
+\includegraphics[scale=0.17]{pics/kompany}
+\end{frame}
 
 \begin{frame}{Multi-label classification: \\
 the example of document categorization}
@@ -315,11 +323,11 @@ the example of predicting student marks}
 
 \end{frame}
 
-\begin{frame}{Upcoming article}
+\begin{frame}{Accompanying article}
 
 \begin{center}
 \includegraphics[width=\textwidth,trim = 0 0 0 0,clip]{Figures/dami}\\
-https://arxiv.org/abs/1809.02352
+Data Mining and Knowledge discovery, 2019. 
 \end{center}
 
 \end{frame}
@@ -370,33 +378,18 @@ https://arxiv.org/abs/1809.02352
 %
 %\end{frame}
 
-%\begin{frame}{General framework}
-%\begin{definition}
-%A multi-target prediction setting is characterized by instances $\vec{x} \in \mathcal{X}$ and targets $\vec{t} \in \mathcal{T}$ with the following properties: 
-%\begin{itemize} 
-%\item[1.] A training dataset consists of triplets $(\vec{x}_i,\vec{t}_j,y_{ij})$, where $y_{ij} \in \mathcal{Y}$.  
-%\item[2.] In total $n$ instances and $m$ targets are observed during training, with $n$ and $m$ finite numbers. 
-%\item[3.]As such, the scores $y_{ij}$ of the training data can be arranged in an $n \times m$ matrix $Y$.
-%\item[4.] The score set $\mathcal{Y}$ is one-dimensional. It consists of nominal, ordinal or real values.  
-%\item[5.] The goal consists of making predictions for any instance-target couple $(\vec{x},\vec{t}) \in \mathcal{X} \times \mathcal{T}$.   
-%\end{itemize}
-%\end{definition}
-%\end{frame}
-
-
 \begin{frame}{General framework}
-\begin{definition}[Multi-target prediction]
+\begin{definition}
 A multi-target prediction setting is characterized by instances $\vec{x} \in \mathcal{X}$ and targets $\vec{t} \in \mathcal{T}$ with the following properties: 
 \begin{itemize} 
-\item[P1.] A training dataset $\mathcal{D}$ consists of triplets $(\vec{x}_i,\vec{t}_j,y_{ij})$, where $y_{ij} \in \mathcal{Y}$ denotes a score that characterizes the relationship between the instance $\vec{x}_i$ and the target $\vec{t}_j$.  
-\item[P2.] In total, $n$ different instances and $m$ different targets are observed during training, with $n$ and $m$ finite numbers. Thus, the scores $y_{ij}$ of the training data can be arranged in an $n \times m$ matrix $Y$, which is in general incomplete, i.e., $Y$ has missing values.
-\item[P3.] The score set $\mathcal{Y}$ is one-dimensional. It consists of nominal, ordinal or real values.  
-\item[P4.] The goal consists of predicting scores for any instance-target couple $(\vec{x},\vec{t}) \in \mathcal{X} \times \mathcal{T}$.   
+\item[1.] A training dataset consists of triplets $(\vec{x}_i,\vec{t}_j,y_{ij})$, where $y_{ij} \in \mathcal{Y}$.  
+\item[2.] In total $n$ instances and $m$ targets are observed during training, with $n$ and $m$ finite numbers. 
+\item[3.]As such, the scores $y_{ij}$ of the training data can be arranged in an $n \times m$ matrix $Y$.
+\item[4.] The score set $\mathcal{Y}$ is one-dimensional. It consists of nominal, ordinal or real values.  
+\item[5.] The goal consists of making predictions for any instance-target couple $(\vec{x},\vec{t}) \in \mathcal{X} \times \mathcal{T}$.   
 \end{itemize}
 \end{definition}
-
 \end{frame}
-
 
 \begin{frame}{Conventional MTP settings}
 \begin{itemize}
@@ -407,41 +400,8 @@ A multi-target prediction setting is characterized by instances $\vec{x} \in \ma
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Conventional MTP settings}
-\begin{definition}[Multivariate regression] 
-A multivariate regression problem is a specific instantiation of the general framework, which exhibits the following additional properties: 
-\begin{enumerate}
-\item[P5.] The cardinality of $\mathcal{T}$ is $m$. This implies that all targets are observed during training. 
-\item[P6.] No side information is available for targets. Without loss of generality, we can hence assign the numbers $1$ to $m$ as identifiers to targets, such that the target space is $\mathcal{T} = \{1,...,m\}$. 
-\item[P7.] The score matrix $Y$ has no missing values. 
-\item[P8.] The score set is $\mathcal{Y} = \mathbb{R}$. 
-\end{enumerate}
-\end{definition}
-\end{frame}
 
 
-\begin{frame}{Multivariate regression}
-% voorbeeldje met boeken
-\includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide1}
-\end{frame}
-
-
-\begin{frame}{Conventional MTP settings}
-\begin{definition}[Multi-task learning] 
-A multi-task learning problem is a specific instantiation of the general framework, which exhibits the following additional properties: 
-\begin{enumerate}
-\item[P5.] The cardinality of $\mathcal{T}$ is $m$; this implies that all targets are observed during training. 
-\item[P6.] No side information is available for targets. Again, the target space can hence be taken as $\mathcal{T} = \{1,...,m\}$.   
-\item[P8a.] The score set is homogenous across columns of $Y$, e.g., $\mathcal{Y} = \{0,1\}$ or $\mathcal{Y} = \mathbb{R}$.
-\end{enumerate}
-\end{definition}
-\end{frame}
-
-
-\begin{frame}{Multi-task learning}
-% voorbeeldje met boeken
-\includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide3}
-\end{frame}
 
 
 \begin{frame}{Conventional MTP settings}
@@ -461,33 +421,66 @@ A multi-label classification problem is a specific instantiation of the general 
 \includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide2}
 \end{frame}
 
+\begin{frame}{Conventional MTP settings}
+\begin{definition}[Multivariate regression] 
+A multivariate regression problem is a specific instantiation of the general framework, which exhibits the following additional properties: 
+\begin{enumerate}
+\item[P5.] The cardinality of $\mathcal{T}$ is $m$. This implies that all targets are observed during training. 
+\item[P6.] No side information is available for targets. Without loss of generality, we can hence assign the numbers $1$ to $m$ as identifiers to targets, such that the target space is $\mathcal{T} = \{1,...,m\}$. 
+\item[P7.] The score matrix $Y$ has no missing values. 
+\item[P8.] The score set is $\mathcal{Y} = \mathbb{R}$. 
+\end{enumerate}
+\end{definition}
+\end{frame}
+
+\begin{frame}{Multivariate regression}
+% voorbeeldje met boeken
+\includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide1}
+\end{frame}
 
 \begin{frame}{Conventional MTP settings}
-\begin{definition}[Label ranking] 
-A multi-label classification problem is a specific instantiation of the general framework, which exhibits the following additional properties: 
+\begin{definition}[Multi-task learning] 
+A multi-task learning problem is a specific instantiation of the general framework, which exhibits the following additional properties: 
 \begin{enumerate}
 \item[P5.] The cardinality of $\mathcal{T}$ is $m$; this implies that all targets are observed during training. 
-\item[P6.] No side information is available for targets. Again, without loss of generality, we can hence identify targets with natural numbers, such that the target space is $\mathcal{T} = \{1,...,m\}$. 
-\item[P7.] The score matrix $Y$ has no missing values. 
-\item[P8c.] The score set is $\mathcal{Y} = \{1, \ldots , m\}$, and the scores (interpreted as ranks) are such that $y_{ij} \neq y_{ik}$ for all $1 \leq j,k \neq m$. 
+\item[P6.] No side information is available for targets. Again, the target space can hence be taken as $\mathcal{T} = \{1,...,m\}$.   
+\item[P8a.] The score set is homogenous across columns of $Y$, e.g., $\mathcal{Y} = \{0,1\}$ or $\mathcal{Y} = \mathbb{R}$.
 \end{enumerate}
 \end{definition}
 \end{frame}
 
 
-
-
-
-\begin{frame}{Conventional MTP settings}
-\begin{itemize}
-\item
-In \emph{label ranking}\footnote{E.H., J.\ F\"urnkranz, W.\ Cheng, K.\ Brinker. Label Ranking by Learning Pairwise Preferences, Artificial Intelligence, 172, 2008.}, each instance is associated with a ranking (total order) of the targets.
-\end{itemize}
-%\vspace{0.8cm}
-\begin{center}
-\includegraphics[width=0.8\textwidth]{Figures/pictures/labelranking}
-\end{center}
+\begin{frame}{Multi-task learning}
+% voorbeeldje met boeken
+\includegraphics[width=0.9\textwidth,trim = 0 0 100 100,clip]{Figures/pictures/Slide3}
 \end{frame}
+
+%\begin{frame}{Conventional MTP settings}
+%\begin{definition}[Label ranking] 
+%A multi-label classification problem is a specific instantiation of the general framework, which exhibits the following additional properties: 
+%\begin{enumerate}
+%\item[P5.] The cardinality of $\mathcal{T}$ is $m$; this implies that all targets are observed during training. 
+%\item[P6.] No side information is available for targets. Again, without loss of generality, we can hence identify targets with natural numbers, such that the target space is $\mathcal{T} = \{1,...,m\}$. 
+%\item[P7.] The score matrix $Y$ has no missing values. 
+%\item[P8c.] The score set is $\mathcal{Y} = \{1, \ldots , m\}$, and the scores (interpreted as ranks) are such that $y_{ij} \neq y_{ik}$ for all $1 \leq j,k \neq m$. 
+%\end{enumerate}
+%\end{definition}
+%\end{frame}
+%
+%
+%
+%
+%
+%\begin{frame}{Conventional MTP settings}
+%\begin{itemize}
+%\item
+%In \emph{label ranking}\footnote{E.H., J.\ F\"urnkranz, W.\ Cheng, K.\ Brinker. Label Ranking by Learning Pairwise Preferences, Artificial Intelligence, 172, 2008.}, each instance is associated with a ranking (total order) of the targets.
+%\end{itemize}
+%%\vspace{0.8cm}
+%\begin{center}
+%\includegraphics[width=0.8\textwidth]{Figures/pictures/labelranking}
+%\end{center}
+%\end{frame}
 
 
 
@@ -502,18 +495,20 @@ How would you call this machine learning problem?}
 
 \begin{frame}{Let's assume a target representation: \\
 How would you call this machine learning problem?}
+\vspace{0.8cm}
+\includegraphics[width=0.9\textwidth,trim = 0 0 0 90,clip]{Figures/pictures/Slide4}
+
+\end{frame}
+
+\begin{frame}{Let's assume a target representation: \\
+How would you call this machine learning problem?}
 \begin{center}
 \includegraphics[width=0.8\textwidth,trim = 0 0 100 30,clip]{Figures/pictures/Slide6}
 \end{center}
 
 \end{frame}
 
-\begin{frame}{Let's assume a target representation: \\
-How would you call this machine learning problem?}
-\vspace{0.8cm}
-\includegraphics[width=0.9\textwidth,trim = 0 0 0 90,clip]{Figures/pictures/Slide4}
 
-\end{frame}
 
 
 
@@ -524,43 +519,43 @@ How would you call this machine learning problem?}
 \item Additional side information about the target space is available.
 \item Examples: 
 \begin{itemize}
+\item Taxonomy on document categories (\emph{hierarchy}).
 \item Representation for the target molecules in drug design application (\emph{structured representation}).
-\item Taxonomie on document categories (\emph{hierarchy}).
 \item Information about schools and courses (geographical location, qualifications of the teachers, reputation of the school, etc.) in student mark forecasting application (\emph{feature representation}).
 \end{itemize}
 \item Such problems are often referred to as dyadic prediction, link prediction, or network inference settings.
 \end{itemize}
 \end{frame}
-
-
-\begin{frame}{Learning with side information on targets}
-\begin{itemize}
-\item
-Generally speaking, such settings cover problems that obey the four properties listed in the MTP definition. 
-\item Labels $y_{ij}$ can be arranged in a matrix $Y$, which is often sparse. 
-\item Thus, one may argue that \emph{dyadic prediction} is nothing else than \emph{multi-task learning with task features}. 
-\item However, MTP terminology is rarely used in the dyadic prediction literature. 
-\end{itemize}
-\end{frame}
-
-
-
-
-
-\begin{frame}{Inductive versus transductive learning problems}
-\begin{itemize} 
-\item In the previous problems, 
-\begin{itemize}
-\item predictions need be be generated for novel instances, 
-\item whereas the set of targets is known beforehand and observed during the training phase.
-\end{itemize}
-\item These problems are \emph{inductive} w.r.t.\ instances and \emph{transductive} w.r.t.\ targets.
-\item   
-\emph{Side information} is of crucial importance for generalizing to novel targets that are unobserved during the training phase.
-%such as a novel target molecule in the drug design example, a novel tag in the document annotation example, or a novel course in the student grading example. 
-\end{itemize}
-\end{frame}
-
+%
+%
+%\begin{frame}{Learning with side information on targets}
+%\begin{itemize}
+%\item
+%Generally speaking, such settings cover problems that obey the four properties listed in the MTP definition. 
+%\item Labels $y_{ij}$ can be arranged in a matrix $Y$, which is often sparse. 
+%\item Thus, one may argue that \emph{dyadic prediction} is nothing else than \emph{multi-task learning with task features}. 
+%\item However, MTP terminology is rarely used in the dyadic prediction literature. 
+%\end{itemize}
+%\end{frame}
+%
+%
+%
+%
+%
+%\begin{frame}{Inductive versus transductive learning problems}
+%\begin{itemize} 
+%\item In the previous problems, 
+%\begin{itemize}
+%\item predictions need be be generated for novel instances, 
+%\item whereas the set of targets is known beforehand and observed during the training phase.
+%\end{itemize}
+%\item These problems are \emph{inductive} w.r.t.\ instances and \emph{transductive} w.r.t.\ targets.
+%\item   
+%\emph{Side information} is of crucial importance for generalizing to novel targets that are unobserved during the training phase.
+%%such as a novel target molecule in the drug design example, a novel tag in the document annotation example, or a novel course in the student grading example. 
+%\end{itemize}
+%\end{frame}
+%
 
 \begin{frame}{Inductive versus transductive learning problems}
 % voorbeeldje met boeken
@@ -575,6 +570,38 @@ $$\qquad g(.,.): \mbox{target similarity}$$
 	\vspace{0.4cm}
    \includegraphics[width=0.9\textwidth]{Figures/pictures/Slide16} % requires the graphicx package
 \end{frame}
+
+%
+%\begin{frame}{General framework}
+%\begin{definition}[Multi-target prediction]
+%A multi-target prediction setting is characterized by instances $\vec{x} \in \mathcal{X}$ and targets $\vec{t} \in \mathcal{T}$ with the following properties: 
+%\begin{itemize} 
+%\item[P1.] A training dataset $\mathcal{D}$ consists of triplets $(\vec{x}_i,\vec{t}_j,y_{ij})$, where $y_{ij} \in \mathcal{Y}$ denotes a score that characterizes the relationship between the instance $\vec{x}_i$ and the target $\vec{t}_j$.  
+%\item[P2.] In total, $n$ different instances and $m$ different targets are observed during training, with $n$ and $m$ finite numbers. Thus, the scores $y_{ij}$ of the training data can be arranged in an $n \times m$ matrix $Y$, which is in general incomplete, i.e., $Y$ has missing values.
+%\item[P3.] The score set $\mathcal{Y}$ is one-dimensional. It consists of nominal, ordinal or real values.  
+%\item[P4.] The goal consists of predicting scores for any instance-target couple $(\vec{x},\vec{t}) \in \mathcal{X} \times \mathcal{T}$.   
+%\end{itemize}
+%\end{definition}
+%
+%\end{frame}
+%
+%
+%
+%
+%\begin{frame}{Specific MTP settings: one example}
+%\begin{definition}[Multivariate regression] 
+%A multivariate regression problem is a specific instantiation of the general framework, which exhibits the following additional properties: 
+%\begin{enumerate}
+%\item[P5.] The cardinality of $\mathcal{T}$ is $m$. This implies that all targets are observed during training. 
+%\item[P6.] No side information is available for targets. Without loss of generality, we can hence assign the numbers $1$ to $m$ as identifiers to targets, such that the target space is $\mathcal{T} = \{1,...,m\}$. 
+%\item[P7.] The score matrix $Y$ has no missing values. 
+%\item[P8.] The score set is $\mathcal{Y} = \mathbb{R}$. 
+%\end{enumerate}
+%\end{definition}
+%\end{frame}
+
+
+
 
 
 \begin{frame}{Inductive versus transductive learning problems}
@@ -609,884 +636,6 @@ A matrix completion problem is a specific instantiation of the general framework
 \end{definition}
 \end{frame}
 
-
-\begin{frame}{What we don't cover under MTP}
-\begin{itemize}
-\item
-Our formal framework is rather generic.
-\pause
-
-\item
-In principle, every prediction problem with (original) output space $\mathcal{Y}$ could be seen as a special case by taking $\mathcal{T} = \mathcal{Y}$ and $\{0,1\}$ as a score set (or through any other binary reduction). 
-\pause
-
-\item Each candidate output is treated as a target, the task is to predict whether or not the sought output corresponds to that candidate. 
-\pause
-
-\item Consequently, a consistent prediction has to obey strong (deterministic) dependencies between the targets (a single 1, rest 0).  
-\pause 
-
-\item Includes multi-class classification and structured output prediction (SOP) as special cases.
-\pause
-
-%\item
-%Yet, we do not consider such problems as special cases of MTP.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{What we don't cover under MTP}
-
-\begin{itemize}
-\item
-Multi-class classification as a special case of MTP (?)
-\end{itemize}
-%\vspace{0.8cm}
-\begin{center}
-\includegraphics[width=0.3\textwidth]{Figures/pictures/multiclass0}
-\includegraphics[width=0.6\textwidth]{Figures/pictures/multiclass}
-\end{center}
-\end{frame}
-
-
-
-
-\begin{frame}{What we don't cover under MTP}
-\begin{itemize}
-
-\item \emph{Conceptually}, viewing each candidate prediction as a separate target appears artificial. Actually, one is still interested in a single prediction, not multiple ones.
-
-\item The multi-target problem was only produced through \emph{decomposition} of a singe-target problem into multiple binary tasks/decisions.   
-
-\item To comply with the corresponding \emph{consistency constraints}, a kind of post-processing (like the decoding step in ECOC) is normally required (separation over tasks is not even possible in principal).
-
-\medskip 
-
-
-\begin{center}
-\includegraphics[width=0.55\textwidth]{Figures/pictures/decomposition}
-\end{center}
-
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{What we don't cover under MTP}
-\begin{itemize}
-
-\item \emph{Algorithmically}, the multi-target perspective is not typical of SOP. Instead, such methods are specifically tailored for output spaces that are often huge but equipped with a strong structure. 
-
-\medskip 
-\item
-Also excluded are prediction problems where the ground truth cannot be represented in a matrix format with optional side information, such as problems involving multi-instance learning representations or dyadic feature representations. 
-\end{itemize}
-\end{frame}
-
-
-
-\section{MTP loss functions}
-
-\begin{frame}{Overview of this talk}
-
-\tableofcontents
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Multi-target prediction}
-\begin{itemize}
-\item For a feature vector $\bx$, predict a vector of responses $\by = (y_1, y_2, \ldots, y_m)$ using a function/hypothesis $\bh$:
-$$
-\bx = (x_1,x_2,\ldots,x_p) \quad \xrightarrow{~~\bh(\bx)~~} \quad \hat{\by} = ( \hat{y}_1, \hat{y}_2, \ldots, \hat{y}_m)
-$$
-\pause
-
-\item Compared to single-target prediction, a multitude of \emph{multivariate loss functions} 
-$$
-\ell: \, \mathcal{Y}^m \times \mathcal{Y}^m \rightarrow \mathbb{R}
-$$ 
-%$$\ell(\by, \bh(\bx))$$
-are conceivable. 
-\pause
-
-\item \emph{Problem:} Given a target loss $\ell$, find a (Bayes) predictor $\bh$ that minimizes expected loss with regard to $\ell$. 
-\pause
-
-\item \emph{Key question:} Can we achieve this goal through simple reduction, i.e., by training one model for each target independently? Or can we do better with more sophisticated methods?  
-
-%\item \emph{Two views:} %the individual target and joint target view.
-%\begin{itemize}
-%\item The individual-target view
-%\item The joint-target view
-
-\end{itemize}
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{The individual target view}
-
-\begin{itemize} 
-\item How can we improve the predictive accuracy of a single label by exploiting information about other labels?
-\item Goal: predict a value of $y_i$ using $\bx$ and any available information on other targets $y_j$.
-\item The problem is usually defined through univariate losses $\ell_i(y_i, \hat{y}_i)$.
-%\item The problem is usually decomposable over the targets.
-\item  Domain of $y_i$ is either continuous or nominal.
-\item  Independent models vs.\ regularized (shrunken) models.
-\item James-Stein paradox (to be discussed later).
-
-\end{itemize}
-
-\end{frame}
-
-
-
-\begin{frame}
-\frametitle{The joint target view}
-
-\begin{itemize}
-\item The problem is defined through multivariate losses $\ell(\by, \hat{\by})$.
-%\item What are examples of such loss functions ?
-\item Is reduction to single-target prediction (decomposition over targets) still possible, and even if so, can we improve over such strategies by using more expressive models?
-%\item What are the relations between the losses?
-%\item Goal: predict a vector $\by$ using $\bx$.
-\item Important: \emph{Structure of loss} $\ell(\cdot)$, possible \emph{dependencies between targets}, multivariate distribution of $\by$.
-
-%\item The problem might not be easily decomposable over the targets.
-%\item Domain of $\by$ is usually finite, but contains a large number of elements.
-%\item Independent models vs.\ more expressive models.
-%\item Loss function perspective.
-
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Multivariate loss functions}
-
-\begin{itemize}
-\item \emph{Decomposable} over examples: A loss $L$ is decomposable over examples if it can be written in the form
-$$
-L = \sum_{i=1}^n \ell(\by_i, \bh(\bx_i)) 
-%\quad \text{vs.} \quad L \ne \sum_{i=1}^n \ell(\by_i, \bh(\bx_i)) 
-\, ,
-$$
-i.e., as a sum of losses over all (test) examples. 
-\pause
-
-\item \emph{Decomposable} over targets: A multivariate loss $\ell$ is decomposable over targets if it can be written as
-$$
-\ell(\by, \bh(\bx)) = \sum_{i=1}^m \ell_i(y_i, h_i(\bx)) 
-%\quad \text{vs.} \quad \ell(\by, \bh(\bx)) \ne \sum_{i=1}^m \ell(y_i, h_i(\bx))
-$$
-with suitable single-target losses $\ell_i$. 
-
-\end{itemize}
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Macro- and micro-averaging}
-
-\begin{itemize}
-\item<1-> Macro-averaging
-
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\multicolumn{4}{c}{True labels} \\
-\hline
-{\only<2>{\color{putred}}$y_{11}$} & {\only<3>{\color{putred}}$y_{12}$} & {\only<4>{\color{putred}}$y_{13}$} & {\only<5>{\color{putred}}$y_{14}$} \\
-{\only<2>{\color{putred}}$y_{21}$} & {\only<3>{\color{putred}}$y_{22}$} & {\only<4>{\color{putred}}$y_{23}$} & {\only<5>{\color{putred}}$y_{24}$} \\
-{\only<2>{\color{putred}}$y_{31}$} & {\only<3>{\color{putred}}$y_{32}$} & {\only<4>{\color{putred}}$y_{33}$} & {\only<5>{\color{putred}}$y_{34}$} \\
-{\only<2>{\color{putred}}$y_{41}$} & {\only<3>{\color{putred}}$y_{42}$} & {\only<4>{\color{putred}}$y_{43}$} & {\only<5>{\color{putred}}$y_{44}$} \\
-{\only<2>{\color{putred}}$y_{51}$} & {\only<3>{\color{putred}}$y_{52}$} & {\only<4>{\color{putred}}$y_{53}$} & {\only<5>{\color{putred}}$y_{54}$} \\
-{\only<2>{\color{putred}}$y_{61}$} & {\only<3>{\color{putred}}$y_{62}$} & {\only<4>{\color{putred}}$y_{63}$} & {\only<5>{\color{putred}}$y_{64}$} \\
-\hline
-\end{tabular}
-$\quad$
-\begin{tabular}{|c|c|c|c|}
-\multicolumn{4}{c}{Predicted labels} \\
-\hline
-{\only<2>{\color{putred}}$\hat{y}_{11}$} & {\only<3>{\color{putred}}$\hat{y}_{12}$} & {\only<4>{\color{putred}}$\hat{y}_{13}$} & {\only<5>{\color{putred}}$\hat{y}_{14}$} \\
-{\only<2>{\color{putred}}$\hat{y}_{21}$} & {\only<3>{\color{putred}}$\hat{y}_{22}$} & {\only<4>{\color{putred}}$\hat{y}_{23}$} & {\only<5>{\color{putred}}$\hat{y}_{24}$} \\
-{\only<2>{\color{putred}}$\hat{y}_{31}$} & {\only<3>{\color{putred}}$\hat{y}_{32}$} & {\only<4>{\color{putred}}$\hat{y}_{33}$} & {\only<5>{\color{putred}}$\hat{y}_{34}$} \\
-{\only<2>{\color{putred}}$\hat{y}_{41}$} & {\only<3>{\color{putred}}$\hat{y}_{42}$} & {\only<4>{\color{putred}}$\hat{y}_{43}$} & {\only<5>{\color{putred}}$\hat{y}_{44}$} \\
-{\only<2>{\color{putred}}$\hat{y}_{51}$} & {\only<3>{\color{putred}}$\hat{y}_{52}$} & {\only<4>{\color{putred}}$\hat{y}_{53}$} & {\only<5>{\color{putred}}$\hat{y}_{54}$} \\
-{\only<2>{\color{putred}}$\hat{y}_{61}$} & {\only<3>{\color{putred}}$\hat{y}_{62}$} & {\only<4>{\color{putred}}$\hat{y}_{63}$} & {\only<5>{\color{putred}}$\hat{y}_{64}$} \\
-\hline
-\end{tabular}
-\end{center}
-\end{itemize}
-
-$$
-L = \frac{1}{4} \left( {\only<2>{\color{putred}}L_1} + {\only<3>{\color{putred}}L_2} + {\only<4>{\color{putred}}L_3} + {\only<5>{\color{putred}}L_4} \right)
-$$
-
-\end{frame}
-
-
-
-
-\begin{frame}
-\frametitle{Macro- and micro-averaging}
-
-\begin{itemize}
-\item<1-> Micro-averaging
-
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\multicolumn{4}{c}{True labels} \\
-\hline
-\color{putred}$y_{11}$ & \color{putred}$y_{12}$ & \color{putred}$y_{13}$ & \color{putred}$y_{14}$ \\
-\color{putred}$y_{21}$ & \color{putred}$y_{22}$ & \color{putred}$y_{23}$ & \color{putred}$y_{24}$ \\
-\color{putred}$y_{31}$ & \color{putred}$y_{32}$ & \color{putred}$y_{33}$ & \color{putred}$y_{34}$ \\
-\color{putred}$y_{41}$ & \color{putred}$y_{42}$ & \color{putred}$y_{43}$ & \color{putred}$y_{44}$ \\
-\color{putred}$y_{51}$ & \color{putred}$y_{52}$ & \color{putred}$y_{53}$ & \color{putred}$y_{54}$ \\
-\color{putred}$y_{61}$ & \color{putred}$y_{62}$ & \color{putred}$y_{63}$ & \color{putred}$y_{64}$ \\
-\hline
-\end{tabular}
-$\quad$
-\begin{tabular}{|c|c|c|c|}
-\multicolumn{4}{c}{Predicted labels} \\
-\hline
-\color{putred}$\hat{y}_{11}$ & \color{putred}$\hat{y}_{12}$ & \color{putred}$\hat{y}_{13}$ & \color{putred}$\hat{y}_{14}$ \\
-\color{putred}$\hat{y}_{21}$ & \color{putred}$\hat{y}_{22}$ & \color{putred}$\hat{y}_{23}$ & \color{putred}$\hat{y}_{24}$ \\
-\color{putred}$\hat{y}_{31}$ & \color{putred}$\hat{y}_{32}$ & \color{putred}$\hat{y}_{33}$ & \color{putred}$\hat{y}_{34}$ \\
-\color{putred}$\hat{y}_{41}$ & \color{putred}$\hat{y}_{42}$ & \color{putred}$\hat{y}_{43}$ & \color{putred}$\hat{y}_{44}$ \\
-\color{putred}$\hat{y}_{51}$ & \color{putred}$\hat{y}_{52}$ & \color{putred}$\hat{y}_{53}$ & \color{putred}$\hat{y}_{54}$ \\
-\color{putred}$\hat{y}_{61}$ & \color{putred}$\hat{y}_{62}$ & \color{putred}$\hat{y}_{63}$ & \color{putred}$\hat{y}_{64}$ \\
-\hline
-\end{tabular}
-\end{center}
-\end{itemize}
-
-$$
-L =  \sum_{i,j} \ell(y_{ij} , \hat{y}_{ij})
-$$
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Macro- and micro-averaging}
-
-\begin{itemize}
-\item<1-> Micro-averaging
-
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\multicolumn{4}{c}{True labels} \\
-\hline
-\color{putred}$y_{11}$ & \color{putred}$y_{12}$ &   & \color{putred}$y_{14}$ \\
-\color{putred}$y_{21}$ &   & \color{putred}$y_{23}$ & \color{putred}$y_{24}$ \\
-\color{putred}$y_{31}$ & \color{putred}$y_{32}$ & \color{putred}$y_{33}$ & \color{putred}$y_{34}$ \\
-\color{putred}$y_{41}$ &   & \color{putred}$y_{43}$ & \color{putred}$y_{44}$ \\
-\color{putred}$y_{51}$ & \color{putred}$y_{52}$ & \color{putred}$y_{53}$ & \color{putred}$y_{54}$ \\
-  & \color{putred}$y_{62}$ & \color{putred}$y_{63}$ &   \\
-\hline
-\end{tabular}
-$\quad$
-\begin{tabular}{|c|c|c|c|}
-\multicolumn{4}{c}{Predicted labels} \\
-\hline
-\color{putred}$\hat{y}_{11}$ & \color{putred}$\hat{y}_{12}$ &   & \color{putred}$\hat{y}_{14}$ \\
-\color{putred}$\hat{y}_{21}$ &   & \color{putred}$\hat{y}_{23}$ & \color{putred}$\hat{y}_{24}$ \\
-\color{putred}$\hat{y}_{31}$ & \color{putred}$\hat{y}_{32}$ & \color{putred}$\hat{y}_{33}$ & \color{putred}$\hat{y}_{34}$ \\
-\color{putred}$\hat{y}_{41}$ &   & \color{putred}$\hat{y}_{43}$ & \color{putred}$\hat{y}_{44}$ \\
-\color{putred}$\hat{y}_{51}$ & \color{putred}$\hat{y}_{52}$ & \color{putred}$\hat{y}_{53}$ & \color{putred}$\hat{y}_{54}$ \\
-  & \color{putred}$\hat{y}_{62}$ & \color{putred}$\hat{y}_{63}$ &   \\
-\hline
-\end{tabular}
-\end{center}
-\end{itemize}
-
-$$
-L =  \sum_{i,j} \ell(y_{ij} , \hat{y}_{ij})
-$$
-\begin{center}
-Same weight of every prediction vs.\ same weight of every target.
-\end{center}
-
-\end{frame}
-
-
-
-
-\begin{frame}
-\frametitle{Instance-wise losses}
-
-\begin{itemize}
-\item<1-> Averaging over instances
-
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\multicolumn{4}{c}{True labels} \\
-\hline
-{\only<2>{\color{putred}}$y_{11}$} & {\only<2>{\color{putred}}$y_{12}$} & {\only<2>{\color{putred}}$y_{13}$} & {\only<2>{\color{putred}}$y_{14}$} \\
-{\only<3>{\color{putred}}$y_{21}$} & {\only<3>{\color{putred}}$y_{22}$} & {\only<3>{\color{putred}}$y_{23}$} & {\only<3>{\color{putred}}$y_{24}$} \\
-{\only<4>{\color{putred}}$y_{31}$} & {\only<4>{\color{putred}}$y_{32}$} & {\only<4>{\color{putred}}$y_{33}$} & {\only<4>{\color{putred}}$y_{34}$} \\
-{\only<5>{\color{putred}}$y_{41}$} & {\only<5>{\color{putred}}$y_{42}$} & {\only<5>{\color{putred}}$y_{43}$} & {\only<5>{\color{putred}}$y_{44}$} \\
-{\only<6>{\color{putred}}$y_{51}$} & {\only<6>{\color{putred}}$y_{52}$} & {\only<6>{\color{putred}}$y_{53}$} & {\only<6>{\color{putred}}$y_{54}$} \\
-{\only<7>{\color{putred}}$y_{61}$} & {\only<7>{\color{putred}}$y_{62}$} & {\only<7>{\color{putred}}$y_{63}$} & {\only<7>{\color{putred}}$y_{64}$} \\
-\hline
-\end{tabular}
-$\quad$
-\begin{tabular}{|c|c|c|c|}
-\multicolumn{4}{c}{Predicted labels} \\
-\hline
-{\only<2>{\color{putred}}$\hat{y}_{11}$} & {\only<2>{\color{putred}}$\hat{y}_{12}$} & {\only<2>{\color{putred}}$\hat{y}_{13}$} & {\only<2>{\color{putred}}$\hat{y}_{14}$} \\
-{\only<3>{\color{putred}}$\hat{y}_{21}$} & {\only<3>{\color{putred}}$\hat{y}_{22}$} & {\only<3>{\color{putred}}$\hat{y}_{23}$} & {\only<3>{\color{putred}}$\hat{y}_{24}$} \\
-{\only<4>{\color{putred}}$\hat{y}_{31}$} & {\only<4>{\color{putred}}$\hat{y}_{32}$} & {\only<4>{\color{putred}}$\hat{y}_{33}$} & {\only<4>{\color{putred}}$\hat{y}_{34}$} \\
-{\only<5>{\color{putred}}$\hat{y}_{41}$} & {\only<5>{\color{putred}}$\hat{y}_{42}$} & {\only<5>{\color{putred}}$\hat{y}_{43}$} & {\only<5>{\color{putred}}$\hat{y}_{44}$} \\
-{\only<6>{\color{putred}}$\hat{y}_{51}$} & {\only<6>{\color{putred}}$\hat{y}_{52}$} & {\only<6>{\color{putred}}$\hat{y}_{53}$} & {\only<6>{\color{putred}}$\hat{y}_{54}$} \\
-{\only<7>{\color{putred}}$\hat{y}_{61}$} & {\only<7>{\color{putred}}$\hat{y}_{62}$} & {\only<7>{\color{putred}}$\hat{y}_{63}$} & {\only<7>{\color{putred}}$\hat{y}_{64}$} \\
-\hline
-\end{tabular}
-\end{center}
-\end{itemize}
-
-\begin{align*}
-L = \frac{1}{6} \Big( {\only<2>{\color{putred}}\ell(\vec{y}_1,\hat{\vec{y}}_1)}  & + 
-{\only<3>{\color{putred}}\ell(\vec{y}_2,\hat{\vec{y}}_2)} +
-{\only<4>{\color{putred}}\ell(\vec{y}_3,\hat{\vec{y}}_3)} + \\
-& {\only<5>{\color{putred}}\ell(\vec{y}_4,\hat{\vec{y}}_4)} +
-{\only<6>{\color{putred}}\ell(\vec{y}_5,\hat{\vec{y}}_5)} +
-{\only<7>{\color{putred}}\ell(\vec{y}_6,\hat{\vec{y}}_6)} 
-\Big)
-\end{align*}
-
-\end{frame}
-
-
-
-
-\begin{frame}
-\frametitle{Examples of MTP loss functions}
-\begin{itemize}
-
-\item \emph{F-measure}:
-$$
-F(\mathbf{Y}, \hat{\mathbf{Y}}) = \frac{2 \sum_{i=1}^K y_i \hat{y}_i}{\sum_{i=1}^K y_i + \sum_{i=1}^K \hat{y}_i} \, ,
-$$
-where $\mathbf{Y} = (y_1, \ldots , y_K) \in \{ 0,1 \}^K$ and $\hat{\mathbf{Y}} = (\hat{y}_1, \ldots , \hat{y}_K) \in \{ 0,1 \}^K$. Can be used in macro- and micro-averaging, but also instance-wise. 
-\end{itemize}
-\pause
-
-\bigskip
-
-\begin{center}
-\includegraphics[width=0.5\textwidth]{Figures/pictures/fmeasure}
-\end{center}
-
-
-\end{frame}
-
-
-
-
-
-\begin{frame}
-\frametitle{Examples of MTP loss functions}
-\begin{itemize}
-
-\item \emph{F-measure}:
-$$
-F(\mathbf{Y}, \hat{\mathbf{Y}}) = \frac{2 \sum_{i=1}^K y_i \hat{y}_i}{\sum_{i=1}^K y_i + \sum_{i=1}^K \hat{y}_i} \, ,
-$$
-where $\mathbf{Y} = (y_1, \ldots , y_K) \in \{ 0,1 \}^K$ and $\hat{\mathbf{Y}} = (\hat{y}_1, \ldots , \hat{y}_K) \in \{ 0,1 \}^K$. Can be used in macro- and micro-averaging, but also instance-wise. 
-
-
-
-\item The \emph{Hamming loss} averages over mistakes on individual labels:    
-$$
-\ell_H(\by, \hat{\by}) = \frac{1}{m}  \, \sum_{i=1}^m \, \assert{y_i \neq  y_i}
-$$
-
-\pause
-
-\item The \emph{subset 0/1 loss} simply checks for entire correctness:  
-\begin{align*}
-\ell_{0/1}(\by, \hat{\by}) & = \assert{\by \ne \hat{\by}} =  \max_i \, \assert{y_i \neq  y_i}
-\end{align*}
-
-
-\end{itemize}
-\end{frame}
-
-
-
-\begin{frame}
-\frametitle{Examples of MTP loss functions}
-\begin{itemize}
-
-\item
-The \emph{rank loss} compares binary targets with a \emph{predicted ranking}:
-$$
-\ell_r(\vec{y},\sigma) = \sum_{(i,j): y_i > y_j}  \left (\llbracket \sigma(i) > \sigma(j) \rrbracket + \frac{1}{2} \llbracket \sigma(i)  = \sigma (j) \rrbracket  \right) \, ,
-$$
-where $\sigma$ is a permutation/ranking of the targets typically induced by a scoring function $\boldsymbol{f}:\, \mathcal{X} \rightarrow \mathbb{R}^m$ s.t.\ $\sigma(i) \leq \sigma(j) \Leftrightarrow f_i(\bx) \geq f_j(\bx)$. 
-
-\pause 
-
-\item \emph{Precision at position $k$} compares a binary targets with \emph{predicted top-ranking}:
-$$
-\mathrm{prec}@k(\by, \hat{Y}_k) = \frac{1}{k} \sum_{j \in \hat{Y}_k} \assert{y_j = 1} \,,
-$$
-where $\hat{Y}_k$ is a set of $k$ labels predicted by the learner (perhaps by thresholding a ranking/scoring function).
-
-\end{itemize}
-
-\end{frame}
-
-
-
-
-
-\begin{frame}
-\frametitle{Examples of MTP loss functions}
-\begin{itemize}
-\item \emph{Normalized Discounted Cumulative Gain at position $k$}:
-$$
-\mathrm{NDCG}@k(\by,  \sigma ) = N_k(\by) \sum_{r=1}^k  \frac{y_{\sigma(r)}}{\log(1 + r)} ,
-$$
-where $\sigma$ is a permutation of labels for $\bx$ returned by a \emph{ranker}, and $N_k(\by)$ normalizes NDCG$@k$ to the interval $[0,1]$:
-$$
-N_k(\by) = \left ( \sum_{r=1}^{\min(k, \sum_{i=1}^m y_i)}  \frac{1}{\log(1 + r)}  \right )^{-1}
-$$
-
-\end{itemize}
-\end{frame}
-
-
-
-
-
-
-
-\begin{frame}
-\frametitle{Examples of MTP loss functions}
-\begin{itemize}
-
-\item \emph{Squared error loss} (typically used in multivariate regression):
-$$
-\ell(\by, \hat{\by}) = \sum_{i=1}^m (y_i - \hat{y}_i)^2 \, ,
-$$
-where $\by , \hat{\by} \in \mathbb{R}^m$.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Two simple yet extreme multi-label losses}
-\begin{itemize}
-\item The \emph{Hamming loss} averages over mistakes on individual labels:    
-$$
-\displaystyle \ell_H(\by, \hat{\by}) = \frac{1}{m}  \, \sum_{i=1}^m \, \assert{y_i \neq  y_i}
-$$
-
-\item The \emph{subset 0/1 loss} simply checks for entire correctness:  
-\begin{align*}
-\displaystyle \ell_{0/1}(\by, \hat{\by}) & = \assert{\by \ne \hat{\by}}  =  \max_i \, \assert{y_i \neq  y_i}
-\end{align*}
-
-%\item {F-measure-based loss}: $\displaystyle \ell_F(\by,\bh) = 1 - \frac{2 \sum_{i=1}^m y_i h_i}{\sum_{i=1}^m y_i + \sum_{i=1}^m h_i}$\\[12pt]
-%\item {Rank loss}: $\displaystyle \ellrank(\by,\bh) = w(\by) \sum_{y_i>y_j} \left( \assert{h_i < h_j}+\frac{1}{2} \assert{h_i = h_j} \right) $\\[12pt]
-%\item $\ldots$
-\end{itemize}
-\end{frame}
-
-
-
-
-\begin{frame}
-\frametitle{Hamming vs.\ subset 0/1 loss}
-\begin{itemize}
-\item What is the risk-minimizing (Bayes) prediction for the Hamming loss $1/m  \, \sum_{i=1}^m \assert{y_i \neq  y_i}$ and the subset 0/1 loss $\assert{\by \ne \hat{\by}}$, respectively, given the following conditional distribution $\Pr(Y_1,Y_2 \, \vert \, \vec{x})$?
-
-\medskip
-
-\begin{center}
-\begin{tabular}{ccc}
-\toprule
-$y_1$ & $y_2$ & $\Pr(y_1,y_2 \, | \, \vec{x})$  \\
-\midrule
-0   & 0   & 0.3    \\
-0   & 1   & 0.3        \\
-1   & 0   & 0.0       \\
-1   & 1   & 0.4     \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\pause 
-
-\small
-\begin{align*}
-\mathbb{E}_{\mathbf{Y}} \ell_{0/1}(\by, \hat{\by}) \; = \; & 0.3 \, \ell_{0/1}((0,0),\hat{\by}) +  
-0.3 \, \ell_{0/1}((0,1),\hat{\by}) + \\
-& 0.0 \, \ell_{0/1}((1,0),\hat{\by}) +  0.4 \, \ell_{0/1}((1,1),\hat{\by}) \\
-= \; &  1 - \Pr(\hat{\by} \, | \, \vec{x}) 
-\end{align*}
-
-%\pause
-
-%\medskip
-
-%\item In general, the \emph{marginal mode} is the risk-minimizer for Hamming, and the \emph{joint mode} the risk-minimizer for subset 0/1. 
-\end{itemize}
-\end{frame}
-
-
-
-\begin{frame}
-\frametitle{Hamming vs.\ subset 0/1 loss}
-\begin{itemize}
-\item What is the risk-minimizing (Bayes) prediction for the Hamming loss $1/m  \, \sum_{i=1}^m \assert{y_i \neq  y_i}$ and the subset 0/1 loss $\assert{\by \ne \hat{\by}}$, respectively, given the following conditional distribution $\Pr(Y_1,Y_2 \, \vert \, \vec{x})$?
-
-\medskip
-
-\begin{center}
-\begin{tabular}{ccc}
-\toprule
-$y_1$ & $y_2$ & $\Pr(y_1,y_2)$  \\
-\midrule
-0   & 0   & 0.3    \\
-0   & 1   & 0.3        \\
-1   & 0   & 0.0       \\
-1   & 1   & 0.4     \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\small
-\begin{align*}
-\mathbb{E}_{\mathbf{Y}} \ell_H(\by, \hat{\by}) \; = \; & 0.3 \, \ell_H((0,0),\hat{\by}) +  0.3 \, \ell_H((0,1),\hat{\by}) +  0.4 \, \ell_H((1,1),\hat{\by}) \\  
-= \; & \frac{1}{2} \big( 0.3( \assert{0 \neq y_1} + \assert{0 \neq y_2}) + 
-0.3( \assert{0 \neq y_1} + \assert{1 \neq y_2}) + \\
-& \quad\quad\quad
-0.4( \assert{1 \neq y_1} + \assert{1 \neq y_2}) \big) \\
-= \; & \frac{1}{2} \big( 0.6 \assert{0 \neq y_1} + 0.4 \assert{1 \neq y_1} + 0.3 \assert{0 \neq y_2} + 0.7 \assert{0 \neq y_2} \big) \\
-= \; & 1/2 \, \mathbb{E}_{Y_1} \ell_H(y_1, \hat{y}_1) + 1/2 \, \mathbb{E}_{Y_2} \ell_H(y_2, \hat{y}_2)
-\end{align*}
-
-%\pause
-
-%\medskip
-
-%\item In general, the \emph{marginal mode} is the risk-minimizer for Hamming, and the \emph{joint mode} the risk-minimizer for subset 0/1. 
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Hamming vs.\ subset 0/1 loss}
-\begin{itemize}
-\item The risk minimizer for the Hamming loss is the  \emph{marginal mode}:
-$$
-h_i^*(\vec{x}) = \arg \max_{y_i \in \{0,1\}} \Pr( y_i  \given \vec{x} )\,, \quad i = 1,\ldots,m ,
-$$
-%\item 
-while for the subset 0/1 loss it is the \emph{joint mode}:
-$$
-\mathbf{h}^*(\vec{x}) = \arg \max_{\vec{y} \in \mathcal{Y}} \Pr(\vec{y} \given \vec{x}) \,.
-$$
-\item Marginal mode vs. joint mode.\\[6pt]
-\begin{center}
-\begin{tabular}{@{}cc@{}}
-\toprule
-$\by$ & $\Pr(\by)$ \\
-\hline
-$0~0~0~0$ & $0.30$ \\
-$0~1~1~1$ & $0.17$ \\
-$1~0~1~1$ & $0.18$ \\
-$1~1~0~1$ & $0.17$ \\
-$1~1~1~0$ & $0.18$ \\
-\toprule
-\end{tabular}
-$\qquad$
-\footnotesize{
-\begin{tabular}{lr}
-Marginal mode: & $1~1~1~1$ \\
-Joint mode: & $0~0~0~0$ \\
-\end{tabular}
-}
-\end{center}
-\end{itemize}
-\end{frame}
-
-
-
-
-
-\begin{frame}
-\frametitle{Hamming vs.\ subset 0/1 loss}
-
-\begin{itemize}
-%\item
-%Regret with respect to the Hamming loss:
-%$$
-%r_H(\mathbf{h}) = \mathbb{E}_{\mathbf{X}\mathbf{Y}} L_H(\mathbf{Y}, \mathbf{h}(\mathbf{X})) - \mathbb{E}_{\mathbf{X}\mathbf{Y}} L_H(\mathbf{Y}, \mathbf{h}^*_H(\mathbf{X}))\,,
-%$$
-%\item
-%Regret with respect to the subset 0/1 loss:
-%$$
-%r_s(\mathbf{h}) = \mathbb{E}_{\mathbf{X}\mathbf{Y}} L_s(\mathbf{Y}, \mathbf{h}(\mathbf{X})) - \mathbb{E}_{\mathbf{X}\mathbf{Y}} L_s(\mathbf{Y}, \mathbf{h}^*_s(\mathbf{X}))\,.
-%$$
-\item \emph{Proposition}\footnote{K.D., W.W., W.\ Cheng, E.H. On Label Dependence and Loss Minimization in Multi-Label Classification. Machine Learning, 88, 2012.}:
-The following upper bound holds for $m > 3$:
-$$
-\mathbb{E}_{\mathbf{Y}} \, \ell_H(\mathbf{Y}, \mathbf{h}^*_{0/1}(\vec{x})) - \mathbb{E}_{\mathbf{Y}} \, \ell_H(\mathbf{Y}, \mathbf{h}^*_H(\vec{x}))
-< \frac{m-2}{m+2}
-$$
-Moreover, this bound is tight, i.e.
-$$
-\sup_{\Pr} \, (\mathbb{E}_{\mathbf{Y}} \, \ell_H(\mathbf{Y}, \mathbf{h}^*_{0/1}(\vec{x})) - \mathbb{E}_{\mathbf{Y}}  \, \ell_H(\mathbf{Y}, \mathbf{h}^*_H(\vec{x})))
-= \frac{m-2}{m+2}\,,
-$$
-where the supremum is taken over all probability distributions on $\mathcal{Y}$.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Hamming vs.\ subset 0/1 loss}
-
-Under specific conditions, the risk minimizers for $\ell_H$ %Hamming loss
-and $\ell_{\ZO}$ %subset 0/1 loss 
-are provably \emph{equivalent}, i.e.,
-$$\bh^*_H(\bx) = \bh^*_{\ZO}(\bx) \,,$$
-for example, when
-
-\medskip
-
-\begin{itemize}
-\item the probability of the {joint mode} satisfies
-$$
-\Pr \big(\bh^*_{\ZO} (\bx)\, |\, \bx \big) > 0.5\, ,
-$$
-\item or the targets $Y_1, \ldots, Y_m$ are \emph{conditionally independent}.
-% i.e, 
-%$$
-%\Pr(\bY|\bx) = \prod_{i=1}^m \Pr(Y_i|\bx)\,.
-%$$
-\end{itemize}
-%\item The following bounds hold for any $\Pr(\bY \given \bx)$ and $\bh$:
-%$$
-%\frac{1}{m} \loss_{\ZO}(\bh,P \given \bx) \leq \loss_{H}(\bh,P \given \bx) \leq \loss_{\ZO}(\bh,P \given \bx)
-%$$
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Target dependence}
-We distinguish between conditional and unconditional (in)dependence of targets\footnote{K.D., W.W., W.\ Cheng, E.H. On Label Dependence and Loss Minimization in Multi-Label Classification. Machine Learning, 88, 2012.}.
-\begin{itemize}
-\item \emph{Unconditional/marginal dependence}: 
-$$
-\Pr(\bY) \ne \prod_{i=1}^m \Pr(Y_i) 
-$$
-Often due to model similarities, i.e., $f_i(\bx) = g_i(\bx) + \epsilon_i$ for $i = 1, \ldots, m$, with similarities in the structural parts $g_i(\cdot)$, which implies \emph{correlation} between targets. 
-\pause
-
-\item \emph{Conditional dependence}:
-$$
-\Pr(\bY \given \bx) \ne \prod_{i=1}^m \Pr(Y_i \given \bx)
-$$
-
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Target dependence}
-\begin{itemize}
-\item
-marginal (in)dependence $\not \leftrightarrows$ conditional (in)dependence
-
-\item Example: 
-%Joint distribution $\Pr(X_1,Y_1,Y_2)$ on $\mathcal{X}\times\mathcal{Y}$:
-\begin{center}
-\begin{tabular}{cccc@{$\qquad$}cccc}
-\toprule
-$x_1$ & $y_1$ & $y_2$ & $\Pr$ & $x_1$ & $y_1$ & $y_2$ & $\Pr$ \\
-\midrule
-0   & 0   & 0   & 0.25  & 1   & 0   & 0   & 0       \\
-0   & 0   & 1   & 0     & 1   & 0   & 1   & 0.25  \\
-0   & 1   & 0   & 0     & 1   & 1   & 0   & 0.25 \\
-0   & 1   & 1   & 0.25   & 1   & 1   & 1   & 0 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\medskip 
-
-\item Strong conditional dependence, for example
-$\Pr(Y_1 = 0 | x_1 = 1) \Pr(Y_2 = 0 | x_1 = 1) = 0.5 \times 0.5 = 0.25 \neq 0$.
-%One can even speak of a kind of deterministic dependence, since $y_1 = y_2$ for $x_1\!=\!0$ and $y_2 = 1 - y_1$ for $x_1 = 1$.
-\item Yet, labels are marginally independent: Joint probability is the product of the marginals $\Pr(y_1) = \Pr(y_2) = 0.5$.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Synthetic data}
-
-\begin{itemize}
-\item Two conditionally independent models:
-$$
-f_1(\bx) = \frac{1}{2} x_1 + \frac{1}{2} x_2, \quad f_2(\bx) = \frac{1}{2} x_1 - \frac{1}{2} x_2 
-$$
-\item Logistic model to assign labels:
-$$
-\Pr(y_i = 1) = \frac{1}{1 + \exp(-2f_i)}
-$$
-\end{itemize}
-\vskip12pt
-\begin{center}
-\begin{tabular}{@{}c@{$\quad\quad\quad$}c@{}}
-\includegraphics[width = .35\textwidth]{pics/ind-1.pdf} &
-\includegraphics[width = .35\textwidth]{pics/ind-2.pdf} \\
-\end{tabular}
-\end{center}
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Synthetic data}
-
-\begin{itemize}
-\item Two conditionally dependent models:
-$$
-f_1(\bx) = \frac{1}{2} x_1 + \frac{1}{2} x_2 \quad f_2(y_1, \bx) = y_1 + \frac{1}{2} x_1 - \frac{1}{2} x_2 - \frac{2}{3}
-$$
-\item Logistic model to assign labels:
-$$
-\Pr(y_i = 1) = \frac{1}{1 + \exp(-2f_i)}
-$$
-\end{itemize}
-\vskip12pt
-\begin{center}
-\begin{tabular}{@{}c@{$\quad\quad\quad$}c@{}}
-\includegraphics[width = .35\textwidth]{pics/dep-1.pdf} &
-\includegraphics[width = .35\textwidth]{pics/dep-2.pdf} \\
-\end{tabular}
-\end{center}
-
-\end{frame}
-
-%0	BR	15497	488	0,4232	0,6723
-%0	LP	12910	299	0,4232	0,6725
-%1	BR	15908	297	0,3470	0,5499
-%1	LP	14222	203	0,3610	0,5146
-
-
-\begin{frame}
-\frametitle{Hamming vs.\ subset 0/1 loss}
-
-\begin{itemize}
-\item  Binary relevance (BR): Train two binary classifiers for targets $y_1$ and $y_2$ independently. 
-\item  Label powerset (LP): Train a 4-class classifier on meta-classes $c_1=(0,0)$, $c_2=(0,1)$, $c_3=(1,0)$, $c_4=(1,1)$.
-\end{itemize}
-\begin{table}
-\begin{center}
-%\caption{Results on the two synthetic datasets.}
-\small{\textsc{
-\begin{tabular}{l@{~~~~~~~~}c@{~~~~~~~~}c}
-\toprule
-\multicolumn{3}{c}{Conditional independence} \\
-\midrule
-classifier & Hamming loss & subset 0/1 loss \\
-\midrule
-BR LR         & 0.4232 & 0.6723  \\	
-LP LR         & 0.4232 & 0.6725  \\
-%\midrule
-%Bayes Optimal         & 0.4162 & 0.8016                \\
-\bottomrule
-&&\\
-\toprule
-\multicolumn{3}{c}{Conditional dependence} \\
-\midrule
-classifier & Hamming loss & subset 0/1 loss \\
-\midrule
-BR LR        & 0.3470 & 0.5499 \\	
-LP LR         & 0.3610 & 0.5146 \\
-%\midrule
-%Bayes Optimal        & 0.3897 & 0.6029                \\
-\bottomrule
-\end{tabular}
-}}
-\end{center}
-\end{table}
-
-\end{frame}
-
-
-
-\begin{frame}
-\frametitle{Rank loss}
-\begin{itemize}
-\item
-The rank loss compares binary targets with a predicted ranking:
-$$
-\ell_r(\vec{y},\boldsymbol{f}(\vec{x})) = \sum_{(i,j): y_i > y_j}  \left (\llbracket f_i(\vec{x}) < f_j(\vec{x}) \rrbracket + \frac{1}{2} \llbracket f_i(\vec{x}) = f_j(\vec{x}) \rrbracket  \right )
-$$
-
-\item
-To minimize this loss, it is enough to sort the targets by their probability of relevance. 
-
-\item
-\emph{Theorem}\footnote{K.D., W.W., W.\ Cheng, E.H. On Label Dependence and Loss Minimization in Multi-Label Classification. Machine Learning, 88, 2012.}: A ranking function that sorts the labels according to their probability of relevance, i.e., using the scoring
-function $\boldsymbol{f}(\cdot)$ with
-$$
-f_i(\vec{x}) \, = \, \Pr(Y_i = 1 \, | \, \vec{x}) \,,
-$$
-minimizes the expected rank loss.
-\end{itemize}
-
-\end{frame}
-
-
-%\begin{frame}
-%\frametitle{Target interdependences}
-%\begin{itemize}
-%\item \emph{Interdependence} vs. \emph{hypothesis} and \emph{feature space}:
-%\begin{itemize}
-%\item Regularization constraints the hypothesis space.
-%\item Modeling dependencies may increase the expressiveness of the model.
-%\item Using a more complex model on individual targets might also help.
-%\item Comparison between independent and multi-target models is difficult in general, as they differ in many respects (e.g., complexity)!
-%\end{itemize}
-%\end{itemize}
-%\end{frame}
-
-
-
-\begin{frame}
-\frametitle{Loss functions and target dependence}
-\begin{itemize}
-\item Optimal (pointwise) prediction requires information about $\Pr( \by \, \vert \, \bx)$.
-\pause
-
-\item \emph{Independence} simplifies learning a lot, since learning marginals is much easier than learning a joint distribution ($\rightarrow$ graphical models).
-\pause
-
-\item \emph{Structure of the loss function} has an important influence, too, due to the ``interaction'' between $\ell$ and $\Pr$:
-$$
-\mathbb{E}_{\mathbf{Y}} \, \ell(\mathbf{Y}, \hat{\by}) =  \sum_{\by} \ell(\by, \hat{\by}) \Pr(\by \, \vert \, \bx) \, .
-$$
-In some cases, such as F-measure optimization, knowledge of properties of $\Pr$ instead of complete distribution is therefore enough. 
-\pause
-
-\item \emph{Conditional independence} of $\Pr$ and \emph{decomposability} of $\ell$ are sufficient conditions for Bayes-optimality of target-wise Bayes predictor.
-\end{itemize}
-\end{frame}
-
-
-%%% end changes %%%
 
 
 
@@ -2351,7 +1500,7 @@ probabilistic classifier trees. ECMLPKDD 2016}
 
 \begin{itemize}
 \item Estimate the {joint} conditional distribution $\Pr(\vec{Y} \given  \vec{x})$. 
-\item For optimizing the subset 0/1 loss:  $$ \ell_{0/1}(\by, \hat{y}) = \assert{\by \ne \hat{y}}$$
+\item For optimizing the subset 0/1 loss:  $$ \ell_{0/1}(\by, \hat{\by}) = \assert{\by \ne \hat{\by}}$$
 \item Repeatedly apply the \emph{product rule of probability}:
 $$
 \Pr(\vec{Y} = \vec{y} \given \vec{x}) = \prod_{i=1}^{m} \Pr(Y_i = y_i \given \vec{x}, y_1, \ldots,y_{i-1}) \, .
@@ -2527,7 +1676,7 @@ $$\min_{G \in \mathbb{R}^{m \times m}} \left[ \min_{\bf{f} \in \mathcal{F}} \sum
 
 \begin{frame}{Constructing decision rules among targets}
 \begin{center}
-\includegraphics[scale=0.3]{Figures/rules} \\ \pause 
+\includegraphics[scale=0.3]{Figures/rules} \\ 
 Potential inferred rule\footnote{Loza-Mencia and Janssen, Learning rules for multi-label classification: a stacking and separate-and-conquer approach}: \alert{TEA $\rightarrow$ NOT LEMONADE} \\
 
 \vspace{0.3cm}
@@ -2670,25 +1819,25 @@ $$ \min_{\bm{\boldsymbol\alpha}} \, ||\bm{\kkernelm}\bm{\boldsymbol\alpha} -\bm{
 \includegraphics[width=0.75\textwidth,trim = 0 0 0 90,clip]{Figures/pictures/Slide10}
 \end{frame}
 
-\begin{frame}{Two-step kernel ridge regression}
-
-\vspace{0.6cm}
-\begin{itemize}
-\item Kernel evaluations for new test instance: 
-$$\bm{k}(\bm{x})=\left(\kernelf(\bm{x},\bm{x}_1),\ldots,\kernelf(\bm{x},\bm{x}_\osize)\right)\transpose$$ 
-$$\bm{g}(\bm{t})=\left(\gkernelf(\bm{t},\bm{t}_1),\ldots,\gkernelf(\bm{t},\bm{t}_m)\right)\transpose$$ \pause 
-\item Step 1: prediction for $\bm{x}$ on all the training targets
-$$
-\mathbf{\predfun}_\taskset (\bm{x}) = \bm{k}(\bm{x})\transpose A^{IT} = \bm{k}(\bm{x})\transpose \left(\dkernelm+\regparam_1 \idmatrix\right)^{-1} Y  $$ \pause 
-\item Step 2: generalizing to new targets
-\begin{eqnarray*}
-\predfun^\text{TS}(\bm{x}, \bm{t}) &=&  \bm{g}(\bm{t})\transpose \left(\tkernelm+\regparam_2 \idmatrix\right)^{-1}  \mathbf{\predfun}_\taskset (\bm{x})\transpose \\ \pause 
-&=& \bm{k}(\bm{x})\transpose \left(\dkernelm+\regparam_1 \idmatrix\right)^{-1} Y  \left(\tkernelm+\regparam_2 \idmatrix\right)^{-1} \bm{g}(\bm{t}) \\ \pause 
-&=& \bm{k}(\bm{x})\transpose A^\text{TS} \bm{g}(\bm{t}) \\
-&=& \vec{w}^T \left(\phi(\vec{x}) \otimes \psi(\vec{t}) \right)
-\end{eqnarray*}
-\end{itemize}
-\end{frame}
+%\begin{frame}{Two-step kernel ridge regression}
+%
+%\vspace{0.6cm}
+%\begin{itemize}
+%\item Kernel evaluations for new test instance: 
+%$$\bm{k}(\bm{x})=\left(\kernelf(\bm{x},\bm{x}_1),\ldots,\kernelf(\bm{x},\bm{x}_\osize)\right)\transpose$$ 
+%$$\bm{g}(\bm{t})=\left(\gkernelf(\bm{t},\bm{t}_1),\ldots,\gkernelf(\bm{t},\bm{t}_m)\right)\transpose$$ \pause 
+%\item Step 1: prediction for $\bm{x}$ on all the training targets
+%$$
+%\mathbf{\predfun}_\taskset (\bm{x}) = \bm{k}(\bm{x})\transpose A^{IT} = \bm{k}(\bm{x})\transpose \left(\dkernelm+\regparam_1 \idmatrix\right)^{-1} Y  $$ \pause 
+%\item Step 2: generalizing to new targets
+%\begin{eqnarray*}
+%\predfun^\text{TS}(\bm{x}, \bm{t}) &=&  \bm{g}(\bm{t})\transpose \left(\tkernelm+\regparam_2 \idmatrix\right)^{-1}  \mathbf{\predfun}_\taskset (\bm{x})\transpose \\ \pause 
+%&=& \bm{k}(\bm{x})\transpose \left(\dkernelm+\regparam_1 \idmatrix\right)^{-1} Y  \left(\tkernelm+\regparam_2 \idmatrix\right)^{-1} \bm{g}(\bm{t}) \\ \pause 
+%&=& \bm{k}(\bm{x})\transpose A^\text{TS} \bm{g}(\bm{t}) \\
+%&=& \vec{w}^T \left(\phi(\vec{x}) \otimes \psi(\vec{t}) \right)
+%\end{eqnarray*}
+%\end{itemize}
+%\end{frame}
 
 
 %
@@ -3140,29 +2289,14 @@ $$p \times m \qquad \quad \qquad p \times p \qquad \qquad \qquad p \times m \qqu
 \end{itemize}
 
 \begin{center}
-{\bf Upcoming paper: \\
+{\bf Accompanying paper: \\
 Waegeman et al. \\ Multi-Target Prediction: \\ A Unifying View on Problems and Methods} \\
-(available in a few days on Arxiv)
+Data Mining and Knowledge Discovery, 2019. 
 
 \end{center}
 
 \end{frame}
 
-\begin{frame}{Multi-target prediction papers at ECML/PKDD 2018}
-
-\begin{itemize}
-\item \alert{Djerrab et al.}, Output Fisher embedding regression, Tuesday, 15h20 \pause
-\item \alert{Pikalos et al.}, Global multi-output decision trees for interaction prediction, Thursday 11h20 \pause 
-\item \alert{Masera and Blanzieri}, AWX: An integrated approach to hierarchical multi-label classification, Tuesday 14h40 \pause 
-\item \alert{Decubber et al.}, Deep F-measure maximization in multi-label classification: a comparative study, Tuesday 14h20 \pause 
-\item \alert{Park and Read}, A blended metric for multi-label optimization and evaluation, Thursday 11h40 \pause 
-\item \alert{Rafailidis and Crestani}, Deep collaborative filtering with multifaceted contextual information in location-based social networks, Thursday 14h20 \pause 
-\item \alert{Du et al.}, POLAR: Attention-based CNN for one-shot personalized article recommendation, Thursday 14h40 \pause 
-\item \alert{Lan et al.}, Personalized thread recommendation of MOOC discussion forums, Thursday 14h20 \pause 
-\item \alert{Marecek et al.}, Matrix completion under interval uncertainty, Thursday 16h30
-\end{itemize}
-
-\end{frame}
 
 \begin{frame}{Questions? Remarks?}
 
